@@ -20,7 +20,7 @@ export const AuthenticatedRoute = ({ ...otherProps }) => {
 
   if (!isAuthenticated || !TrustAgent.isAuthenticated()) {
     TrustAgent.logout();
-    logout();
+    logout({ returnTo: window.location.origin + routes.LOGIN });
     return <Redirect to={routes.LOGIN} />;
   }
 

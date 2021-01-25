@@ -18,7 +18,7 @@ export const LoginPage = () => {
 
   const doLogout = () => {
     TrustAgent.logout();
-    logout();
+    logout({ returnTo: window.location.origin + routes.LOGIN });
   };
 
   async function doLogin() {

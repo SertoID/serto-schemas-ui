@@ -14,7 +14,7 @@ export const LogOut: React.FunctionComponent = (props) => {
   function logOut(event: React.MouseEvent) {
     event.preventDefault();
     TrustAgent.logout();
-    logout();
+    logout({ returnTo: window.location.origin + routes.LOGIN });
     history.push(routes.LOGIN);
   }
 
