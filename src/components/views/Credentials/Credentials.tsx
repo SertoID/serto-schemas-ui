@@ -3,8 +3,7 @@ import useSWR from "swr";
 import { TrustAgencyContext } from "../../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../../services/TrustAgencyService";
 import { Box, Flash, Flex, Loader, Text } from "rimble-ui";
-import { Credential, CredentialViewTypes } from "../../elements/components";
-import { baseColors, colors } from "../../elements/themes";
+import { baseColors, colors, Credential, CredentialViewTypes } from "serto-ui";
 
 export const Credentials: React.FunctionComponent = () => {
   const TrustAgent = React.useContext<TrustAgencyService>(TrustAgencyContext);

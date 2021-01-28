@@ -5,7 +5,7 @@ import { SchemaDetail } from "./SchemaDetail";
 import { ldContextPlusToSchemaInput } from "./utils";
 import { EXAMPLE_SCHEMAS } from "./examples";
 import { SchemaDataInput } from "./types";
-import { IdentityThemeProvider } from "../../themes/IdentityTheme";
+import { IdentityThemeProvider } from "serto-ui";
 
 const DEFAULT_SCHEMA = "ContentPublishCredential";
 

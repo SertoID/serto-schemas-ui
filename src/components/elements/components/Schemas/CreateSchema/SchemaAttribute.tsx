@@ -1,12 +1,11 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Box, Button, Checkbox, Flex, Input } from "rimble-ui";
-import { fonts, colors } from "../../../themes";
+import { fonts, colors, DropDown } from "serto-ui";
 import { NESTED_TYPE_KEY, typeOptions } from "../utils";
 import { LdContextPlusInnerNode, LdContextPlusNode, LdContextPlusNodeKey } from "../VcSchema";
 import { convertToCamelCase } from "../../../utils";
 import { newSchemaAttribute } from "../../../";
-import { DropDown } from "../../DropDown/DropDown";
 
 const AttributeBox = styled(Box)`
   &:first-child {

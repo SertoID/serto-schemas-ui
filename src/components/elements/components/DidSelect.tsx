@@ -1,7 +1,7 @@
 import React from "react";
 import useSWR from "swr";
 import { Box, Input, Loader } from "rimble-ui";
-import { DropDown } from "./DropDown/DropDown";
+import { DropDown } from "serto-ui";
 import { TrustAgencyService } from "../../../services/TrustAgencyService";
 import { TrustAgencyContext } from "../../../context/TrustAgentProvider";
 

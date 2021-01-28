@@ -6,7 +6,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { config } from "./config";
 import { routes } from "./constants";
 import { TrustAgencyProvider } from "./context/TrustAgentProvider";
-import { IdentityThemeProvider, fonts } from "./components/elements";
+import { IdentityThemeProvider, fonts } from "serto-ui";
 
 import { LoginPage } from "./components/views/Auth/LoginPage";
 import { AuthenticatedRoute } from "./components/views/Auth/AuthenticatedRoute";

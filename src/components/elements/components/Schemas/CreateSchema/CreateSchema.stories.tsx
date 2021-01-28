@@ -1,9 +1,8 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { Card, Flex, Box } from "rimble-ui";
-import { IdentityThemeProvider } from "../../../";
+import { IdentityThemeProvider, HighlightedJson } from "serto-ui";
 import { CreateSchema } from "./";
-import { HighlightedJson } from "../../HighlightedJson/HighlightedJson";
 
 storiesOf("Schemas", module).add("Create Schema", () => {
   const [schema, setSchema] = React.useState({});

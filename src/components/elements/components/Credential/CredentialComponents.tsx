@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, Text } from "rimble-ui";
-import { baseColors, fonts, colors } from "../../themes";
+import { baseColors, fonts, colors } from "serto-ui";
 
 export const CredentialBorder: React.FunctionComponent = (props) => {
   return (

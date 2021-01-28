@@ -3,7 +3,7 @@ import { Box, Button, Checkbox, Field, Flash, Form, Input, Loader } from "rimble
 import { mutate } from "swr";
 import { TrustAgencyContext } from "../../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../../services/TrustAgencyService";
-import { ModalContent, ModalHeader } from "../../elements/components/Modals";
+import { ModalContent, ModalHeader } from "serto-ui";
 import { SchemaDataResponse, VcSchema } from "../../elements/components/Schemas";
 import { JsonSchemaNode } from "../../elements/components/Schemas/VcSchema";
 import { getSchemaUrl } from "../../elements/components/Schemas/utils";

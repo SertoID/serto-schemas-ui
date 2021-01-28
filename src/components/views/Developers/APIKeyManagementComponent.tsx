@@ -1,12 +1,23 @@
 import React, { useContext, useState } from "react";
 import useSWR, { mutate } from "swr";
-import { Box, Button, Field, Flash, Flex, Input, Loader, Table, Text } from "rimble-ui";
-import { AddCircle } from "@rimble/icons";
 import { TrustAgencyContext } from "../../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../../services/TrustAgencyService";
-import { CopyableTruncatableText, ModalWithX, ModalContent, ModalFooter, ModalHeader } from "../../elements/components";
-import { SecondaryHeader, TBody, TH, THead, TR } from "../../elements/layouts";
-import { baseColors, colors } from "../../elements/themes";
+import { AddCircle } from "@rimble/icons";
+import { Box, Button, Field, Flash, Flex, Input, Loader, Table, Text } from "rimble-ui";
+import {
+  baseColors,
+  colors,
+  CopyableTruncatableText,
+  ModalWithX,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  SecondaryHeader,
+  TBody,
+  TH,
+  THead,
+  TR,
+} from "serto-ui";
 
 export const APIKeyManagementComponent: React.FunctionComponent = () => {
   const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);

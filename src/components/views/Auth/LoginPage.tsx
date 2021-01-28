@@ -5,9 +5,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { TrustAgencyContext } from "../../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../../services/TrustAgencyService";
 import { routes } from "../../../constants";
-import { H2 } from "../../elements/layouts";
+import { colors, H2 } from "serto-ui";
 import { ErrorUserNameUnique, ErrorUserNotFound, ErrorLogin, ErrorSignup } from "../../elements/text";
-import { colors } from "../../elements/themes";
 
 export const LoginPage = () => {
   const { loginWithPopup, getIdTokenClaims, logout, isAuthenticated } = useAuth0();

@@ -3,12 +3,10 @@ import { generatePath, Link } from "react-router-dom";
 import { Button, Flash, Flex, Loader, Table, Text } from "rimble-ui";
 import useSWR from "swr";
 import { SchemaDataResponse } from "..";
-import { colors } from "../../";
+import { colors, ModalContent, ModalFooter, ModalWithX, TBody, TH, TR } from "serto-ui";
 import { routes } from "../../../../constants";
 import { TrustAgencyContext } from "../../../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../../../services/TrustAgencyService";
-import { TBody, TH, TR } from "../../layouts/LayoutComponents";
-import { ModalContent, ModalFooter, ModalWithX } from "../Modals";
 import { SchemaDetail } from "./SchemaDetail";
 
 export interface SchemasTableProps {

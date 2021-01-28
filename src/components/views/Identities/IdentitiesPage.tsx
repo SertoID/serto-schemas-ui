@@ -1,13 +1,12 @@
 import * as React from "react";
 import useSWR from "swr";
 import { routes } from "../../../constants";
-import { GlobalLayout, Header, HeaderBox } from "../../elements/layouts";
-import { Box, Flash, Flex, Loader, Table, Text } from "rimble-ui";
 import { TrustAgencyContext } from "../../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../../services/TrustAgencyService";
+import { Box, Flash, Flex, Loader, Table, Text } from "rimble-ui";
+import { baseColors, colors, Header, HeaderBox, TBody, TH, THead, TR } from "serto-ui";
+import { GlobalLayout } from "../../elements/layouts";
 import { IssueCredentialButton } from "../../elements/components";
-import { TBody, TH, THead, TR } from "../../elements/layouts";
-import { baseColors, colors } from "../../elements/themes";
 
 export const IdentitiesPage: React.FunctionComponent = () => {
   const TrustAgent = React.useContext<TrustAgencyService>(TrustAgencyContext);

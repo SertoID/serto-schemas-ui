@@ -2,12 +2,24 @@ import React, { useContext, useMemo, useState } from "react";
 import useSWR, { mutate } from "swr";
 import slugify from "@sindresorhus/slugify";
 import { routes, featureFlags } from "../../../constants";
-import { Box, Button, Field, Flash, Flex, Input, Loader, Table, Text, Checkbox } from "rimble-ui";
 import { TrustAgencyContext } from "../../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../../services/TrustAgencyService";
-import { GlobalLayout, Header, HeaderBox, TBody, TH, TR } from "../../elements/layouts";
-import { baseColors, colors } from "../../elements/themes";
-import { Error404, FeatureFlag, ModalWithX, ModalContent, ModalFooter, ModalHeader } from "../../elements/components";
+import { Box, Button, Field, Flash, Flex, Input, Loader, Table, Text, Checkbox } from "rimble-ui";
+import {
+  baseColors,
+  colors,
+  Header,
+  HeaderBox,
+  TBody,
+  TH,
+  TR,
+  ModalWithX,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from "serto-ui";
+import { GlobalLayout } from "../../elements/layouts";
+import { Error404, FeatureFlag } from "../../elements/components";
 
 export const FeedsPage: React.FunctionComponent = () => {
   const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);

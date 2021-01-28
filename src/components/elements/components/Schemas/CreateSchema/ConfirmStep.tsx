@@ -3,7 +3,7 @@ import { Button, Loader } from "rimble-ui";
 import { SchemaDetail } from "../SchemaDetail";
 import { CompletedSchema, WorkingSchema } from "../types";
 import { createSchemaInput } from "../utils";
-import { ModalContent, ModalHeader } from "../../Modals";
+import { ModalContent, ModalHeader } from "serto-ui";
 
 export interface ConfirmStepProps {
   schema: WorkingSchema;

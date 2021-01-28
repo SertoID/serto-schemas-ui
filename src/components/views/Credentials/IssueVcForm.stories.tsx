@@ -7,8 +7,7 @@ import { SchemaDataInput } from "../../elements/components/Schemas";
 import { ldContextPlusToSchemaInput } from "../../elements/components/Schemas/utils";
 import { IssueVcForm } from "./IssueVcForm";
 import { SchemaDataResponse } from "../../elements";
-import { HighlightedJson } from "../../elements/components/HighlightedJson/HighlightedJson";
-import { IdentityThemeProvider } from "../../elements/themes/IdentityTheme";
+import { HighlightedJson, IdentityThemeProvider } from "serto-ui";
 import { Identifier } from "../../../types";
 
 const DEFAULT_SCHEMA = "TestCredential";

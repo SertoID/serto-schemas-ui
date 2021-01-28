@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useParams, useHistory, generatePath } from "react-router-dom";
-import { GlobalLayout, Header, HeaderBox, Tabs } from "../../elements/layouts";
+import { Header, HeaderBox, Tabs } from "serto-ui";
+import { GlobalLayout } from "../../elements/layouts";
 import { featureFlags, routes } from "../../../constants";
 import { IssuedCredentials } from "./IssuedCredentials";
 import { ReceivedCredentials } from "./ReceivedCredentials";

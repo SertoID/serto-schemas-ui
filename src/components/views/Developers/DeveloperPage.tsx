@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useParams, useHistory, generatePath } from "react-router-dom";
 import { routes } from "../../../constants";
-import { GlobalLayout, Header, HeaderBox } from "../../elements/layouts";
-import { Tabs } from "../../elements/layouts";
+import { Header, HeaderBox, Tabs } from "serto-ui";
+import { GlobalLayout } from "../../elements/layouts";
 import { APIKeyManagementComponent } from "./APIKeyManagementComponent";
 import { DocumentationComponent } from "./DocumentationComponent";
 

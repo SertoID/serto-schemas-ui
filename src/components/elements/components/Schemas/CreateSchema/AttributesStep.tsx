@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Box, Button, Flash, Form } from "rimble-ui";
-import { colors } from "../../../";
+import { colors, ModalContent, ModalHeader } from "serto-ui";
 import { WorkingSchema, newSchemaAttribute, requiredSchemaProperties } from "../types";
 import { LdContextPlusNode } from "../VcSchema";
-import { ModalContent, ModalHeader } from "../../Modals";
 import { SchemaAttribute } from "./SchemaAttribute";
 
 export interface AttributesStepProps {

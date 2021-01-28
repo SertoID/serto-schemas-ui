@@ -1,13 +1,9 @@
 import * as React from "react";
 import { Box, Flex, Text, Flash } from "rimble-ui";
-import { H3 } from "../../layouts";
-import { baseColors, colors, fonts } from "../../themes";
+import { baseColors, colors, fonts, DropDown, H3, HighlightedJson, Toggle } from "serto-ui";
 import { SchemaDataInput, SchemaDataResponse, requiredSchemaProperties } from "./types";
 import { typeOptions } from "./utils";
-import { Toggle } from "../Toggle";
 import { LdContextPlusInnerNode, LdContextPlusNode, LdContextPlusRootNode, VcSchema } from "./VcSchema";
-import { HighlightedJson } from "../HighlightedJson";
-import { DropDown } from "../DropDown/DropDown";
 
 const MetadataText: React.FunctionComponent<any> = (props) => (
   <Text color={colors.silver} my={2} {...props}>

@@ -4,7 +4,7 @@ import { routes } from "../../../constants";
 import { TrustAgencyContext } from "../../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../../services/TrustAgencyService";
 import { Box, Button, Card, Field, Flash, Flex, Input, Text } from "rimble-ui";
-import { H2 } from "../../elements/layouts";
+import { H2 } from "serto-ui";
 import { ErrorTenantNameUnique, ErrorValueTooLong, RequiredField } from "../../elements/text";
 
 export const CreateOrganizationPage: React.FunctionComponent = () => {

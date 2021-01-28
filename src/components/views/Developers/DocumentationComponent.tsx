@@ -1,8 +1,7 @@
 import * as React from "react";
-import { Box, Button, Text } from "rimble-ui";
-import { colors } from "../../elements/themes";
 import { links } from "../../../constants";
-import { SecondaryHeader } from "../../elements/layouts";
+import { Box, Button, Text } from "rimble-ui";
+import { colors, SecondaryHeader } from "serto-ui";
 
 export const DocumentationComponent: React.FunctionComponent = () => {
   return (

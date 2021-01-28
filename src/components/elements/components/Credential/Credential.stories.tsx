@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { Credential, CredentialViewTypes } from "./Credential";
-import { IdentityThemeProvider } from "../../themes/IdentityTheme";
+import { IdentityThemeProvider } from "serto-ui";
 import { EXAMPLE_VCS } from "../Schemas/examples";
 
 const diplomaVc = {

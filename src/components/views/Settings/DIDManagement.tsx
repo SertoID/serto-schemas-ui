@@ -2,11 +2,20 @@ import React, { useContext, useState } from "react";
 import useSWR, { mutate } from "swr";
 import { TrustAgencyContext } from "../../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../../services/TrustAgencyService";
-import { Box, Button, Flash, Flex, Input, Loader, Table, Text } from "rimble-ui";
 import { AddCircle } from "@rimble/icons";
-import { ModalWithX, ModalContent, ModalFooter, ModalHeader } from "../../elements/components";
-import { SecondaryHeader, TBody, TH, THead, TR } from "../../elements/layouts";
-import { colors } from "../../elements/themes";
+import { Box, Button, Flash, Flex, Input, Loader, Table, Text } from "rimble-ui";
+import {
+  colors,
+  ModalWithX,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  SecondaryHeader,
+  TBody,
+  TH,
+  THead,
+  TR,
+} from "serto-ui";
 import { hexEllipsis } from "../../elements/utils";
 
 export const AliasExplainerText: React.FunctionComponent = () => (

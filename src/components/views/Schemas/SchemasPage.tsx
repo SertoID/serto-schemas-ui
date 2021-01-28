@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { generatePath, useHistory, useParams } from "react-router-dom";
-import { Box, Button, Flex, Text } from "rimble-ui";
 import { routes } from "../../../constants";
+import { Box, Button, Flex, Text } from "rimble-ui";
+import { baseColors, Header, HeaderBox, ModalWithX, Tabs } from "serto-ui";
+import { GlobalLayout } from "../../elements/layouts";
 import { CreateSchema, SchemasTable } from "../../elements/components";
-import { GlobalLayout, Header, HeaderBox } from "../../elements/layouts";
-import { Tabs } from "../../elements/layouts/Tabs/Tabs";
-import { baseColors } from "../../elements/themes";
-import { ModalWithX } from "../../elements/components/Modals";
 
 export const SchemasPage: React.FunctionComponent = () => {
   const { tabName } = useParams<{ tabName: string }>();

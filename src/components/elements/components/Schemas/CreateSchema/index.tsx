@@ -10,9 +10,7 @@ import { LdContextPlus } from "../VcSchema";
 import { AttributesStep } from "./AttributesStep";
 import { ConfirmStep } from "./ConfirmStep";
 import { InfoStep } from "./InfoStep";
-import { ModalBack } from "../../Modals";
-import { H3 } from "../../../layouts";
-import { colors } from "../../../themes";
+import { colors, ModalBack, H3 } from "serto-ui";
 
 const STEPS = ["INFO", "ATTRIBUTES", "CONFIRM", "DONE"];
 

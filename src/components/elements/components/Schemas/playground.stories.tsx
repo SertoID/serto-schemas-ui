@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { Box, Flex, Text, Flash, Button, Tooltip } from "rimble-ui";
-import { H5 } from "../../layouts";
+import { H5, HighlightedJson, PrismHighlightedCodeWrap } from "serto-ui";
 import styled from "styled-components";
 import Editor from "react-simple-code-editor";
 import Prism from "prismjs";
@@ -10,7 +10,6 @@ import { useDebounce } from "use-debounce";
 
 import { VcSchema } from "./VcSchema";
 import { EXAMPLE_SCHEMAS, EXAMPLE_VCS } from "./examples";
-import { HighlightedJson, PrismHighlightedCodeWrap } from "../HighlightedJson";
 
 const Section = styled(Flex)`
   flex-direction: column;

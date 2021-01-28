@@ -4,7 +4,7 @@ import { TrustAgencyService } from "../../../../services/TrustAgencyService";
 import { useHistory } from "react-router-dom";
 import { routes } from "../../../../constants";
 import { Box, Button } from "rimble-ui";
-import { DropDown } from "../../";
+import { DropDown } from "serto-ui";
 
 export interface SwitchTenantProps {
   user: any;

@@ -2,9 +2,7 @@ import * as React from "react";
 import { Box, Flex, Pill, Table, Text, Tooltip } from "rimble-ui";
 import { Info, Person, VerifiedUser } from "@rimble/icons";
 import { CredentialBorder, CredentialTDLeft, CredentialTDRight, CredentialTR } from "./CredentialComponents";
-import { CopyToClipboard } from "../CopyToClipboard";
-import { Expand } from "../Expand";
-import { baseColors, colors, fonts } from "../../themes";
+import { baseColors, colors, fonts, CopyToClipboard, Expand } from "serto-ui";
 import { dateTimeFormat, ellipsis, hexEllipsis } from "../../utils";
 import { VC } from "../../../../types";
 

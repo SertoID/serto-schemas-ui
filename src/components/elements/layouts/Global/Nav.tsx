@@ -4,7 +4,7 @@ import { Link, generatePath } from "react-router-dom";
 import { routes } from "../../../../constants";
 import { Box, Flex, Text } from "rimble-ui";
 import { Code, People, SelectAll, Send, Settings } from "@rimble/icons";
-import { baseColors, colors } from "../../themes";
+import { baseColors, colors } from "serto-ui";
 
 const NavItemStyled = styled.div`
   padding: 10px 0;
