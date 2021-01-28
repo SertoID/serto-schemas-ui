@@ -1,5 +1,5 @@
 import { config } from "../config";
-import { SchemaDataInput, SchemaDataResponse } from "../components/elements/components/Schemas/types";
+import { SchemaDataInput, SchemaDataResponse } from "../elements/components/Schemas/types";
 import { Identifier } from "../types";
 
 const AUTH_LOCALSTORAGE_KEY = `trust-agent-auth-${config.API_URL}`;

@@ -1,4 +1,4 @@
-import { getAllUrlSearchParam } from "../components/elements/utils";
+import { getAllUrlSearchParam } from "../utils";
 
 export class FeatureFlagService {
   public featureFlags: string[];

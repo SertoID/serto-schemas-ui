@@ -8,17 +8,17 @@ import { routes } from "./constants";
 import { TrustAgencyProvider } from "./context/TrustAgentProvider";
 import { IdentityThemeProvider, fonts } from "serto-ui";
 
-import { LoginPage } from "./components/views/Auth/LoginPage";
-import { AuthenticatedRoute } from "./components/views/Auth/AuthenticatedRoute";
-import { AcceptInvitePage } from "./components/views/Auth/AcceptInvitePage";
-import { OnboardingPage } from "./components/views/Onboarding/OnboardingPage";
-import { CreateOrganizationPage } from "./components/views/Onboarding/CreateOrganizationPage";
-import { FeedsPage } from "./components/views/Feeds/FeedsPage";
-import { CredentialsPage } from "./components/views/Credentials/CredentialsPage";
-import { SchemasPage } from "./components/views/Schemas/SchemasPage";
-import { IdentitiesPage } from "./components/views/Identities/IdentitiesPage";
-import { SettingsPage } from "./components/views/Settings/SettingsPage";
-import { DeveloperPage } from "./components/views/Developers/DeveloperPage";
+import { LoginPage } from "./views/Auth/LoginPage";
+import { AuthenticatedRoute } from "./views/Auth/AuthenticatedRoute";
+import { AcceptInvitePage } from "./views/Auth/AcceptInvitePage";
+import { OnboardingPage } from "./views/Onboarding/OnboardingPage";
+import { CreateOrganizationPage } from "./views/Onboarding/CreateOrganizationPage";
+import { FeedsPage } from "./views/Feeds/FeedsPage";
+import { CredentialsPage } from "./views/Credentials/CredentialsPage";
+import { SchemasPage } from "./views/Schemas/SchemasPage";
+import { IdentitiesPage } from "./views/Identities/IdentitiesPage";
+import { SettingsPage } from "./views/Settings/SettingsPage";
+import { DeveloperPage } from "./views/Developers/DeveloperPage";
 
 const GlobalStyle = createGlobalStyle`
   html {
