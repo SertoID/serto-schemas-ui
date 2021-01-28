@@ -1,6 +1,5 @@
 export enum routes {
   HOMEPAGE = "/",
-  ADMIN = "/admin",
   LOGIN = "/login",
   ACCEPT_INVITE = "/acceptInvite/:jwt",
   ONBOARDING = "/onboarding",
@@ -11,14 +10,6 @@ export enum routes {
   IDENTITIES = "/identities",
   SETTINGS = "/settings/:tabName?",
   DEVELOPER = "/developer/:tabName?",
-}
-
-export enum freeAccount {
-  USERS = "2",
-  VC_ISSUED = "500",
-  VC_PUB_FEED = "500",
-  FEEDS_CREATED = "5",
-  FEED_SUBSCRIPTIONS = "5",
 }
 
 export const links = {

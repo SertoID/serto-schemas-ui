@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext, useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { Box, Button, Card, Flash } from "rimble-ui";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -11,9 +11,9 @@ import { colors } from "../../elements/themes";
 
 export const LoginPage = () => {
   const { loginWithPopup, getIdTokenClaims, logout, isAuthenticated } = useAuth0();
-  const TrustAgent = React.useContext<TrustAgencyService>(TrustAgencyContext);
+  const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);
 
-  const [error, setError] = React.useState<any | undefined>();
+  const [error, setError] = useState<any | undefined>();
   const history = useHistory();
 
   const doLogout = () => {

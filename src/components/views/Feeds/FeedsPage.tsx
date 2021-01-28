@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext, useMemo, useState } from "react";
 import useSWR, { mutate } from "swr";
 import slugify from "@sindresorhus/slugify";
 import { routes, featureFlags } from "../../../constants";
@@ -9,18 +9,18 @@ import { GlobalLayout, Header, HeaderBox, TBody, TH, TR } from "../../elements/l
 import { baseColors, colors } from "../../elements/themes";
 import { Error404, FeatureFlag, ModalWithX, ModalContent, ModalFooter, ModalHeader } from "../../elements/components";
 
-export const FeedsPage: React.FunctionComponent = (props) => {
-  const TrustAgent = React.useContext<TrustAgencyService>(TrustAgencyContext);
-  const [createError, setCreateError] = React.useState("");
-  const [createLoading, setCreateLoading] = React.useState(false);
-  const [feedName, setFeedName] = React.useState("");
-  const [feedDescription, setFeedDescription] = React.useState("");
-  const [isPublic, setIsPublic] = React.useState<boolean>(false);
-  const [isCreateModalOpen, setIsCreateModalOpen] = React.useState(false);
+export const FeedsPage: React.FunctionComponent = () => {
+  const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);
+  const [createError, setCreateError] = useState("");
+  const [createLoading, setCreateLoading] = useState(false);
+  const [feedName, setFeedName] = useState("");
+  const [feedDescription, setFeedDescription] = useState("");
+  const [isPublic, setIsPublic] = useState<boolean>(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const { data, error: getFeedsError, isValidating } = useSWR("/v1/feeds", () => TrustAgent.getFeeds());
 
-  const feedSlug = React.useMemo(() => slugify(feedName), [feedName]);
+  const feedSlug = useMemo(() => slugify(feedName), [feedName]);
 
   function clearCreateFields() {
     setFeedName("");

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { routes } from "../../../constants";
 import { TrustAgencyContext } from "../../../context/TrustAgentProvider";
@@ -7,7 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Flex, Loader } from "rimble-ui";
 
 export const AuthenticatedRoute = ({ ...otherProps }) => {
-  const TrustAgent = React.useContext<TrustAgencyService>(TrustAgencyContext);
+  const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);
   const { isAuthenticated, isLoading, logout } = useAuth0();
 
   if (isLoading) {

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { generatePath, useHistory, useParams } from "react-router-dom";
 import { Box, Button, Flex, Text } from "rimble-ui";
 import { routes } from "../../../constants";
@@ -8,15 +8,15 @@ import { Tabs } from "../../elements/layouts/Tabs/Tabs";
 import { baseColors } from "../../elements/themes";
 import { ModalWithX } from "../../elements/components/Modals";
 
-export const SchemasPage: React.FunctionComponent = (props) => {
-  const { tabName } = useParams();
+export const SchemasPage: React.FunctionComponent = () => {
+  const { tabName } = useParams<{ tabName: string }>();
   const history = useHistory();
   if (tabName && tabName !== "created" && tabName !== "discover") {
     history.push(generatePath(routes.SCHEMAS));
   }
 
-  const [isCreateModalOpen, setIsCreateModalOpen] = React.useState(false);
-  const [isCreateModalFinalStep, setIsCreateModalFinalStep] = React.useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isCreateModalFinalStep, setIsCreateModalFinalStep] = useState(false);
 
   const noSchemas = (
     <Flex alignItems="center" justifyContent="center" minHeight={8}>

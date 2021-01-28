@@ -7,7 +7,7 @@ import { Box, Button, Card, Field, Flash, Flex, Input, Text } from "rimble-ui";
 import { H2 } from "../../elements/layouts";
 import { ErrorTenantNameUnique, ErrorValueTooLong, RequiredField } from "../../elements/text";
 
-export const CreateOrganizationPage: React.FunctionComponent = (props) => {
+export const CreateOrganizationPage: React.FunctionComponent = () => {
   const history = useHistory();
   const TrustAgent = React.useContext<TrustAgencyService>(TrustAgencyContext);
   const [tenantName, setTenantName] = React.useState("");

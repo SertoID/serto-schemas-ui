@@ -5,7 +5,7 @@ import { H2 } from "../../elements/layouts";
 import { baseColors } from "../../elements/themes";
 import { links } from "../../../constants";
 
-export const OnboardingPage: React.FunctionComponent = (props) => {
+export const OnboardingPage: React.FunctionComponent = () => {
   return (
     <Flex flexDirection="column" height="100vh">
       <Box bg={baseColors.white} borderRadius={1} m={3} mb={0} p={3}>

@@ -6,8 +6,8 @@ import { Tabs } from "../../elements/layouts";
 import { APIKeyManagementComponent } from "./APIKeyManagementComponent";
 import { DocumentationComponent } from "./DocumentationComponent";
 
-export const DeveloperPage: React.FunctionComponent = (props) => {
-  const { tabName } = useParams();
+export const DeveloperPage: React.FunctionComponent = () => {
+  const { tabName } = useParams<{ tabName: string }>();
   const history = useHistory();
   if (tabName && tabName !== "api-keys" && tabName !== "docs") {
     history.push(generatePath(routes.DEVELOPER));

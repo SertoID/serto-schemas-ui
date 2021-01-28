@@ -5,10 +5,9 @@ import { GlobalLayout, Header, HeaderBox } from "../../elements/layouts";
 import { Tabs } from "../../elements/layouts";
 import { MemberManagement } from "./MemberManagement";
 import { DIDManagement } from "./DIDManagement";
-// import { AccountPlan } from "./AccountPlan";
 
-export const SettingsPage: React.FunctionComponent = (props) => {
-  const { tabName } = useParams();
+export const SettingsPage: React.FunctionComponent = () => {
+  const { tabName } = useParams<{ tabName: string }>();
   const history = useHistory();
   if (tabName && tabName !== "members" && tabName !== "identifiers" && tabName !== "account-plan") {
     history.push(generatePath(routes.SETTINGS));
@@ -32,11 +31,6 @@ export const SettingsPage: React.FunctionComponent = (props) => {
             title: "Identifiers",
             content: <DIDManagement />,
           },
-          /*{
-            tabName: "account-plan",
-            title: "Account Plan",
-            content: <AccountPlan />,
-          },*/
         ]}
         onTabClicked={(tabName) => {
           history.push(generatePath(routes.SETTINGS, { tabName }));

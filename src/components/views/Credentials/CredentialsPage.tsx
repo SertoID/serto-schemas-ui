@@ -8,9 +8,9 @@ import { FeatureFlagContext } from "../../../context/TrustAgentProvider";
 import { FeatureFlagService } from "../../../services/FeatureFlagService";
 import { IssueCredentialButton } from "../../elements/components/Credential/IssueCredentialButton";
 
-export const CredentialsPage: React.FunctionComponent = (props) => {
+export const CredentialsPage: React.FunctionComponent = () => {
   const features = React.useContext<FeatureFlagService>(FeatureFlagContext);
-  const { tabName } = useParams();
+  const { tabName } = useParams<{ tabName: string }>();
   const history = useHistory();
   if (tabName && tabName !== "issued" && tabName !== "received") {
     history.push(generatePath(routes.CREDENTIALS));

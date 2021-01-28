@@ -29,7 +29,7 @@ export const DIDManagement: React.FunctionComponent = () => {
   const [alias, setAlias] = useState("");
   const [didToEdit, setDidToEdit] = useState("");
   const [identifierSelected, setIdentifierSelected] = useState<any | undefined>();
-  const [getIdentifierLoading, setGetIdentifierLoading] = React.useState(false);
+  const [getIdentifierLoading, setGetIdentifierLoading] = useState(false);
   const [createError, setCreateError] = useState<string | undefined>();
   const [editError, setEditError] = useState<string | undefined>();
 

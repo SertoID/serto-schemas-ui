@@ -6,7 +6,7 @@ import { Box, Flash, Flex, Loader, Text } from "rimble-ui";
 import { Credential, CredentialViewTypes } from "../../elements/components";
 import { baseColors, colors } from "../../elements/themes";
 
-export const Credentials: React.FunctionComponent = (props) => {
+export const Credentials: React.FunctionComponent = () => {
   const TrustAgent = React.useContext<TrustAgencyService>(TrustAgencyContext);
   const {
     data,

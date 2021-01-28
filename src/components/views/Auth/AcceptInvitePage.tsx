@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext, useState } from "react";
 import useSWR from "swr";
 import { useHistory } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -30,14 +30,14 @@ const AcceptInviteWrap: React.FunctionComponent = (props) => (
 export const AcceptInvitePage: React.FunctionComponent<AcceptInviteProps> = (props) => {
   const history = useHistory();
   const { loginWithPopup, getIdTokenClaims, logout } = useAuth0();
-  const TrustAgent = React.useContext<TrustAgencyService>(TrustAgencyContext);
+  const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);
   const { data: user, isValidating } = useSWR("/v1/users/currentUser", () => TrustAgent.getUser());
 
   const jwt = props.match.params.jwt;
 
-  const [error, setError] = React.useState<any | undefined>();
-  const [isAuthenticated, setAuthenticated] = React.useState(TrustAgent.isAuthenticated());
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = useState<any | undefined>();
+  const [isAuthenticated, setAuthenticated] = useState(TrustAgent.isAuthenticated());
+  const [isLoading, setIsLoading] = useState(false);
 
   const doLogout = () => {
     TrustAgent.logout();

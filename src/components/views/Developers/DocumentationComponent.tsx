@@ -4,7 +4,7 @@ import { colors } from "../../elements/themes";
 import { links } from "../../../constants";
 import { SecondaryHeader } from "../../elements/layouts";
 
-export const DocumentationComponent: React.FunctionComponent = (props) => {
+export const DocumentationComponent: React.FunctionComponent = () => {
   return (
     <>
       <SecondaryHeader heading="Documentation">

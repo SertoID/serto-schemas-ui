@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext, useState } from "react";
 import useSWR, { mutate } from "swr";
 import { Box, Button, Flash, Flex, Loader, Table, Text } from "rimble-ui";
 import { AddCircle } from "@rimble/icons";
@@ -9,18 +9,18 @@ import { SecondaryHeader, TBody, TH, THead, TR } from "../../elements/layouts";
 import { baseColors, colors } from "../../elements/themes";
 import { config } from "../../../config";
 
-export const MemberManagement: React.FunctionComponent = (props) => {
-  const TrustAgent = React.useContext<TrustAgencyService>(TrustAgencyContext);
+export const MemberManagement: React.FunctionComponent = () => {
+  const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);
   const activeTenantID = TrustAgent.getAuth()?.tenantid;
-  const [createError, setGetInviteCodeError] = React.useState("");
-  const [getCodeLoading, setGetInviteCodeLoading] = React.useState(false);
-  const [inviteCode, setInviteCodeKey] = React.useState("");
-  const [isCreateModalOpen, setIsGetInviteCodeModalOpen] = React.useState(false);
-  const [isReceiveApiKey, setIsReceiveInviteCode] = React.useState(false);
-  const [memberToDeleteID, setMemberToDeleteID] = React.useState("");
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
-  const [deleteError, setRemoveError] = React.useState("");
-  const [removeLoading, setRemoveLoading] = React.useState(false);
+  const [createError, setGetInviteCodeError] = useState("");
+  const [getCodeLoading, setGetInviteCodeLoading] = useState(false);
+  const [inviteCode, setInviteCodeKey] = useState("");
+  const [isCreateModalOpen, setIsGetInviteCodeModalOpen] = useState(false);
+  const [isReceiveApiKey, setIsReceiveInviteCode] = useState(false);
+  const [memberToDeleteID, setMemberToDeleteID] = useState("");
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteError, setRemoveError] = useState("");
+  const [removeLoading, setRemoveLoading] = useState(false);
 
   const { data, error: getMembersError, isValidating } = useSWR("/v1/tenant/members", () =>
     TrustAgent.getTenantMembers(),

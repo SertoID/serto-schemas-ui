@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext, useState } from "react";
 import useSWR, { mutate } from "swr";
 import { Box, Button, Field, Flash, Flex, Input, Loader, Table, Text } from "rimble-ui";
 import { AddCircle } from "@rimble/icons";
@@ -8,19 +8,19 @@ import { CopyableTruncatableText, ModalWithX, ModalContent, ModalFooter, ModalHe
 import { SecondaryHeader, TBody, TH, THead, TR } from "../../elements/layouts";
 import { baseColors, colors } from "../../elements/themes";
 
-export const APIKeyManagementComponent: React.FunctionComponent = (props) => {
-  const TrustAgent = React.useContext<TrustAgencyService>(TrustAgencyContext);
+export const APIKeyManagementComponent: React.FunctionComponent = () => {
+  const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);
   const activeTenantID = TrustAgent.getAuth()?.tenantid;
-  const [createError, setCreateError] = React.useState("");
-  const [createLoading, setCreateLoading] = React.useState(false);
-  const [apiKeyName, setApiKeyName] = React.useState("");
-  const [apiKey, setApiKey] = React.useState("");
-  const [isCreateModalOpen, setIsCreateModalOpen] = React.useState(false);
-  const [isReceiveApiKeyModalOpen, setIsReceiveApiKeyModalOpen] = React.useState(false);
-  const [apiKeyToDeleteName, setApiKeyToDeleteName] = React.useState("");
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
-  const [deleteError, setDeleteError] = React.useState("");
-  const [deleteLoading, setDeleteLoading] = React.useState(false);
+  const [createError, setCreateError] = useState("");
+  const [createLoading, setCreateLoading] = useState(false);
+  const [apiKeyName, setApiKeyName] = useState("");
+  const [apiKey, setApiKey] = useState("");
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isReceiveApiKeyModalOpen, setIsReceiveApiKeyModalOpen] = useState(false);
+  const [apiKeyToDeleteName, setApiKeyToDeleteName] = useState("");
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const { data, error: getFeedsError, isValidating } = useSWR("/v1/tenant/apiKeys", () => TrustAgent.getApiKeys());
 
