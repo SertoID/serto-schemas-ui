@@ -41,6 +41,3 @@ codecov:
     require_changes: no
     require_head: no
     require_base: no
-
-  fixes:
-    - "before/::"
