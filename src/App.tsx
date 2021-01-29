@@ -6,7 +6,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { config } from "./config";
 import { routes } from "./constants";
 import { TrustAgencyProvider } from "./context/TrustAgentProvider";
-import { IdentityThemeProvider, fonts } from "serto-ui";
+import { SertoUiProvider, fonts } from "serto-ui";
 
 import { LoginPage } from "./views/Auth/LoginPage";
 import { AuthenticatedRoute } from "./views/Auth/AuthenticatedRoute";
@@ -44,7 +44,7 @@ export const App = () => {
       <BrowserRouter>
         <TrustAgencyProvider featureFlags={featureFlags}>
           <React.Suspense fallback={<></>}>
-            <IdentityThemeProvider>
+            <SertoUiProvider>
               <GlobalStyle />
               <Switch>
                 <Route path={routes.LOGIN} component={LoginPage} />
@@ -59,7 +59,7 @@ export const App = () => {
                 <AuthenticatedRoute path={routes.SETTINGS} component={SettingsPage} />
                 <AuthenticatedRoute path={routes.DEVELOPER} component={DeveloperPage} />
               </Switch>
-            </IdentityThemeProvider>
+            </SertoUiProvider>
           </React.Suspense>
         </TrustAgencyProvider>
       </BrowserRouter>

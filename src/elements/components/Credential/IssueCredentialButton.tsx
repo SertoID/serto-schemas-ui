@@ -1,10 +1,9 @@
 import * as React from "react";
 import useSWR, { mutate } from "swr";
 import { Button, Loader, Tooltip } from "rimble-ui";
-import { ModalWithX } from "serto-ui";
+import { IssueVc, ModalWithX } from "serto-ui";
 import { TrustAgencyService } from "../../../services/TrustAgencyService";
 import { TrustAgencyContext } from "../../../context/TrustAgentProvider";
-import { IssueVc } from "../../../views/Credentials/IssueVc";
 import { Identifier } from "../../../types";
 
 export interface IssueCredentialButtonProps {
