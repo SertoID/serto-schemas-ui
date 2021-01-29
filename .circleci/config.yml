@@ -187,7 +187,6 @@ workflows:
           filters:
             branches:
               only:
-                - master
                 - sruddy/continuous-deploy
       - deploy-image:
           name: deploy-ui-image
@@ -198,5 +197,4 @@ workflows:
           filters:
             branches:
               only:
-                - master
                 - sruddy/continuous-deploy

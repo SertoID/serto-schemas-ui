@@ -1,6 +1,7 @@
 ## VC Explorer Demo
 
-[![CircleCI](https://circleci.com/gh/uport-project/vc-explorer-demo.svg?style=svg&circle-token=4b2bdce52128492cddb63e54b1f208887054c201)](https://circleci.com/gh/uport-project/vc-explorer-demo)
+[![SertoID](https://circleci.com/gh/SertoID/serto-agent-ui.svg?style=svg&circle-token=1e5a4628f2f8a7f75980ae087c5d544e21b13aee)](https://circleci.com/gh/SertoID/serto-agent-ui/tree/master)
+[![codecov](https://codecov.io/gh/SertoID/serto-agent-ui/branch/master/graph/badge.svg?token=RYER7SC5QA)](https://codecov.io/gh/SertoID/serto-agent-ui)
 
 ### `yarn start`
 
