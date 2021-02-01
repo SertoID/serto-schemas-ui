@@ -49,7 +49,7 @@ export class TrustAgencyService {
     return this.request("/v1/users/currentUser");
   }
 
-  public async logout(): Promise<void>  {
+  public async logout(): Promise<void> {
     this.clearAuth();
   }
 

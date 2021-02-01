@@ -4,9 +4,9 @@ import { routes } from "../../constants";
 import { TrustAgencyContext } from "../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../services/TrustAgencyService";
 import { Box, Flash, Flex, Loader, Table, Text } from "rimble-ui";
-import { baseColors, colors, Header, HeaderBox, TBody, TH, THead, TR } from "serto-ui";
+import { baseColors, colors, Header, HeaderBox, TBody, TH, THead, TR, IssueCredentialButton } from "serto-ui";
 import { GlobalLayout } from "../../components/layouts";
-import { IssueCredentialButton } from "../../components/elements";
+import { Identifier } from "../../types";
 
 export const IdentitiesPage: React.FunctionComponent = () => {
   const TrustAgent = React.useContext<TrustAgencyService>(TrustAgencyContext);
@@ -18,6 +18,20 @@ export const IdentitiesPage: React.FunctionComponent = () => {
       revalidateOnFocus: false,
     },
   );
+
+  const { data: identifiers } = useSWR("/v1/tenant/agent/identityManagerGetIdentities", () =>
+    TrustAgent.getTenantIdentifiers(),
+  );
+
+  const issuerIdentifiers: Identifier[] = [];
+  if (identifiers) {
+    identifiers.forEach((id: any) => {
+      issuerIdentifiers.push({
+        did: id.did,
+        provider: id.provider,
+      });
+    });
+  }
 
   return (
     <GlobalLayout url={routes.IDENTITIES}>
@@ -48,7 +62,9 @@ export const IdentitiesPage: React.FunctionComponent = () => {
                         </Text.span>
                       </td>
                       <td style={{ textAlign: "right" }}>
-                        <IssueCredentialButton subjectIdentifier={identity} />
+                        {identifiers && (
+                          <IssueCredentialButton subjectIdentifier={identity} issuerIdentifiers={issuerIdentifiers} />
+                        )}
                       </td>
                     </TR>
                   );
