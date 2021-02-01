@@ -6,7 +6,7 @@ import { TrustAgencyContext } from "../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../services/TrustAgencyService";
 import { Flex, Loader } from "rimble-ui";
 
-export const AuthenticatedRoute = ({ ...otherProps }) => {
+export const AuthenticatedRoute = ({ ...otherProps }: { [key: string]: any }): JSX.Element => {
   const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);
   const { isAuthenticated, isLoading, logout } = useAuth0();
 

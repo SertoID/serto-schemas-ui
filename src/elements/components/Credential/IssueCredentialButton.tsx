@@ -83,7 +83,7 @@ export const IssueCredentialButton: React.FunctionComponent<IssueCredentialButto
       <ModalWithX isOpen={isIssueModalOpen} close={() => setIsIssueModalOpen(false)} minWidth={9} maxWidth={11}>
         <IssueVc
           subjectIdentifier={props.subjectIdentifier}
-          identifiers={identifiersResponse!}
+          identifiers={identifiersResponse!} // eslint-disable-line
           onComplete={() => setIsIssueModalOpen(false)}
         />
       </ModalWithX>
