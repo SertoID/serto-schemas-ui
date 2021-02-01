@@ -4,7 +4,7 @@ import { routes } from "../../constants";
 import { MemberManagement } from "./MemberManagement";
 import { DIDManagement } from "./DIDManagement";
 import { Header, HeaderBox, Tabs } from "serto-ui";
-import { GlobalLayout } from "../../elements/layouts";
+import { GlobalLayout } from "../../components/layouts";
 
 export const SettingsPage: React.FunctionComponent = () => {
   const { tabName } = useParams<{ tabName: string }>();

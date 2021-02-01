@@ -8,7 +8,7 @@ import { TrustAgencyService } from "../../services/TrustAgencyService";
 import { Person } from "@rimble/icons";
 import { Box, Button, Card, Flash, Flex, Loader, Text } from "rimble-ui";
 import { baseColors, colors, H3 } from "serto-ui";
-import { ErrorUserNameUnique, ErrorUserNotFound, ErrorLogin, ErrorSignup } from "../../elements/text";
+import { ErrorUserNameUnique, ErrorUserNotFound, ErrorLogin, ErrorSignup } from "../../components/text";
 
 export interface AcceptInviteProps {
   match: any;

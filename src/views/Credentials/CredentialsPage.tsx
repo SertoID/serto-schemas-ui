@@ -6,8 +6,8 @@ import { FeatureFlagService } from "../../services/FeatureFlagService";
 import { IssuedCredentials } from "./IssuedCredentials";
 import { ReceivedCredentials } from "./ReceivedCredentials";
 import { Header, HeaderBox, Tabs } from "serto-ui";
-import { GlobalLayout } from "../../elements/layouts";
-import { IssueCredentialButton } from "../../elements/components/Credential/IssueCredentialButton";
+import { GlobalLayout } from "../../components/layouts";
+import { IssueCredentialButton } from "../../components/elements/Credential/IssueCredentialButton";
 
 export const CredentialsPage: React.FunctionComponent = () => {
   const features = React.useContext<FeatureFlagService>(FeatureFlagContext);

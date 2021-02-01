@@ -3,7 +3,7 @@ import { generatePath, useHistory, useParams } from "react-router-dom";
 import { routes } from "../../constants";
 import { Box, Button, Flex, Text } from "rimble-ui";
 import { baseColors, Header, HeaderBox, ModalWithX, Tabs, CreateSchema, SchemasTable } from "serto-ui";
-import { GlobalLayout } from "../../elements/layouts";
+import { GlobalLayout } from "../../components/layouts";
 
 export const SchemasPage: React.FunctionComponent = () => {
   const { tabName } = useParams<{ tabName: string }>();

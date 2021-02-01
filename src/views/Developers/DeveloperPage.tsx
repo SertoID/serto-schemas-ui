@@ -4,7 +4,7 @@ import { routes } from "../../constants";
 import { APIKeyManagementComponent } from "./APIKeyManagementComponent";
 import { DocumentationComponent } from "./DocumentationComponent";
 import { Header, HeaderBox, Tabs } from "serto-ui";
-import { GlobalLayout } from "../../elements/layouts";
+import { GlobalLayout } from "../../components/layouts";
 
 export const DeveloperPage: React.FunctionComponent = () => {
   const { tabName } = useParams<{ tabName: string }>();

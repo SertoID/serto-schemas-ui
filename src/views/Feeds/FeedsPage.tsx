@@ -18,8 +18,8 @@ import {
   ModalFooter,
   ModalHeader,
 } from "serto-ui";
-import { GlobalLayout } from "../../elements/layouts";
-import { Error404, FeatureFlag } from "../../elements/components";
+import { GlobalLayout } from "../../components/layouts";
+import { Error404, FeatureFlag } from "../../components/elements";
 
 export const FeedsPage: React.FunctionComponent = () => {
   const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);

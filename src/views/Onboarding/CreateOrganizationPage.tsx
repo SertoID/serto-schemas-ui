@@ -5,7 +5,7 @@ import { TrustAgencyContext } from "../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../services/TrustAgencyService";
 import { Box, Button, Card, Field, Flash, Flex, Input, Text } from "rimble-ui";
 import { H2 } from "serto-ui";
-import { ErrorTenantNameUnique, ErrorValueTooLong, RequiredField } from "../../elements/text";
+import { ErrorTenantNameUnique, ErrorValueTooLong, RequiredField } from "../../components/text";
 
 export const CreateOrganizationPage: React.FunctionComponent = () => {
   const history = useHistory();

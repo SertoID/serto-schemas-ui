@@ -6,7 +6,7 @@ import { TrustAgencyContext } from "../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../services/TrustAgencyService";
 import { Box, Button, Card, Flash } from "rimble-ui";
 import { colors, H2 } from "serto-ui";
-import { ErrorUserNameUnique, ErrorUserNotFound, ErrorLogin, ErrorSignup } from "../../elements/text";
+import { ErrorUserNameUnique, ErrorUserNotFound, ErrorLogin, ErrorSignup } from "../../components/text";
 
 export const LoginPage = (): JSX.Element => {
   const { loginWithPopup, getIdTokenClaims, logout, isAuthenticated } = useAuth0();
