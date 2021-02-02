@@ -6,20 +6,20 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { config } from "./config";
 import { routes } from "./constants";
 import { TrustAgencyProvider } from "./context/TrustAgentProvider";
-import { IdentityThemeProvider, fonts } from "./components/elements";
+import { SertoUiProvider, fonts } from "serto-ui";
+import { Code, People, SelectAll, Send, Settings } from "@rimble/icons";
 
-import { AdminPage } from "./components/views/Admin/AdminPage";
-import { LoginPage } from "./components/views/Auth/LoginPage";
-import { AuthenticatedRoute } from "./components/views/Auth/AuthenticatedRoute";
-import { AcceptInvitePage } from "./components/views/Auth/AcceptInvitePage";
-import { OnboardingPage } from "./components/views/Onboarding/OnboardingPage";
-import { CreateOrganizationPage } from "./components/views/Onboarding/CreateOrganizationPage";
-import { FeedsPage } from "./components/views/Feeds/FeedsPage";
-import { CredentialsPage } from "./components/views/Credentials/CredentialsPage";
-import { SchemasPage } from "./components/views/Schemas/SchemasPage";
-import { IdentitiesPage } from "./components/views/Identities/IdentitiesPage";
-import { SettingsPage } from "./components/views/Settings/SettingsPage";
-import { DeveloperPage } from "./components/views/Developers/DeveloperPage";
+import { LoginPage } from "./views/Auth/LoginPage";
+import { AuthenticatedRoute } from "./views/Auth/AuthenticatedRoute";
+import { AcceptInvitePage } from "./views/Auth/AcceptInvitePage";
+import { OnboardingPage } from "./views/Onboarding/OnboardingPage";
+import { CreateOrganizationPage } from "./views/Onboarding/CreateOrganizationPage";
+import { FeedsPage } from "./views/Feeds/FeedsPage";
+import { CredentialsPage } from "./views/Credentials/CredentialsPage";
+import { SchemasPage } from "./views/Schemas/SchemasPage";
+import { IdentitiesPage } from "./views/Identities/IdentitiesPage";
+import { SettingsPage } from "./views/Settings/SettingsPage";
+import { DeveloperPage } from "./views/Developers/DeveloperPage";
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -37,7 +37,16 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export const App = () => {
+export const App = (): JSX.Element => {
+  const sertoUiContext = {
+    navItems: [
+      { text: "Credentials", url: routes.CREDENTIALS, icon: Send },
+      { text: "Schemas", url: routes.SCHEMAS, icon: SelectAll },
+      { text: "Identities", url: routes.IDENTITIES, icon: People },
+      { text: "Settings", url: routes.SETTINGS, icon: Settings },
+      { text: "Developer", url: routes.DEVELOPER, icon: Code },
+    ],
+  };
   const featureFlags = config.FEATURE_FLAGS ? config.FEATURE_FLAGS.split(",") : [];
 
   return (
@@ -45,12 +54,11 @@ export const App = () => {
       <BrowserRouter>
         <TrustAgencyProvider featureFlags={featureFlags}>
           <React.Suspense fallback={<></>}>
-            <IdentityThemeProvider>
+            <SertoUiProvider value={sertoUiContext}>
               <GlobalStyle />
               <Switch>
                 <Route path={routes.LOGIN} component={LoginPage} />
                 <Route path={routes.ACCEPT_INVITE} component={AcceptInvitePage} />
-                <AuthenticatedRoute path={routes.ADMIN} component={AdminPage} />
                 <AuthenticatedRoute path={routes.ONBOARDING} component={OnboardingPage} />
                 <AuthenticatedRoute path={routes.CREATE_ORGANIZATION} component={CreateOrganizationPage} />
                 <AuthenticatedRoute exact path={routes.HOMEPAGE} component={CredentialsPage} />
@@ -61,7 +69,7 @@ export const App = () => {
                 <AuthenticatedRoute path={routes.SETTINGS} component={SettingsPage} />
                 <AuthenticatedRoute path={routes.DEVELOPER} component={DeveloperPage} />
               </Switch>
-            </IdentityThemeProvider>
+            </SertoUiProvider>
           </React.Suspense>
         </TrustAgencyProvider>
       </BrowserRouter>

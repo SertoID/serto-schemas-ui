@@ -1,6 +1,5 @@
 import { config } from "../config";
-import { SchemaDataInput, SchemaDataResponse } from "../components/elements/components/Schemas/types";
-import { Identifier } from "../types";
+import { Identifier, SchemaDataInput, SchemaDataResponse } from "serto-ui";
 
 const AUTH_LOCALSTORAGE_KEY = `trust-agent-auth-${config.API_URL}`;
 
@@ -49,7 +48,7 @@ export class TrustAgencyService {
     return this.request("/v1/users/currentUser");
   }
 
-  public async logout() {
+  public async logout(): Promise<void> {
     this.clearAuth();
   }
 
@@ -57,7 +56,7 @@ export class TrustAgencyService {
     return !!this.auth && !this.loggingIn;
   }
 
-  public switchTenant(tenantid: string) {
+  public switchTenant(tenantid: string): void {
     const jwt = this.getAuth()?.jwt;
     if (jwt) {
       this.setAuth({ jwt, tenantid }, true);
@@ -120,6 +119,7 @@ export class TrustAgencyService {
     return this.request("/v1/tenant/agent/dataStoreORMGetVerifiableCredentials", "POST");
   }
 
+  // eslint-disable-next-line
   public async issueVc(body: any): Promise<any> {
     return this.request("/v1/tenant/agent/createVerifiableCredential", "POST", body);
   }
@@ -196,6 +196,7 @@ export class TrustAgencyService {
     });
   }
 
+  // eslint-disable-next-line
   public async publishToFeed(data: any, _feedId?: string): Promise<any> {
     let feedId = _feedId;
     if (!feedId) {
@@ -214,7 +215,7 @@ export class TrustAgencyService {
       const feedInfo = await this.getFeedBySlug(config.GLOBAL_FEED_SLUG);
       this.defaultFeedId = feedInfo.id;
     }
-    return this.defaultFeedId!;
+    return this.defaultFeedId!; // eslint-disable-line
   }
 
   private async request(
