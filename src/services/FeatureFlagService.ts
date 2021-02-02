@@ -1,4 +1,4 @@
-import { getAllUrlSearchParam } from "../utils";
+import { getAllUrlSearchParam } from "serto-ui";
 
 export class FeatureFlagService {
   public featureFlags: string[];

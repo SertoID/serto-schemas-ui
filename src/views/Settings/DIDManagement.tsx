@@ -15,8 +15,8 @@ import {
   TH,
   THead,
   TR,
+  hexEllipsis,
 } from "serto-ui";
-import { hexEllipsis } from "../../utils";
 
 export const AliasExplainerText: React.FunctionComponent = () => (
   <>
