@@ -3,8 +3,8 @@ import { useParams, useHistory, generatePath } from "react-router-dom";
 import { routes } from "../../constants";
 import { APIKeyManagementComponent } from "./APIKeyManagementComponent";
 import { DocumentationComponent } from "./DocumentationComponent";
-import { Header, HeaderBox, Tabs } from "serto-ui";
-import { GlobalLayout } from "../../components/layouts";
+import { GlobalLayout, Header, HeaderBox, Tabs } from "serto-ui";
+import { LogOut } from "../Auth/LogOut";
 
 export const DeveloperPage: React.FunctionComponent = () => {
   const { tabName } = useParams<{ tabName: string }>();
@@ -14,7 +14,7 @@ export const DeveloperPage: React.FunctionComponent = () => {
   }
 
   return (
-    <GlobalLayout url={routes.DEVELOPER}>
+    <GlobalLayout url={routes.DEVELOPER} sidebarBottomContents={<LogOut />}>
       <HeaderBox>
         <Header heading="Developers" />
       </HeaderBox>

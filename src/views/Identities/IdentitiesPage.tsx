@@ -4,9 +4,20 @@ import { routes } from "../../constants";
 import { TrustAgencyContext } from "../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../services/TrustAgencyService";
 import { Box, Flash, Flex, Loader, Table, Text } from "rimble-ui";
-import { baseColors, colors, Header, HeaderBox, TBody, TH, THead, TR, IssueCredentialButton } from "serto-ui";
-import { GlobalLayout } from "../../components/layouts";
-import { Identifier } from "../../types";
+import {
+  baseColors,
+  colors,
+  GlobalLayout,
+  Header,
+  HeaderBox,
+  Identifier,
+  IssueCredentialButton,
+  TBody,
+  TH,
+  THead,
+  TR,
+} from "serto-ui";
+import { LogOut } from "../Auth/LogOut";
 
 export const IdentitiesPage: React.FunctionComponent = () => {
   const TrustAgent = React.useContext<TrustAgencyService>(TrustAgencyContext);
@@ -34,7 +45,7 @@ export const IdentitiesPage: React.FunctionComponent = () => {
   }
 
   return (
-    <GlobalLayout url={routes.IDENTITIES}>
+    <GlobalLayout url={routes.IDENTITIES} sidebarBottomContents={<LogOut />}>
       <HeaderBox>
         <Header heading="Identities" />
       </HeaderBox>

@@ -7,6 +7,7 @@ import { config } from "./config";
 import { routes } from "./constants";
 import { TrustAgencyProvider } from "./context/TrustAgentProvider";
 import { SertoUiProvider, fonts } from "serto-ui";
+import { Code, People, SelectAll, Send, Settings } from "@rimble/icons";
 
 import { LoginPage } from "./views/Auth/LoginPage";
 import { AuthenticatedRoute } from "./views/Auth/AuthenticatedRoute";
@@ -37,6 +38,15 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export const App = (): JSX.Element => {
+  const sertoUiContext = {
+    navItems: [
+      { text: "Credentials", url: routes.CREDENTIALS, icon: Send },
+      { text: "Schemas", url: routes.SCHEMAS, icon: SelectAll },
+      { text: "Identities", url: routes.IDENTITIES, icon: People },
+      { text: "Settings", url: routes.SETTINGS, icon: Settings },
+      { text: "Developer", url: routes.DEVELOPER, icon: Code },
+    ],
+  };
   const featureFlags = config.FEATURE_FLAGS ? config.FEATURE_FLAGS.split(",") : [];
 
   return (
@@ -44,7 +54,7 @@ export const App = (): JSX.Element => {
       <BrowserRouter>
         <TrustAgencyProvider featureFlags={featureFlags}>
           <React.Suspense fallback={<></>}>
-            <SertoUiProvider>
+            <SertoUiProvider value={sertoUiContext}>
               <GlobalStyle />
               <Switch>
                 <Route path={routes.LOGIN} component={LoginPage} />

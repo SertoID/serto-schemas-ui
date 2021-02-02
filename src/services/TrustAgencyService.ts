@@ -1,6 +1,5 @@
 import { config } from "../config";
-import { SchemaDataInput, SchemaDataResponse } from "serto-ui";
-import { Identifier } from "../types";
+import { Identifier, SchemaDataInput, SchemaDataResponse } from "serto-ui";
 
 const AUTH_LOCALSTORAGE_KEY = `trust-agent-auth-${config.API_URL}`;
 

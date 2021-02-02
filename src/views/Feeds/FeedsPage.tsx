@@ -8,6 +8,7 @@ import { Box, Button, Field, Flash, Flex, Input, Loader, Table, Text, Checkbox }
 import {
   baseColors,
   colors,
+  GlobalLayout,
   Header,
   HeaderBox,
   TBody,
@@ -18,8 +19,8 @@ import {
   ModalFooter,
   ModalHeader,
 } from "serto-ui";
-import { GlobalLayout } from "../../components/layouts";
 import { Error404, FeatureFlag } from "../../components/elements";
+import { LogOut } from "../Auth/LogOut";
 
 export const FeedsPage: React.FunctionComponent = () => {
   const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);
@@ -73,7 +74,7 @@ export const FeedsPage: React.FunctionComponent = () => {
 
   return (
     <FeatureFlag feature={featureFlags.FEEDS} replacement={<Error404 />}>
-      <GlobalLayout url={routes.FEEDS}>
+      <GlobalLayout url={routes.FEEDS} sidebarBottomContents={<LogOut />}>
         {data && data.length > 0 ? (
           <>
             <HeaderBox>

@@ -7,9 +7,8 @@ import { TrustAgencyService } from "../../services/TrustAgencyService";
 import { FeatureFlagService } from "../../services/FeatureFlagService";
 import { IssuedCredentials } from "./IssuedCredentials";
 import { ReceivedCredentials } from "./ReceivedCredentials";
-import { Header, HeaderBox, Tabs, IssueCredentialButton } from "serto-ui";
-import { GlobalLayout } from "../../components/layouts";
-import { Identifier } from "../../types";
+import { GlobalLayout, Header, HeaderBox, Identifier, Tabs, IssueCredentialButton } from "serto-ui";
+import { LogOut } from "../Auth/LogOut";
 
 export const CredentialsPage: React.FunctionComponent = () => {
   const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);
@@ -35,7 +34,7 @@ export const CredentialsPage: React.FunctionComponent = () => {
   }
 
   return (
-    <GlobalLayout url={routes.CREDENTIALS}>
+    <GlobalLayout url={routes.CREDENTIALS} sidebarBottomContents={<LogOut />}>
       <HeaderBox>
         <Header heading="Credentials">
           {identifiers && <IssueCredentialButton issuerIdentifiers={issuerIdentifiers} />}

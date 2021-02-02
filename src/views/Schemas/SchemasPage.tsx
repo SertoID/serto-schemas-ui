@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { generatePath, useHistory, useParams } from "react-router-dom";
 import { routes } from "../../constants";
 import { Box, Button, Flex, Text } from "rimble-ui";
-import { baseColors, Header, HeaderBox, ModalWithX, Tabs, CreateSchema, SchemasTable } from "serto-ui";
-import { GlobalLayout } from "../../components/layouts";
+import { baseColors, GlobalLayout, Header, HeaderBox, ModalWithX, Tabs, CreateSchema, SchemasTable } from "serto-ui";
+import { LogOut } from "../Auth/LogOut";
 
 export const SchemasPage: React.FunctionComponent = () => {
   const { tabName } = useParams<{ tabName: string }>();
@@ -36,7 +36,7 @@ export const SchemasPage: React.FunctionComponent = () => {
   );
 
   return (
-    <GlobalLayout url={routes.SCHEMAS}>
+    <GlobalLayout url={routes.SCHEMAS} sidebarBottomContents={<LogOut />}>
       <HeaderBox>
         <Header heading="Schemas">
           <Button.Outline onClick={() => setIsCreateModalOpen(true)} size="small" minWidth="150px">
