@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  node: circleci/node@2.0.2
+  node: circleci/node@4.1.0
   kubernetes: circleci/kubernetes@0.11.0
   aws-ecr: circleci/aws-ecr@6.8.2
   aws-eks: circleci/aws-eks@0.2.7
@@ -8,7 +8,7 @@ orbs:
 
 defaults: &defaults
   docker:
-    - image: circleci/node:13.13.0
+    - image: circleci/node:14.3.0
 
 jobs:
   build:
