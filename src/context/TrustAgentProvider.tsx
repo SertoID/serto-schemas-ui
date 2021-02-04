@@ -2,11 +2,9 @@ import * as React from "react";
 import { FeatureFlagService } from "../services/FeatureFlagService";
 import { TrustAgencyService } from "../services/TrustAgencyService";
 
-// typescript hack to get around having to initialize the object
-// @ts-ignore
-export const TrustAgencyContext = React.createContext<TrustAgencyService>({});
-// @ts-ignore
-export const FeatureFlagContext = React.createContext<FeatureFlagService>({});
+// typescript hack to get around having to initialize the context objects
+export const TrustAgencyContext = React.createContext<TrustAgencyService>({} as TrustAgencyService);
+export const FeatureFlagContext = React.createContext<FeatureFlagService>({} as FeatureFlagService);
 
 export interface TrustAgencyProviderProps {
   featureFlags?: string[];

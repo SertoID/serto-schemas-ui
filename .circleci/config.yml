@@ -37,7 +37,11 @@ jobs:
             - src
             - public
             - devops
+            - .eslintignore
+            - .eslintrc.js
             - .git
+            - .prettierignore
+            - .prettierrc.yaml
             - node_modules
             - codecov.yml
             - yarn.lock
@@ -68,6 +72,21 @@ jobs:
       #     paths:
       #       - coverage
 
+  prettier:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ./
+      - restore_cache:
+          name: Restore yarn cache
+          key: node-modules-{{ checksum "yarn.lock" }}
+      - run:
+          name: Running prettier
+          command: yarn prettier:lint
+      - restore_cache:
+          name: Restore yarn cache
+          key: node-modules-{{ checksum "yarn.lock" }}
+
   lint:
     <<: *defaults
     steps:
@@ -78,8 +97,7 @@ jobs:
           key: node-modules-{{ checksum "yarn.lock" }}
       - run:
           name: Running lint
-          # command: yarn lint
-          command: echo "No linting yet"
+          command: yarn lint
       - restore_cache:
           name: Restore yarn cache
           key: node-modules-{{ checksum "yarn.lock" }}
@@ -125,7 +143,7 @@ jobs:
           region: AWS_REGION
           create-repo: true
           checkout: false
-          repo: vcexplorerdemo
+          repo: sertoschemasui # TODO/deploy This repo doesn't exist yet
           tag: "$TAG,$TAG-$CIRCLE_SHA1"
 
   deploy-image:
@@ -170,33 +188,37 @@ workflows:
       - test:
           requires:
             - build
+      - prettier:
+          requires:
+            - build
       - lint:
           requires:
             - build
       - codecov:
           requires:
             - test
-      - push-image:
-          name: push-ui-image
-          deployment-name: ui
-          requires:
-            - build
-            - test
-            - lint
-            - codecov
-          filters:
-            branches:
-              only:
-                - master
-                - sruddy/continuous-deploy
-      - deploy-image:
-          name: deploy-ui-image
-          deployment-name: ui
-          cluster-name: alpha
-          requires:
-            - push-ui-image
-          filters:
-            branches:
-              only:
-                - master
-                - sruddy/continuous-deploy
+      # TODO/deploy Commenting out until deploy is set up
+      # - push-image:
+      #     name: push-ui-image
+      #     deployment-name: ui
+      #     requires:
+      #       - build
+      #       - test
+      #       - lint
+      #       - codecov
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
+      #           - sruddy/continuous-deploy
+      # - deploy-image:
+      #     name: deploy-ui-image
+      #     deployment-name: ui
+      #     cluster-name: alpha
+      #     requires:
+      #       - push-ui-image
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
+      #           - sruddy/continuous-deploy

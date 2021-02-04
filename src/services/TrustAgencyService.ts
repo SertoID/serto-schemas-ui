@@ -287,10 +287,8 @@ export class TrustAgencyService {
    * Authenticate wallet extension
    */
   private authenticateExtension(token: string, tenantId: string) {
-    // @ts-ignore
-    if (window.idWallet) {
-      // @ts-ignore
-      idWallet.authenticate(token, tenantId);
+    if ((window as any).idWallet) {
+      (window as any).idWallet.authenticate(token, tenantId);
     }
   }
 

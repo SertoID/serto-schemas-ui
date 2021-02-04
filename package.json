@@ -10,7 +10,8 @@
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
     "prettier": "prettier --config .prettierrc.yaml --write --list-different './**/*.{ts,tsx,json,md}'",
-    "lint": "eslint src/**/*.ts src/**/*.tsx"
+    "prettier:lint": "prettier --config .prettierrc.yaml --list-different './**/*.{ts,tsx,json,md}'",
+    "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
     "@auth0/auth0-react": "^1.2.0",
