@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { SelectAll } from "@rimble/icons";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { GlobalStyle } from "serto-ui";
 
 import { config } from "./config";
 import { routes } from "./constants";
 import { TrustAgencyProvider } from "./context/TrustAgentProvider";
-import { SertoUiProvider, fonts } from "serto-ui";
-import { SelectAll } from "@rimble/icons";
+import { SertoUiWrapper } from "./context/SertoUiWrapper";
 
 import { LoginPage } from "./views/Auth/LoginPage";
 import { AuthenticatedRoute } from "./views/Auth/AuthenticatedRoute";
@@ -15,9 +15,7 @@ import { OnboardingPage } from "./views/Onboarding/OnboardingPage";
 import { SchemasPage } from "./views/Schemas/SchemasPage";
 
 export const App = (): JSX.Element => {
-  const sertoUiContext = {
-    navItems: [{ text: "Schemas", url: routes.SCHEMAS, icon: SelectAll }],
-  };
+  const navItems = [{ text: "Schemas", url: routes.SCHEMAS, icon: SelectAll }];
   const featureFlags = config.FEATURE_FLAGS ? config.FEATURE_FLAGS.split(",") : [];
 
   return (
@@ -25,7 +23,7 @@ export const App = (): JSX.Element => {
       <BrowserRouter>
         <TrustAgencyProvider featureFlags={featureFlags}>
           <React.Suspense fallback={<></>}>
-            <SertoUiProvider context={sertoUiContext}>
+            <SertoUiWrapper navItems={navItems}>
               <GlobalStyle />
               <Switch>
                 <Route path={routes.LOGIN} component={LoginPage} />
@@ -33,7 +31,7 @@ export const App = (): JSX.Element => {
                 <AuthenticatedRoute exact path={routes.HOMEPAGE} component={SchemasPage} />
                 <AuthenticatedRoute path={routes.SCHEMAS} component={SchemasPage} />
               </Switch>
-            </SertoUiProvider>
+            </SertoUiWrapper>
           </React.Suspense>
         </TrustAgencyProvider>
       </BrowserRouter>
