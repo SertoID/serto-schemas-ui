@@ -1,24 +1,19 @@
 export interface ConfigType {
   ENVIRONMENT: string;
   API_URL: string;
-  NATS_WS_URL: string;
   UI_URL: string;
   AUTH0_CLIENT_ID: string;
   AUTH0_DOMAIN: string;
-  GLOBAL_FEED_SLUG: string;
   FEATURE_FLAGS?: string;
 }
 
 const defaultConfig: ConfigType = {
   ENVIRONMENT: process.env.NODE_ENV || "development",
   API_URL: "https://alpha.consensysidentity.com",
-  NATS_WS_URL: "wss://alpha-nats.consensysidentity.com:9222",
   UI_URL: window.location.origin,
   // API_URL: "http://localhost:8000",
-  // NATS_WS_URL: "wss://0.0.0.0:9222",
   AUTH0_CLIENT_ID: "sAnzetlNs0HbyokOncaTUZmLRijPazBc",
   AUTH0_DOMAIN: "auth.consensys.id",
-  GLOBAL_FEED_SLUG: "global",
   FEATURE_FLAGS: process.env.REACT_APP_FEATURE_FLAGS,
 };
 

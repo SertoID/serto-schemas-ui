@@ -15,12 +15,6 @@ export const ErrorSignup: React.FunctionComponent = () => (
   </>
 );
 
-// code: 111
-export const ErrorTenantNameUnique: React.FunctionComponent = () => <>Organization name must be unique.</>;
-
-// code: 453
-export const ErrorValueTooLong: React.FunctionComponent = () => <>Organization name is too long.</>;
-
 // code: 455
 export const ErrorUserNameUnique: React.FunctionComponent = () => <>A user already exists with that username.</>;
 

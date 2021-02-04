@@ -9,7 +9,6 @@ export interface Auth {
 }
 export class TrustAgencyService {
   private auth?: Auth;
-  private defaultFeedId?: string;
   private loggingIn?: boolean;
   public url = config.API_URL;
 
@@ -56,103 +55,8 @@ export class TrustAgencyService {
     return !!this.auth && !this.loggingIn;
   }
 
-  public switchTenant(tenantid: string): void {
-    const jwt = this.getAuth()?.jwt;
-    if (jwt) {
-      this.setAuth({ jwt, tenantid }, true);
-      window.location.reload();
-    }
-  }
-
-  public async getTenants(): Promise<any> {
-    return this.request("/v1/admin/tenants");
-  }
-
-  public async createTenant(name: string, type: string): Promise<any> {
-    return this.request("/v1/tenant", "POST", { name, type });
-  }
-
-  public async activateTenant(token: string): Promise<any> {
-    return this.request("/v1/tenant/activate", "POST", { activateJwt: token }, true);
-  }
-
   public async getTenantIdentifiers(): Promise<Identifier[]> {
     return this.request("/v1/tenant/agent/identityManagerGetIdentities", "POST");
-  }
-
-  public async getTenantFirstIdentifier(): Promise<any> {
-    const identifiers = await this.request("/v1/tenant/agent/identityManagerGetIdentities", "POST");
-    return identifiers?.[0]?.did;
-  }
-
-  public async getTenantIdentifier(did: string): Promise<any> {
-    return this.request("/v1/tenant/agent/identityManagerGetIdentity", "POST", { did });
-  }
-
-  public async createTenantIdentifier(alias?: string): Promise<any> {
-    return this.request("/v1/tenant/agent/identityManagerCreateIdentity", "POST", { alias });
-  }
-
-  public async setTenantIdentifierAlias(did: string, alias: string): Promise<any> {
-    return this.request("/v1/tenant/agent/identityManagerSetAlias", "POST", { did, alias });
-  }
-
-  public async getAllIdentifiers(): Promise<Identifier[]> {
-    const allUsers = await this.request("/v1/tenant/all");
-    const identifiers: Identifier[] = [];
-    allUsers?.forEach?.((user: any) => {
-      if (!user.identities?.length) {
-        return;
-      }
-      user.identities.forEach((id: Identifier) => {
-        identifiers.push({
-          ...id,
-          userName: user.name,
-          userType: user.type,
-        });
-      });
-    });
-    return identifiers;
-  }
-
-  public async getCredentials(): Promise<any> {
-    return this.request("/v1/tenant/agent/dataStoreORMGetVerifiableCredentials", "POST");
-  }
-
-  // eslint-disable-next-line
-  public async issueVc(body: any): Promise<any> {
-    return this.request("/v1/tenant/agent/createVerifiableCredential", "POST", body);
-  }
-
-  public async getApiKeys(): Promise<any> {
-    return this.request("/v1/tenant/apiKeys");
-  }
-
-  public async getTenantMembers(): Promise<any> {
-    return this.request("/v1/tenant/members");
-  }
-
-  public async getFeeds(): Promise<any> {
-    return this.request("/v1/feeds");
-  }
-
-  public async getFeedBySlug(slug: string): Promise<any> {
-    return this.request(`/v1/feeds/${slug}`);
-  }
-
-  /** Get NATS JWT bearer token. */
-  public async getFeedToken(feedId?: string, expirationInSeconds = 60): Promise<any> {
-    return this.request("/v1/feeds/token", "POST", {
-      feedId: feedId || (await this.getDefaultFeedId()),
-      expirationInSeconds,
-    });
-  }
-
-  public async createFeed(data: { name: string; slug: string; description?: string; public?: boolean }): Promise<any> {
-    return this.request("/v1/feeds", "POST", {
-      tenantId: this.getAuth()?.tenantid,
-      ...data,
-    });
   }
 
   public async getSchemas(global?: boolean): Promise<SchemaDataResponse[]> {
@@ -161,61 +65,6 @@ export class TrustAgencyService {
 
   public async createSchema(schema: SchemaDataInput): Promise<any> {
     return this.request("/v1/schemas", "POST", schema);
-  }
-
-  public async createApiKey(data: { keyName: string }): Promise<any> {
-    return this.request("/v1/tenant/apiKeys", "POST", {
-      tenantId: this.getAuth()?.tenantid,
-      ...data,
-    });
-  }
-
-  public async getInviteCode(): Promise<any> {
-    return this.request("/v1/tenant/createInvite", "POST", {
-      tenantId: this.getAuth()?.tenantid,
-    });
-  }
-
-  public async acceptInvite(jwt: string): Promise<any> {
-    return this.request("/v1/tenant/acceptInvite", "POST", {
-      invite: jwt,
-    });
-  }
-
-  public async removeMember(userId: string): Promise<any> {
-    return this.request("/v1/tenant/removeMember", "POST", {
-      userId,
-      tenantId: this.getAuth()?.tenantid,
-    });
-  }
-
-  public async deleteApiKey(data: { keyName: string }): Promise<any> {
-    return this.request("/v1/tenant/apiKeys", "DELETE", {
-      tenantId: this.getAuth()?.tenantid,
-      ...data,
-    });
-  }
-
-  // eslint-disable-next-line
-  public async publishToFeed(data: any, _feedId?: string): Promise<any> {
-    let feedId = _feedId;
-    if (!feedId) {
-      try {
-        feedId = await this.getDefaultFeedId();
-      } catch (err) {
-        console.error(`Failed to get feed info for default feed slug "${config.GLOBAL_FEED_SLUG}", throwing error`);
-        throw err;
-      }
-    }
-    return this.request(`/v1/feeds/${feedId}/publish`, "POST", data);
-  }
-
-  private async getDefaultFeedId(): Promise<string> {
-    if (!this.defaultFeedId) {
-      const feedInfo = await this.getFeedBySlug(config.GLOBAL_FEED_SLUG);
-      this.defaultFeedId = feedInfo.id;
-    }
-    return this.defaultFeedId!; // eslint-disable-line
   }
 
   private async request(
