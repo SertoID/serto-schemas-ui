@@ -1,5 +1,5 @@
 import * as React from "react";
-import { links, routes } from "../../constants";
+import { links } from "../../constants";
 import { Box, Button, Flex, Text } from "rimble-ui";
 import { baseColors, H2 } from "serto-ui";
 
@@ -18,22 +18,9 @@ export const OnboardingPage: React.FunctionComponent = () => {
         <Box mx="auto" width="350px">
           <Box border={1} mb={4} p={5}>
             <Text fontSize={2} fontWeight={3}>
-              Create an organization
+              @TODO/tobek What goes here?
             </Text>
-            <Text.p fontSize={1} lineHeight="copy">
-              Create your organization with your current account as its admin account.
-            </Text.p>
-            <Text.p fontSize={1} lineHeight="copy">
-              Your organization can issue and receive credentials. You can also invite other accounts to join your
-              organization.
-            </Text.p>
-            <Button as="a" href={routes.CREATE_ORGANIZATION} size="small">
-              Create organization
-            </Button>
           </Box>
-          <Text fontSize={2} textAlign="center">
-            Are you looking to join an existing organization? Contact your admin to get an invite link.
-          </Text>
         </Box>
       </Box>
     </Flex>
