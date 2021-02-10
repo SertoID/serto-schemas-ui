@@ -55,13 +55,13 @@ export class TrustAgencyService {
     return !!this.auth && !this.loggingIn;
   }
 
-
   public async getSchemas(global?: boolean): Promise<SchemaDataResponse[]> {
     return this.request(`/v1/schemas${global ? "?global=true" : ""}`);
   }
 
   public async createSchema(schema: SchemaDataInput): Promise<any> {
     return this.request("/v1/schemas", "POST", schema);
+  }
 
   public async updateSchema(schema: SchemaDataInput): Promise<any> {
     return this.request(`/v1/schemas/${schema.slug}/update`, "POST", {
