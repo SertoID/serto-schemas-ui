@@ -71,10 +71,11 @@ export const SchemasPage: React.FunctionComponent = () => {
         width={9}
       >
         <CreateSchema
-          onFinalStep={() => {
-            setIsCreateModalFinalStep(true);
+          onFinalStep={() => setIsCreateModalFinalStep(true)}
+          onComplete={() => {
+            setIsCreateModalOpen(false);
+            setIsCreateModalFinalStep(false);
           }}
-          onComplete={() => setIsCreateModalOpen(false)}
         ></CreateSchema>
       </ModalWithX>
     </GlobalLayout>

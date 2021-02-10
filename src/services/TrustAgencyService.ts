@@ -1,5 +1,5 @@
 import { config } from "../config";
-import { Identifier, SchemaDataInput, SchemaDataResponse } from "serto-ui";
+import { SchemaDataInput, SchemaDataResponse } from "serto-ui";
 
 const AUTH_LOCALSTORAGE_KEY = `trust-agent-auth-${config.API_URL}`;
 
@@ -55,9 +55,6 @@ export class TrustAgencyService {
     return !!this.auth && !this.loggingIn;
   }
 
-  public async getTenantIdentifiers(): Promise<Identifier[]> {
-    return this.request("/v1/tenant/agent/identityManagerGetIdentities", "POST");
-  }
 
   public async getSchemas(global?: boolean): Promise<SchemaDataResponse[]> {
     return this.request(`/v1/schemas${global ? "?global=true" : ""}`);
@@ -65,6 +62,12 @@ export class TrustAgencyService {
 
   public async createSchema(schema: SchemaDataInput): Promise<any> {
     return this.request("/v1/schemas", "POST", schema);
+
+  public async updateSchema(schema: SchemaDataInput): Promise<any> {
+    return this.request(`/v1/schemas/${schema.slug}/update`, "POST", {
+      ...schema,
+      slug: undefined, // @TODO/tobek API errors if slug is included in update request even if slug hasn't been updated - should update API so that if slug is included but not changed then it's fine
+    });
   }
 
   private async request(
