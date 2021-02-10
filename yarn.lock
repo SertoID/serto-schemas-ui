@@ -12639,10 +12639,10 @@ serialize-javascript@^5.0.1:
   dependencies:
     randombytes "^2.1.0"
 
-serto-ui@0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/serto-ui/-/serto-ui-0.2.1.tgz#050b52ced7ca1d310c119ae7e7f9d230d8e67a6f"
-  integrity sha512-Ops8MhUzPVrdGGAwjpCsZU+S6IVZg1U0QNn6JGuWa/5RiLfVs7hNp3693Or7ekBxI2xZGugdM9UBxgdhDZyAEA==
+serto-ui@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/serto-ui/-/serto-ui-0.2.2.tgz#f2e10d3133760d19a69a58aed530b881b44408b3"
+  integrity sha512-/rCqRYdSao8qg9bMdMciOIvdb3BiyHoEWpyBRwqSJqsWowxLmM9rYVAtuVGBGeyyAR7HNzYMLms0O5qirp4iNQ==
   dependencies:
     "@rimble/icons" "^1.1.0"
     "@sindresorhus/slugify" "^1.1.0"

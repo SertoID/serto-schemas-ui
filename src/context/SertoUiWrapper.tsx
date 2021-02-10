@@ -15,7 +15,10 @@ export const SertoUiWrapper: React.FunctionComponent<SertoUiWrapperProps> = (pro
   const sertoUiContext = {
     navItems: props.navItems,
     createSchema: TrustAgent.createSchema.bind(TrustAgent),
+    updateSchema: TrustAgent.updateSchema.bind(TrustAgent),
     getSchemas: TrustAgent.getSchemas.bind(TrustAgent),
+    // @TODO/tobek Versioned schema URLs are broken in API, so leaving this commented out until that's fixed:
+    // buildSchemaUrl: (slug: string, type: string, version?: string) => `${config.API_URL}/v1/schemas/public/${slug}${version && ("/" + version)}/${type}.json`,
     buildSchemaUrl: (slug: string, type: string) => `${config.API_URL}/v1/schemas/public/${slug}/${type}.json`,
   };
 
