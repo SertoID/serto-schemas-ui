@@ -1,8 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { SelectAll } from "@rimble/icons";
 import { Auth0Provider } from "@auth0/auth0-react";
-import { GlobalStyle } from "serto-ui";
+import { GlobalStyle, SelectAll } from "serto-ui";
 
 import { config } from "./config";
 import { routes } from "./constants";

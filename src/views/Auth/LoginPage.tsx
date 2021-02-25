@@ -76,7 +76,7 @@ export const LoginPage = (): JSX.Element => {
         width="525px"
       >
         <H2 color={colors.primary.base} mb={5} mt={7}>
-          Login to TrustAgent
+          Log in to Serto Schemas
         </H2>
         <Box width="100%">
           <Button onClick={doLogin} mb={3} width="100%">
