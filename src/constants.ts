@@ -1,7 +1,9 @@
 export enum routes {
   HOMEPAGE = "/",
+  ABOUT = "/about",
   LOGIN = "/login",
   ONBOARDING = "/onboarding",
+  DISCOVER = "/discover",
   PLAYGROUND = "/playground",
   SCHEMAS = "/schemas/:tabName?",
 }
