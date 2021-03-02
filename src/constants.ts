@@ -6,6 +6,7 @@ export enum routes {
   DISCOVER = "/discover",
   PLAYGROUND = "/playground",
   SCHEMAS = "/schemas/:tabName?",
+  SCHEMA = "/schema/:slug?",
 }
 
 export const links = {

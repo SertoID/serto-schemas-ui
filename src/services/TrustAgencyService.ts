@@ -56,7 +56,14 @@ export class TrustAgencyService {
   }
 
   public async getSchemas(global?: boolean): Promise<SchemaDataResponse[]> {
-    return this.request(`/v1/schemas${global ? "?global=true" : ""}`);
+    return this.request(`/v1/schemas${global ? "?global=true" : ""}`, "GET", undefined, global);
+  }
+
+  public async getSchema(slug: string): Promise<SchemaDataResponse> {
+    if (!slug) {
+      throw new Error("API error: Must provide a schema ID");
+    }
+    return this.request(`/v1/schemas/public/${slug}`, "GET", undefined, true);
   }
 
   public async createSchema(schema: SchemaDataInput): Promise<any> {

@@ -14,6 +14,7 @@ import { LoginPage } from "./views/Auth/LoginPage";
 import { AuthenticatedRoute } from "./views/Auth/AuthenticatedRoute";
 import { OnboardingPage } from "./views/Onboarding/OnboardingPage";
 import { SchemasPage } from "./views/Schemas/SchemasPage";
+import { SchemaPage } from "./views/Schemas/SchemaPage";
 import { DiscoverPage } from "./views/Schemas/DiscoverPage";
 import { AboutPage } from "./views/AboutPage";
 import { PlaygroundPage } from "./views/Schemas/PlaygroundPage";
@@ -43,6 +44,7 @@ export const App = (): JSX.Element => {
                 <AuthenticatedRoute path={routes.ABOUT} component={AboutPage} />
                 <AuthenticatedRoute path={routes.PLAYGROUND} component={PlaygroundPage} />
                 <AuthenticatedRoute path={routes.SCHEMAS} component={SchemasPage} />
+                <Route path={routes.SCHEMA} component={SchemaPage} />
               </Switch>
             </SertoUiWrapper>
           </React.Suspense>
