@@ -8,6 +8,7 @@ import { routes } from "./constants";
 import { TrustAgencyProvider } from "./context/TrustAgentProvider";
 import { SertoUiWrapper } from "./context/SertoUiWrapper";
 
+import { HomePage } from "./views/HomePage";
 import { LoginPage } from "./views/Auth/LoginPage";
 import { AuthenticatedRoute } from "./views/Auth/AuthenticatedRoute";
 import { OnboardingPage } from "./views/Onboarding/OnboardingPage";
@@ -25,6 +26,7 @@ export const App = (): JSX.Element => {
             <SertoUiWrapper navItems={navItems}>
               <GlobalStyle />
               <Switch>
+                <Route exact path={routes.HOMEPAGE} component={HomePage} />
                 <Route path={routes.LOGIN} component={LoginPage} />
                 <AuthenticatedRoute path={routes.ONBOARDING} component={OnboardingPage} />
                 <AuthenticatedRoute exact path={routes.HOMEPAGE} component={SchemasPage} />

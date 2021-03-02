@@ -2,6 +2,7 @@ export enum routes {
   HOMEPAGE = "/",
   LOGIN = "/login",
   ONBOARDING = "/onboarding",
+  PLAYGROUND = "/playground",
   SCHEMAS = "/schemas/:tabName?",
 }
 
