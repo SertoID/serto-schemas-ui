@@ -1,5 +1,5 @@
-import { config } from "../config";
 import { SchemaDataInput, SchemaDataResponse } from "serto-ui";
+import { config } from "../config";
 
 const AUTH_LOCALSTORAGE_KEY = `trust-agent-auth-${config.API_URL}`;
 
@@ -47,7 +47,7 @@ export class TrustAgencyService {
     return this.request("/v1/users/currentUser");
   }
 
-  public async logout(): Promise<void> {
+  public logout(): void {
     this.clearAuth();
   }
 

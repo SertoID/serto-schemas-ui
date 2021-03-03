@@ -1,24 +1,15 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import useSWR from "swr";
-import {
-  Header,
-  HeaderBox,
-  baseColors,
-  SchemaCard,
-  H2,
-  H3,
-  H4,
-  colors,
-  SertoUiContext,
-  SertoUiContextInterface,
-} from "serto-ui";
+import { Header, HeaderBox, baseColors, SchemaCard, H2, H3, H4, colors } from "serto-ui";
 import { Flex, Box, Button, Text, Loader, Flash } from "rimble-ui";
 import { FindInPage, Star } from "@rimble/icons";
+import { TrustAgencyContext } from "../context/TrustAgentProvider";
+import { TrustAgencyService } from "../services/TrustAgencyService";
 import { routes } from "../constants";
 
 export const HomePage: React.FunctionComponent = () => {
-  const context = React.useContext<SertoUiContextInterface>(SertoUiContext);
+  const context = React.useContext<TrustAgencyService>(TrustAgencyContext);
   const { data, error, isValidating } = useSWR(["/v1/schemas", true], () => context.getSchemas(true), {
     revalidateOnFocus: false,
   });

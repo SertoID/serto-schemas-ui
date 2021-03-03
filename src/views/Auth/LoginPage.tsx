@@ -1,36 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 import { routes } from "../../constants";
-import { TrustAgencyContext } from "../../context/TrustAgentProvider";
-import { TrustAgencyService } from "../../services/TrustAgencyService";
 import { Box, Button, Card, Flash } from "rimble-ui";
 import { colors, H2 } from "serto-ui";
 import { ErrorUserNameUnique, ErrorUserNotFound, ErrorLogin, ErrorSignup } from "../../components/text";
+import { useAuth } from "../../services/useAuth";
 
 export const LoginPage = (): JSX.Element => {
-  const { loginWithPopup, getIdTokenClaims, logout, isAuthenticated } = useAuth0();
-  const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);
+  const { login, signup, logout, isAuthenticated } = useAuth();
 
   const [error, setError] = useState<any | undefined>();
   const history = useHistory();
 
-  const doLogout = () => {
-    TrustAgent.logout();
-    logout({ returnTo: window.location.origin + routes.LOGIN });
-  };
-
   async function doLogin() {
     try {
-      await loginWithPopup();
-      const token = await getIdTokenClaims();
-      if (!token) {
-        console.warn("Undefined token from Auth0 - popup cancelled or superceded?");
-        return;
+      const succeeded = await login();
+      if (succeeded) {
+        history.push(routes.HOMEPAGE);
       }
-      console.log({ token });
-      await TrustAgent.login(token.__raw);
-      history.push(routes.HOMEPAGE);
     } catch (err) {
       console.error("error logging in:", err);
       if (err.toString().includes("312")) {
@@ -38,17 +25,16 @@ export const LoginPage = (): JSX.Element => {
       } else {
         setError(ErrorLogin);
       }
-      doLogout();
+      logout();
     }
   }
 
   async function doSignup() {
     try {
-      await loginWithPopup({ screen_hint: "signup" });
-      const token = await getIdTokenClaims();
-      console.log({ token });
-      await TrustAgent.signup(token.__raw);
-      history.push(routes.ONBOARDING);
+      const succeeded = await signup();
+      if (succeeded) {
+        history.push(routes.ONBOARDING);
+      }
     } catch (err) {
       console.error("error signing up:", err);
       if (err.toString().includes("455")) {
@@ -56,11 +42,11 @@ export const LoginPage = (): JSX.Element => {
       } else {
         setError(ErrorSignup);
       }
-      doLogout();
+      logout();
     }
   }
 
-  if (isAuthenticated && TrustAgent.isAuthenticated()) {
+  if (isAuthenticated) {
     return <Redirect to={routes.HOMEPAGE} />;
   }
 
