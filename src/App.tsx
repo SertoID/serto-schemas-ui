@@ -23,7 +23,7 @@ export const App = (): JSX.Element => {
   const navItems = [
     { text: "Home", url: routes.HOMEPAGE, icon: Home },
     { text: "About", url: routes.ABOUT, icon: Info },
-    { text: "Discover", url: routes.DISCOVER, icon: FindInPage },
+    { text: "Schemas", url: routes.SCHEMAS, icon: FindInPage },
     { text: "Playground", url: routes.PLAYGROUND, icon: Code },
   ];
   const featureFlags = config.FEATURE_FLAGS ? config.FEATURE_FLAGS.split(",") : [];
@@ -43,7 +43,7 @@ export const App = (): JSX.Element => {
                 <AuthenticatedRoute exact path={routes.HOMEPAGE} component={SchemasPage} />
                 <AuthenticatedRoute path={routes.ABOUT} component={AboutPage} />
                 <AuthenticatedRoute path={routes.PLAYGROUND} component={PlaygroundPage} />
-                <AuthenticatedRoute path={routes.SCHEMAS} component={SchemasPage} />
+                <AuthenticatedRoute path={routes.SCHEMAS} component={SchemasPage} redirect={routes.DISCOVER} />
                 <Route path={routes.SCHEMA} component={SchemaPage} />
               </Switch>
             </SertoUiWrapper>

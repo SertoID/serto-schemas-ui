@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import { routes } from "../../constants";
 import { Box, Flash, Loader } from "rimble-ui";
-import { baseColors, GlobalLayout, Header, HeaderBox, SchemaDetail } from "serto-ui";
+import { baseColors, Header, HeaderBox, SchemaDetail } from "serto-ui";
 import { TrustAgencyContext } from "../../context/TrustAgentProvider";
 import { TrustAgencyService } from "../../services/TrustAgencyService";
+import { GlobalLayout } from "../../components/GlobalLayout";
 
 export const SchemaPage: React.FunctionComponent = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -14,7 +15,7 @@ export const SchemaPage: React.FunctionComponent = () => {
     revalidateOnFocus: false,
   });
   return (
-    <GlobalLayout url={routes.SCHEMA} sidebarBottomContents={<>@TODO/tobek log in/out</>}>
+    <GlobalLayout url={routes.SCHEMA}>
       <HeaderBox>
         <Header heading={data?.name || <Loader size="32px" />} />
       </HeaderBox>

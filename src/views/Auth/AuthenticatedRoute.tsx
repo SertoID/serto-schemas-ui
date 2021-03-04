@@ -4,7 +4,11 @@ import { routes } from "../../constants";
 import { useAuth } from "../../services/useAuth";
 import { Flex, Loader } from "rimble-ui";
 
-export const AuthenticatedRoute = ({ ...otherProps }: { [key: string]: any }): JSX.Element => {
+export interface AuthenticatedRouteProps {
+  redirect?: string;
+  [key: string]: any;
+}
+export const AuthenticatedRoute = ({ redirect, ...otherProps }: AuthenticatedRouteProps): JSX.Element => {
   const { isAuthenticated, isLoading, logout } = useAuth();
 
   if (isLoading) {
@@ -16,8 +20,10 @@ export const AuthenticatedRoute = ({ ...otherProps }: { [key: string]: any }): J
   }
 
   if (!isAuthenticated) {
-    logout();
-    return <Redirect to={routes.LOGIN} />;
+    if (!redirect) {
+      logout();
+    }
+    return <Redirect to={redirect || routes.LOGIN} />;
   }
 
   return <Route {...otherProps} />;

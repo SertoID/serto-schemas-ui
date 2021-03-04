@@ -43,7 +43,7 @@ export const HomePage: React.FunctionComponent = () => {
               Just starting out? Browsing and playing with VC schemas is a great way to understand how they work and how
               to use them for Verifiable Credentials.
             </Text>
-            <Button.Outline mt={3} as={Link} to={routes.DISCOVER} size="small">
+            <Button.Outline mt={3} as={Link} to={routes.SCHEMAS} size="small">
               Browse Schemas
             </Button.Outline>
           </Box>
@@ -74,7 +74,7 @@ export const HomePage: React.FunctionComponent = () => {
               ))
             ) : error ? (
               <Flash variant="danger" width="33%">
-                {error}
+                Failed to load schemas: {error.message}
               </Flash>
             ) : (
               // @TODO/tobek Concatting schemas to get more for now
@@ -88,7 +88,7 @@ export const HomePage: React.FunctionComponent = () => {
             )}
           </Flex>
           <Box textAlign="center" mt={5}>
-            <Button.Outline as={Link} to={routes.DISCOVER}>
+            <Button.Outline as={Link} to={routes.SCHEMAS}>
               See More
             </Button.Outline>
           </Box>

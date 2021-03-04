@@ -1,11 +1,12 @@
 import React from "react";
 import { routes } from "../constants";
 import { Box, Text } from "rimble-ui";
-import { baseColors, GlobalLayout, Header, HeaderBox } from "serto-ui";
+import { baseColors, Header, HeaderBox } from "serto-ui";
+import { GlobalLayout } from "../components/GlobalLayout";
 
 export const AboutPage: React.FunctionComponent = () => {
   return (
-    <GlobalLayout url={routes.ABOUT} sidebarBottomContents={<>@TODO/tobek log in/out</>}>
+    <GlobalLayout url={routes.ABOUT}>
       <HeaderBox>
         <Header heading="About Serto Schemas" />
       </HeaderBox>
