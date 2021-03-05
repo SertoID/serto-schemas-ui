@@ -1653,7 +1653,7 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
-"@rimble/icons@ConsenSysMesh/rimble-icons":
+"@rimble/icons@ConsenSysMesh/rimble-icons", "@rimble/icons@github:ConsenSysMesh/rimble-icons":
   version "1.2.0"
   resolved "https://codeload.github.com/ConsenSysMesh/rimble-icons/tar.gz/faa8c0842e1c42f46b9e355cb65084fdf0ec1074"
 
@@ -12643,11 +12643,12 @@ serialize-javascript@^5.0.1:
   dependencies:
     randombytes "^2.1.0"
 
-serto-ui@^0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/serto-ui/-/serto-ui-0.2.5.tgz#a1cf8eedc6a17a664c806636140a3ba43df7b714"
-  integrity sha512-yD592/7SWlVDQUQOWYNRhksTQ0KrZ5/z/5pb/rE0qylnu0kMcn/lHh8FN4UfG6YUV3T2BHjYMGy2zSTTKMDtnQ==
+serto-ui@^0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/serto-ui/-/serto-ui-0.2.7.tgz#1db4826305750a5ee3a7999e3ade9deca0d0e50a"
+  integrity sha512-Etpk0cr2WDZccAz6wG/td9yezz+OTCRQWCL1n7KFhmfXJ6nXi49XmyCGPNSJ7plH4ZgGdj/wL4fp6xwExA0kNw==
   dependencies:
+    "@rimble/icons" ConsenSysMesh/rimble-icons
     "@sindresorhus/slugify" "^1.1.0"
     deepdash-es "^5.3.5"
     prismjs "^1.23.0"

@@ -68,7 +68,8 @@ export const SchemasPage: React.FunctionComponent = () => {
         isOpen={isCreateModalOpen}
         hideX={isCreateModalFinalStep}
         close={() => setIsCreateModalOpen(false)}
-        width={9}
+        minWidth={9}
+        maxWidth={11}
       >
         <CreateSchema
           onFinalStep={() => setIsCreateModalFinalStep(true)}
