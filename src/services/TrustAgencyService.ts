@@ -1,5 +1,5 @@
-import { config } from "../config";
 import { SchemaDataInput, SchemaDataResponse } from "serto-ui";
+import { config } from "../config";
 
 const AUTH_LOCALSTORAGE_KEY = `trust-agent-auth-${config.API_URL}`;
 
@@ -47,7 +47,7 @@ export class TrustAgencyService {
     return this.request("/v1/users/currentUser");
   }
 
-  public async logout(): Promise<void> {
+  public logout(): void {
     this.clearAuth();
   }
 
@@ -56,7 +56,14 @@ export class TrustAgencyService {
   }
 
   public async getSchemas(global?: boolean): Promise<SchemaDataResponse[]> {
-    return this.request(`/v1/schemas${global ? "?global=true" : ""}`);
+    return this.request(`/v1/schemas${global ? "?global=true" : ""}`, "GET", undefined, global);
+  }
+
+  public async getSchema(slug: string): Promise<SchemaDataResponse> {
+    if (!slug) {
+      throw new Error("API error: Must provide a schema ID");
+    }
+    return this.request(`/v1/schemas/public/${slug}`, "GET", undefined, true);
   }
 
   public async createSchema(schema: SchemaDataInput): Promise<any> {
