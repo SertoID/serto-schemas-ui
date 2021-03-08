@@ -7,8 +7,10 @@ import { FindInPage, Star } from "@rimble/icons";
 import { TrustAgencyContext } from "../context/TrustAgentProvider";
 import { TrustAgencyService } from "../services/TrustAgencyService";
 import { routes } from "../constants";
+import { useAuth } from "../services/useAuth";
 
 export const HomePage: React.FunctionComponent = () => {
+  const { isAuthenticated } = useAuth();
   const context = React.useContext<TrustAgencyService>(TrustAgencyContext);
   const { data, error, isValidating } = useSWR(["/v1/schemas", true], () => context.getSchemas(true), {
     revalidateOnFocus: false,
@@ -30,9 +32,11 @@ export const HomePage: React.FunctionComponent = () => {
             evolve existing schemas. Get maximum benefit for your efforts while preventing duplicate work, friction, and
             data silos.
           </Text>
-          <Button as={Link} to={routes.LOGIN} mt={4}>
-            Sign up for free
-          </Button>
+          {!isAuthenticated && (
+            <Button as={Link} to={routes.LOGIN} mt={4}>
+              Sign up for free
+            </Button>
+          )}
         </Box>
 
         <Flex my={6}>
