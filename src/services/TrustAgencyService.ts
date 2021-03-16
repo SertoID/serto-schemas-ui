@@ -5,7 +5,6 @@ const AUTH_LOCALSTORAGE_KEY = `trust-agent-auth-${config.API_URL}`;
 
 export interface Auth {
   jwt: string;
-  tenantid?: string;
 }
 export class TrustAgencyService {
   private auth?: Auth;
@@ -23,28 +22,25 @@ export class TrustAgencyService {
 
   public async signup(jwt: string): Promise<any> {
     this.loggingIn = true;
-    const user = await this.request("/v1/users/signup", "POST", { userToken: jwt }, true);
+    const user = await this.request("/v1/user/signup", "POST", { userToken: jwt }, true);
     console.log({ user });
-    const tenantid = user.tenants[0].tenantId;
-    this.setAuth({ jwt, tenantid }, true);
+    this.setAuth({ jwt }, true);
     this.loggingIn = false;
   }
 
   public async login(jwt: string): Promise<any> {
     this.loggingIn = true;
     this.setAuth({ jwt });
-    const user = await this.request("/v1/users/currentUser");
+    const user = await this.request("/v1/user/currentUser");
     console.log({ user });
-    const tenantOrg = user.tenants.find((tenant: { Tenant_type: string }) => tenant.Tenant_type === "organization");
-    const tenantid = tenantOrg ? tenantOrg.Tenant_id : user.tenants[0].Tenant_id;
-    this.setAuth({ jwt, tenantid }, true);
+    this.setAuth({ jwt }, true);
     this.loggingIn = false;
 
-    this.authenticateExtension(jwt, tenantid);
+    this.authenticateExtension(jwt);
   }
 
   public async getUser(): Promise<any> {
-    return this.request("/v1/users/currentUser");
+    return this.request("/v1/user/currentUser");
   }
 
   public logout(): void {
@@ -56,25 +52,22 @@ export class TrustAgencyService {
   }
 
   public async getSchemas(global?: boolean): Promise<SchemaDataResponse[]> {
-    return this.request(`/v1/schemas${global ? "?global=true" : ""}`, "GET", undefined, global);
+    return this.request(`/v1/${global ? "?global=true" : ""}`, "GET", undefined, global);
   }
 
   public async getSchema(slug: string): Promise<SchemaDataResponse> {
     if (!slug) {
       throw new Error("API error: Must provide a schema ID");
     }
-    return this.request(`/v1/schemas/public/${slug}`, "GET", undefined, true);
+    return this.request(`/v1/public/${slug}`, "GET", undefined, true);
   }
 
   public async createSchema(schema: SchemaDataInput): Promise<any> {
-    return this.request("/v1/schemas", "POST", schema);
+    return this.request("/v1/", "POST", schema);
   }
 
   public async updateSchema(schema: SchemaDataInput): Promise<any> {
-    return this.request(`/v1/schemas/${schema.slug}/update`, "POST", {
-      ...schema,
-      slug: undefined, // @TODO/tobek API errors if slug is included in update request even if slug hasn't been updated - should update API so that if slug is included but not changed then it's fine
-    });
+    return this.request(`/v1/${schema.slug}/update`, "POST", schema);
   }
 
   private async request(
@@ -90,9 +83,6 @@ export class TrustAgencyService {
     const headers: any = {};
     if (this.auth?.jwt) {
       headers.authorization = `Bearer ${this.auth.jwt}`;
-    }
-    if (this.auth?.tenantid) {
-      headers.tenantid = this.auth.tenantid;
     }
     if (body) {
       headers["Content-Type"] = "application/json";
@@ -145,9 +135,9 @@ export class TrustAgencyService {
   /**
    * Authenticate wallet extension
    */
-  private authenticateExtension(token: string, tenantId: string) {
+  private authenticateExtension(token: string) {
     if ((window as any).idWallet) {
-      (window as any).idWallet.authenticate(token, tenantId);
+      (window as any).idWallet.authenticate(token);
     }
   }
 
@@ -158,8 +148,8 @@ export class TrustAgencyService {
     document.onreadystatechange = () => {
       if (document.readyState === "complete") {
         const auth = this.getAuth();
-        if (auth?.jwt && auth?.tenantid) {
-          this.authenticateExtension(auth.jwt, auth.tenantid);
+        if (auth?.jwt) {
+          this.authenticateExtension(auth.jwt);
         }
       }
     };

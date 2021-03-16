@@ -9,9 +9,10 @@ export interface ConfigType {
 
 const defaultConfig: ConfigType = {
   ENVIRONMENT: process.env.NODE_ENV || "development",
-  API_URL: "https://alpha.consensysidentity.com",
-  UI_URL: window.location.origin,
+  // API_URL: "https://alpha.consensysidentity.com",
+  API_URL: "http://sertoschemabackendstaging.eba-ba3rcff5.us-east-2.elasticbeanstalk.com",
   // API_URL: "http://localhost:8000",
+  UI_URL: window.location.origin,
   AUTH0_CLIENT_ID: "sAnzetlNs0HbyokOncaTUZmLRijPazBc",
   AUTH0_DOMAIN: "auth.consensys.id",
   FEATURE_FLAGS: process.env.REACT_APP_FEATURE_FLAGS,
