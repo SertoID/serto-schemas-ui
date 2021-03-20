@@ -13,6 +13,7 @@ export function useAuth(): {
   login: ReplaceReturnType<Auth0ContextInterface["loginWithPopup"], Promise<boolean>>;
   signup: ReplaceReturnType<Auth0ContextInterface["loginWithPopup"], Promise<boolean>>;
   logout: Auth0ContextInterface["logout"];
+  jwt?: string;
 } {
   const { loginWithPopup, getIdTokenClaims, isAuthenticated, isLoading, logout } = useAuth0();
   const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);
@@ -46,5 +47,6 @@ export function useAuth(): {
       TrustAgent.logout();
       logout({ returnTo: window.location.origin + routes.LOGIN, ...options });
     },
+    jwt: TrustAgent.auth?.jwt,
   };
 }

@@ -3,15 +3,13 @@ import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import { routes } from "../../constants";
 import { Box, Flash, Loader } from "rimble-ui";
-import { baseColors, Header, HeaderBox, SchemaDetail } from "serto-ui";
-import { TrustAgencyContext } from "../../context/TrustAgentProvider";
-import { TrustAgencyService } from "../../services/TrustAgencyService";
+import { SertoUiContext, SertoUiContextInterface, baseColors, Header, HeaderBox, SchemaDetail } from "serto-ui";
 import { GlobalLayout } from "../../components/GlobalLayout";
 
 export const SchemaPage: React.FunctionComponent = () => {
   const { slug } = useParams<{ slug: string }>();
-  const context = React.useContext<TrustAgencyService>(TrustAgencyContext);
-  const { data, error } = useSWR(`/v1/schemas/public/${slug}`, () => context.getSchema(slug), {
+  const schemasService = React.useContext<SertoUiContextInterface>(SertoUiContext).schemasService;
+  const { data, error } = useSWR(`/v1/schemas/public/${slug}`, () => schemasService.getSchema(slug), {
     revalidateOnFocus: false,
   });
   return (

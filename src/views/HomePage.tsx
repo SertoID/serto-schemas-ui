@@ -1,18 +1,27 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import useSWR from "swr";
-import { Header, HeaderBox, baseColors, SchemaCard, H2, H3, H4, colors } from "serto-ui";
+import {
+  SertoUiContext,
+  SertoUiContextInterface,
+  Header,
+  HeaderBox,
+  baseColors,
+  SchemaCard,
+  H2,
+  H3,
+  H4,
+  colors,
+} from "serto-ui";
 import { Flex, Box, Button, Text, Loader, Flash } from "rimble-ui";
 import { FindInPage, Star } from "@rimble/icons";
-import { TrustAgencyContext } from "../context/TrustAgentProvider";
-import { TrustAgencyService } from "../services/TrustAgencyService";
 import { routes } from "../constants";
 import { useAuth } from "../services/useAuth";
 
 export const HomePage: React.FunctionComponent = () => {
   const { isAuthenticated } = useAuth();
-  const context = React.useContext<TrustAgencyService>(TrustAgencyContext);
-  const { data, error, isValidating } = useSWR(["/v1/schemas", true], () => context.getSchemas(true), {
+  const schemasService = React.useContext<SertoUiContextInterface>(SertoUiContext).schemasService;
+  const { data, error, isValidating } = useSWR(["/v1/schemas", true], () => schemasService.getSchemas(), {
     revalidateOnFocus: false,
   });
   const schemas = React.useMemo(() => data?.sort((schema1, schema2) => (schema1.updated < schema2.updated ? 1 : -1)), [
