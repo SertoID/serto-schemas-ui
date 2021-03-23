@@ -1653,10 +1653,6 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
-"@rimble/icons@ConsenSysMesh/rimble-icons":
-  version "1.2.0"
-  resolved "https://codeload.github.com/ConsenSysMesh/rimble-icons/tar.gz/faa8c0842e1c42f46b9e355cb65084fdf0ec1074"
-
 "@rimble/icons@^1.0.2":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@rimble/icons/-/icons-1.1.0.tgz#e69bdff01190c304af95fae578a5d1b90f34e14d"
@@ -1666,6 +1662,10 @@
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@rimble/icons/-/icons-1.2.0.tgz#86dd1d770b894ae29dcb62ebfda34b0054546b68"
   integrity sha512-v+qh/Bb3HFF9y1Gy/v1kHXqFJxf52jxwBL2mi1DPpR9pUaCsOZzmuw+DIHt9XIPfq19C2iuIQ6tcLhxTDryWPQ==
+
+"@rimble/icons@github:ConsenSysMesh/rimble-icons":
+  version "1.2.0"
+  resolved "https://codeload.github.com/ConsenSysMesh/rimble-icons/tar.gz/faa8c0842e1c42f46b9e355cb65084fdf0ec1074"
 
 "@rollup/plugin-node-resolve@^7.1.1":
   version "7.1.3"
@@ -12648,10 +12648,10 @@ serialize-javascript@^5.0.1:
   dependencies:
     randombytes "^2.1.0"
 
-serto-ui@^0.2.7:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/serto-ui/-/serto-ui-0.2.7.tgz#1db4826305750a5ee3a7999e3ade9deca0d0e50a"
-  integrity sha512-Etpk0cr2WDZccAz6wG/td9yezz+OTCRQWCL1n7KFhmfXJ6nXi49XmyCGPNSJ7plH4ZgGdj/wL4fp6xwExA0kNw==
+serto-ui@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/serto-ui/-/serto-ui-0.3.0.tgz#947f3de16b5627eaa7af0400499045354e703658"
+  integrity sha512-7N3mNuxseo0X9RC7s0xu9wXz9/argz6oqfHN8RCYLnMjwXKyTr61PFxLe4eBFnV74WztgUdSMit6fOpP2eL4bQ==
   dependencies:
     "@rimble/icons" ConsenSysMesh/rimble-icons
     "@sindresorhus/slugify" "^1.1.0"
