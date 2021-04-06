@@ -1,16 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import useSWR from "swr";
-import {
-  SertoUiContext,
-  SertoUiContextInterface,
-  baseColors,
-  SchemaCard,
-  H2,
-  H3,
-  H4,
-  colors,
-} from "serto-ui";
+import { SertoUiContext, SertoUiContextInterface, baseColors, SchemaCard, H2, H3, H4, colors } from "serto-ui";
 import { Flex, Box, Button, Text, Loader, Flash } from "rimble-ui";
 import { FindInPage, Star } from "@rimble/icons";
 import { routes } from "../constants";
@@ -29,7 +20,7 @@ export const HomePage: React.FunctionComponent = () => {
 
   return (
     <GlobalLayout url={routes.HOMEPAGE}>
-      <Box bg={baseColors.white} borderRadius={1} p={4}>
+      <Box bg={baseColors.white} borderRadius={1} py={4}>
         <Box>
           <H2>A shared vocabulary for Verifiable Credentials</H2>
           <Text>

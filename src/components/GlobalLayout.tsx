@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Box, Flex } from "rimble-ui";
 import styled from "styled-components";
-import { colors, baseColors, Nav, SertoLogo, SertoSchemasLogo } from "serto-ui";
+import { colors, baseColors, Nav, SertoSchemasLogo } from "serto-ui";
 import { AuthButtons } from "../views/Auth/AuthButtons";
+import { Footer } from "./Footer";
 
 export const PAGE_WIDTH = "1440px";
 export const CONTENT_WIDTH = "1170px";
@@ -53,12 +54,12 @@ export const GlobalLayout: React.FunctionComponent<GlobalLayoutProps> = (props) 
         </Box>
       )}
       <Box backgroundColor={baseColors.white}>
-        <Box maxWidth={CONTENT_WIDTH} m="auto">
+        <Box maxWidth={CONTENT_WIDTH} m="auto" px={5}>
           {props.children}
         </Box>
         <Box borderTop={`1px solid ${colors.lightGray}`}>
-          <Box maxWidth={PAGE_WIDTH} m="auto">
-            <SertoLogo />
+          <Box maxWidth={PAGE_WIDTH} m="auto" p={5}>
+            <Footer />
           </Box>
         </Box>
       </Box>
