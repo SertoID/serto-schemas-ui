@@ -4,8 +4,6 @@ import useSWR from "swr";
 import {
   SertoUiContext,
   SertoUiContextInterface,
-  Header,
-  HeaderBox,
   baseColors,
   SchemaCard,
   H2,
@@ -17,6 +15,7 @@ import { Flex, Box, Button, Text, Loader, Flash } from "rimble-ui";
 import { FindInPage, Star } from "@rimble/icons";
 import { routes } from "../constants";
 import { useAuth } from "../services/useAuth";
+import { GlobalLayout } from "../components/GlobalLayout";
 
 export const HomePage: React.FunctionComponent = () => {
   const { isAuthenticated } = useAuth();
@@ -29,10 +28,7 @@ export const HomePage: React.FunctionComponent = () => {
   ]);
 
   return (
-    <Box maxWidth={11} my={4} mx="auto">
-      <HeaderBox>
-        <Header heading="Serto Schemas" />
-      </HeaderBox>
+    <GlobalLayout url={routes.HOMEPAGE}>
       <Box bg={baseColors.white} borderRadius={1} p={4}>
         <Box>
           <H2>A shared vocabulary for Verifiable Credentials</H2>
@@ -121,6 +117,6 @@ export const HomePage: React.FunctionComponent = () => {
           </Button>
         </Box>
       </Box>
-    </Box>
+    </GlobalLayout>
   );
 };

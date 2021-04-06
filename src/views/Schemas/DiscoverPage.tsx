@@ -12,7 +12,7 @@ export const DiscoverPage: React.FunctionComponent = () => {
       </HeaderBox>
 
       <Box bg={baseColors.white} borderRadius={1} flexGrow="1">
-        <SchemasTable discover={true} />,
+        <SchemasTable discover={true} />
       </Box>
     </GlobalLayout>
   );

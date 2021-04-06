@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { generatePath, useHistory, useParams } from "react-router-dom";
 import { routes } from "../../constants";
 import { Box, Button, Flex, Text } from "rimble-ui";
-import { baseColors, Header, HeaderBox, ModalWithX, Tabs, CreateSchema, SchemasTable } from "serto-ui";
-import { GlobalLayout } from "../../components/GlobalLayout";
+import { H1, baseColors, ModalWithX, Tabs, CreateSchema, SchemasTable } from "serto-ui";
+import { CONTENT_WIDTH, GlobalLayout } from "../../components/GlobalLayout";
 
 export const SchemasPage: React.FunctionComponent = () => {
   const { tabName } = useParams<{ tabName: string }>();
@@ -36,14 +36,21 @@ export const SchemasPage: React.FunctionComponent = () => {
   );
 
   return (
-    <GlobalLayout url={routes.SCHEMAS}>
-      <HeaderBox>
-        <Header heading="Schemas">
-          <Button.Outline onClick={() => setIsCreateModalOpen(true)} size="small" minWidth="150px">
-            Create Schema
-          </Button.Outline>
-        </Header>
-      </HeaderBox>
+    <GlobalLayout
+      url={routes.SCHEMAS}
+      headerContent={
+        <Box pt={6} pb="82px" maxWidth={CONTENT_WIDTH} m="auto">
+          <H1>Explore Schemas</H1>
+          <Text maxWidth={9}>
+            Browse and use VC schemas from world-class organizations and developers in the community. Or create a new VC
+            schema to meet your needs.
+          </Text>
+        </Box>
+      }
+    >
+      <Button.Outline onClick={() => setIsCreateModalOpen(true)} size="small" minWidth="150px">
+        Create Schema
+      </Button.Outline>
 
       <Tabs
         activeTabName={tabName || "created"}

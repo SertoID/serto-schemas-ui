@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
-import { Home, Info, FindInPage, Code } from "@rimble/icons";
+import { Info, FindInPage, Code } from "@rimble/icons";
 import { GlobalStyle } from "serto-ui";
 
 import { config } from "./config";
@@ -21,10 +21,9 @@ import { PlaygroundPage } from "./views/Schemas/PlaygroundPage";
 
 export const App = (): JSX.Element => {
   const navItems = [
-    { text: "Home", url: routes.HOMEPAGE, icon: Home },
+    { text: "Explore", url: routes.SCHEMAS, icon: FindInPage },
+    { text: "Create", url: routes.PLAYGROUND, icon: Code },
     { text: "About", url: routes.ABOUT, icon: Info },
-    { text: "Schemas", url: routes.SCHEMAS, icon: FindInPage },
-    { text: "Playground", url: routes.PLAYGROUND, icon: Code },
   ];
   const featureFlags = config.FEATURE_FLAGS ? config.FEATURE_FLAGS.split(",") : [];
 
@@ -39,10 +38,9 @@ export const App = (): JSX.Element => {
                 <Route exact path={routes.HOMEPAGE} component={HomePage} />
                 <Route path={routes.LOGIN} component={LoginPage} />
                 <Route exact path={routes.DISCOVER} component={DiscoverPage} />
+                <Route path={routes.ABOUT} component={AboutPage} />
+                <Route path={routes.PLAYGROUND} component={PlaygroundPage} />
                 <AuthenticatedRoute path={routes.ONBOARDING} component={OnboardingPage} />
-                <AuthenticatedRoute exact path={routes.HOMEPAGE} component={SchemasPage} />
-                <AuthenticatedRoute path={routes.ABOUT} component={AboutPage} />
-                <AuthenticatedRoute path={routes.PLAYGROUND} component={PlaygroundPage} />
                 <AuthenticatedRoute path={routes.SCHEMAS} component={SchemasPage} redirect={routes.DISCOVER} />
                 <Route path={routes.SCHEMA} component={SchemaPage} />
               </Switch>
