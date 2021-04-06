@@ -1,9 +1,11 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import { Box, Flex } from "rimble-ui";
 import styled from "styled-components";
 import { colors, baseColors, Nav, SertoSchemasLogo } from "serto-ui";
 import { AuthButtons } from "../views/Auth/AuthButtons";
 import { Footer } from "./Footer";
+import { routes } from "../constants";
 
 export const PAGE_WIDTH = "1440px";
 export const CONTENT_WIDTH = "1170px";
@@ -32,6 +34,7 @@ const NavWrapper = styled(Box)`
 export interface GlobalLayoutProps {
   url: string;
   headerContent?: JSX.Element;
+  fullWidth?: boolean;
 }
 
 export const GlobalLayout: React.FunctionComponent<GlobalLayoutProps> = (props) => {
@@ -39,7 +42,9 @@ export const GlobalLayout: React.FunctionComponent<GlobalLayoutProps> = (props) 
     <>
       <Flex maxWidth={PAGE_WIDTH} m="auto" px={5} height="72px" alignItems="center" justifyContent="space-between">
         <Flex alignItems="center">
-          <SertoSchemasLogo />
+          <Link to={routes.HOMEPAGE}>
+            <SertoSchemasLogo />
+          </Link>
           <NavWrapper ml={4}>
             <Nav currentUrl={props.url} />
           </NavWrapper>
@@ -54,7 +59,7 @@ export const GlobalLayout: React.FunctionComponent<GlobalLayoutProps> = (props) 
         </Box>
       )}
       <Box backgroundColor={baseColors.white}>
-        <Box maxWidth={CONTENT_WIDTH} m="auto" px={5}>
+        <Box maxWidth={props.fullWidth ? undefined : CONTENT_WIDTH} m="auto" px={props.fullWidth ? undefined : 5}>
           {props.children}
         </Box>
         <Box borderTop={`1px solid ${colors.lightGray}`}>
