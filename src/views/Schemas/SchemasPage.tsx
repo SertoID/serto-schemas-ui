@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { generatePath, useHistory, useParams } from "react-router-dom";
-import { routes } from "../../constants";
+import { Link, generatePath, useHistory, useParams } from "react-router-dom";
 import { Box, Button, Flex, Text } from "rimble-ui";
-import { H1, baseColors, ModalWithX, Tabs, CreateSchema, SchemasTable } from "serto-ui";
+import { H1, baseColors, ModalWithX, Tabs, CreateSchema, SchemaCards } from "serto-ui";
+import { routes } from "../../constants";
 import { CONTENT_WIDTH, GlobalLayout } from "../../components/GlobalLayout";
 
 export const SchemasPage: React.FunctionComponent = () => {
   const { tabName } = useParams<{ tabName: string }>();
   const history = useHistory();
-  if (tabName && tabName !== "created" && tabName !== "discover") {
+  if (tabName && tabName !== "created" && tabName !== "all") {
     history.push(generatePath(routes.SCHEMAS));
   }
 
@@ -20,7 +20,7 @@ export const SchemasPage: React.FunctionComponent = () => {
       <Box bg={baseColors.white} borderRadius={1} py={3} maxWidth={9}>
         <Text.span display="block" fontSize={1} lineHeight="copy" textAlign="center">
           <b style={{ display: "block", fontWeight: 600 }}>
-            {tabName === "discover"
+            {tabName !== "created"
               ? "There are no publicly discoverable credential schemas yet."
               : "You do not have any credential schemas."}
           </b>
@@ -48,28 +48,36 @@ export const SchemasPage: React.FunctionComponent = () => {
         </Box>
       }
     >
-      <Button.Outline onClick={() => setIsCreateModalOpen(true)} size="small" minWidth="150px">
-        Create Schema
-      </Button.Outline>
-
       <Tabs
-        activeTabName={tabName || "created"}
+        activeTabName={tabName || "all"}
+        subHeader={
+          <Box textAlign="right" py={3}>
+            {/*@TODO/tobek deep link to FAQ*/}
+            <Button.Text size="verySmall" as={Link} to={routes.ABOUT}>
+              What is a schema?
+            </Button.Text>
+            <Button onClick={() => setIsCreateModalOpen(true)} size="small" minWidth="150px">
+              Create a VC Schema
+            </Button>
+          </Box>
+        }
         tabs={[
           {
-            tabName: "created",
-            title: "Created",
-            content: <SchemasTable discover={false} noSchemasElement={noSchemas} />,
+            tabName: "all",
+            title: "All Schemas",
+            content: <SchemaCards noSchemasElement={noSchemas} />,
           },
           {
-            tabName: "discover",
-            title: "Discover",
-            content: <SchemasTable discover={true} noSchemasElement={noSchemas} />,
+            tabName: "created",
+            title: "Your Schemas",
+            content: <SchemaCards filter="CREATED" noSchemasElement={noSchemas} />,
           },
         ]}
         onTabClicked={(tabName) => {
           history.push(generatePath(routes.SCHEMAS, { tabName }));
         }}
       />
+      {/*@TODO/tobek Add "Saved Schemas" when we have support*/}
 
       <ModalWithX
         isOpen={isCreateModalOpen}

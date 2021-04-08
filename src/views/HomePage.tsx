@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Link, generatePath } from "react-router-dom";
 import styled from "styled-components";
-import useSWR from "swr";
-import { Flex, Box, Button, Text, Loader, Flash, Image } from "rimble-ui";
-import { SertoUiContext, SertoUiContextInterface, baseColors, SchemaCard, H2, H3, H4, colors } from "serto-ui";
+import { Flex, Box, Button, Text, Image } from "rimble-ui";
+import { baseColors, SchemaCards, H2, H3, H4, colors } from "serto-ui";
 import { FindInPage, Star } from "@rimble/icons";
 import { routes } from "../constants";
 import { useAuth } from "../services/useAuth";
@@ -40,13 +39,6 @@ const DoItLiveListItem = styled.li`
 
 export const HomePage: React.FunctionComponent = () => {
   const { isAuthenticated } = useAuth();
-  const schemasService = React.useContext<SertoUiContextInterface>(SertoUiContext).schemasService;
-  const { data, error, isValidating } = useSWR(["/v1/schemas", true], () => schemasService.getSchemas(), {
-    revalidateOnFocus: false,
-  });
-  const schemas = React.useMemo(() => data?.sort((schema1, schema2) => (schema1.updated < schema2.updated ? 1 : -1)), [
-    data,
-  ]);
 
   return (
     <GlobalLayout url={routes.HOMEPAGE} fullWidth={true}>
@@ -130,36 +122,19 @@ export const HomePage: React.FunctionComponent = () => {
       </Flex>
 
       <Box width={CONTENT_WIDTH} mx="auto" mt={7} mb={6}>
-        <Flex justifyContent="space-between" flexWrap="wrap">
-          <Box width="32%" pb={6}>
-            <H3 fontSize={5} lineHeight="1.4" mt={0}>
-              Find Inspiration from Established Schemas
-            </H3>
-            <Text fontSize={3}>
-              Browse and use schemas from world-class organizations and developers in the community.
-            </Text>
-          </Box>
-          {isValidating && !schemas?.length ? (
-            [1, 2, 3, 4, 5].map((i) => (
-              <Box key={i} py={6} width="32%">
-                <Loader size="32px" m="auto" />
-              </Box>
-            ))
-          ) : error ? (
-            <Flash variant="danger" width="33%">
-              Failed to load schemas: {error.message}
-            </Flash>
-          ) : (
-            // @TODO/tobek Concatting schemas to get more for now
-            schemas
-              ?.concat(schemas)
-              .concat(schemas)
-              .slice(0, 5)
-              .map((schema, i) => (
-                <SchemaCard schema={schema} key={i} style={{ width: "32%", minHeight: 300, marginBottom: "16px" }} />
-              ))
-          )}
-        </Flex>
+        <SchemaCards
+          maxLength={5}
+          firstCard={
+            <Box pb={6}>
+              <H3 fontSize={5} lineHeight="1.4" mt={0}>
+                Find Inspiration from Established Schemas
+              </H3>
+              <Text fontSize={3}>
+                Browse and use schemas from world-class organizations and developers in the community.
+              </Text>
+            </Box>
+          }
+        />
         <Box textAlign="center" mt={5}>
           <OutlineButtonWrap>
             <Button.Outline as={Link} to={generatePath(routes.SCHEMAS)} mb={1}>
