@@ -4,10 +4,12 @@ import { Box, Button, Flex, Text } from "rimble-ui";
 import { H1, baseColors, ModalWithX, Tabs, CreateSchema, SchemaCards, SchemaDataResponse } from "serto-ui";
 import { routes } from "../../constants";
 import { CONTENT_WIDTH, GlobalLayout } from "../../components/GlobalLayout";
+import { useAuth } from "../../services/useAuth";
 
 export const SchemasPage: React.FunctionComponent = () => {
   const { tabName } = useParams<{ tabName: string }>();
   const history = useHistory();
+  const { isAuthenticated } = useAuth();
   if (tabName && tabName !== "created" && tabName !== "all") {
     history.push(generatePath(routes.SCHEMAS));
   }
@@ -60,7 +62,11 @@ export const SchemasPage: React.FunctionComponent = () => {
             <Button.Text size="verySmall" as={Link} to={routes.ABOUT}>
               What is a schema?
             </Button.Text>
-            <Button onClick={() => setIsCreateModalOpen(true)} size="small" minWidth="150px">
+            <Button
+              onClick={() => (isAuthenticated ? setIsCreateModalOpen(true) : history.push(routes.LOGIN))}
+              size="small"
+              minWidth="150px"
+            >
               Create a VC Schema
             </Button>
           </Box>
@@ -74,7 +80,13 @@ export const SchemasPage: React.FunctionComponent = () => {
           {
             tabName: "created",
             title: "Your Schemas",
-            content: <SchemaCards filter="CREATED" noSchemasElement={noSchemas} onSchemaClick={onSchemaClick} />,
+            content: isAuthenticated ? (
+              <SchemaCards filter="CREATED" noSchemasElement={noSchemas} onSchemaClick={onSchemaClick} />
+            ) : (
+              <Box py={5} textAlign="center">
+                Please <Link to={routes.LOGIN}>log in</Link> in order to see your schemas.
+              </Box>
+            ),
           },
         ]}
         onTabClicked={(tabName) => {

@@ -15,7 +15,6 @@ import { AuthenticatedRoute } from "./views/Auth/AuthenticatedRoute";
 import { OnboardingPage } from "./views/Onboarding/OnboardingPage";
 import { SchemasPage } from "./views/Schemas/SchemasPage";
 import { SchemaPage } from "./views/Schemas/SchemaPage";
-import { DiscoverPage } from "./views/Schemas/DiscoverPage";
 import { AboutPage } from "./views/AboutPage";
 import { PlaygroundPage } from "./views/Schemas/PlaygroundPage";
 
@@ -37,11 +36,10 @@ export const App = (): JSX.Element => {
               <Switch>
                 <Route exact path={routes.HOMEPAGE} component={HomePage} />
                 <Route path={routes.LOGIN} component={LoginPage} />
-                <Route exact path={routes.DISCOVER} component={DiscoverPage} />
                 <Route path={routes.ABOUT} component={AboutPage} />
                 <Route path={routes.PLAYGROUND} component={PlaygroundPage} />
                 <AuthenticatedRoute path={routes.ONBOARDING} component={OnboardingPage} />
-                <AuthenticatedRoute path={routes.SCHEMAS} component={SchemasPage} redirect={routes.DISCOVER} />
+                <Route path={routes.SCHEMAS} component={SchemasPage} />
                 <Route path={routes.SCHEMA} component={SchemaPage} />
               </Switch>
             </SertoUiWrapper>
