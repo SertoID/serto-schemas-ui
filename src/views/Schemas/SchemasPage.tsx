@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, generatePath, useHistory, useParams } from "react-router-dom";
 import { Box, Button, Flex, Text } from "rimble-ui";
-import { H1, baseColors, ModalWithX, Tabs, CreateSchema, SchemaCards } from "serto-ui";
+import { H1, baseColors, ModalWithX, Tabs, CreateSchema, SchemaCards, SchemaDataResponse } from "serto-ui";
 import { routes } from "../../constants";
 import { CONTENT_WIDTH, GlobalLayout } from "../../components/GlobalLayout";
 
@@ -14,6 +14,10 @@ export const SchemasPage: React.FunctionComponent = () => {
 
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isCreateModalFinalStep, setIsCreateModalFinalStep] = useState(false);
+
+  function onSchemaClick(schema: SchemaDataResponse) {
+    history.push(generatePath(routes.SCHEMA, { slug: schema.slug }));
+  }
 
   const noSchemas = (
     <Flex alignItems="center" justifyContent="center" minHeight={8}>
@@ -65,12 +69,12 @@ export const SchemasPage: React.FunctionComponent = () => {
           {
             tabName: "all",
             title: "All Schemas",
-            content: <SchemaCards noSchemasElement={noSchemas} />,
+            content: <SchemaCards noSchemasElement={noSchemas} onSchemaClick={onSchemaClick} />,
           },
           {
             tabName: "created",
             title: "Your Schemas",
-            content: <SchemaCards filter="CREATED" noSchemasElement={noSchemas} />,
+            content: <SchemaCards filter="CREATED" noSchemasElement={noSchemas} onSchemaClick={onSchemaClick} />,
           },
         ]}
         onTabClicked={(tabName) => {

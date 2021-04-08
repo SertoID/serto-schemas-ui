@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Link, generatePath } from "react-router-dom";
+import { Link, generatePath, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Flex, Box, Button, Text, Image } from "rimble-ui";
-import { baseColors, SchemaCards, H2, H3, H4, colors } from "serto-ui";
+import { baseColors, SchemaCards, H2, H3, H4, colors, SchemaDataResponse } from "serto-ui";
 import { FindInPage, Star } from "@rimble/icons";
 import { routes } from "../constants";
 import { useAuth } from "../services/useAuth";
@@ -39,6 +39,11 @@ const DoItLiveListItem = styled.li`
 
 export const HomePage: React.FunctionComponent = () => {
   const { isAuthenticated } = useAuth();
+
+  const history = useHistory();
+  function onSchemaClick(schema: SchemaDataResponse) {
+    history.push(generatePath(routes.SCHEMA, { slug: schema.slug }));
+  }
 
   return (
     <GlobalLayout url={routes.HOMEPAGE} fullWidth={true}>
@@ -123,6 +128,7 @@ export const HomePage: React.FunctionComponent = () => {
 
       <Box width={CONTENT_WIDTH} mx="auto" mt={7} mb={6}>
         <SchemaCards
+          onSchemaClick={onSchemaClick}
           maxLength={5}
           firstCard={
             <Box pb={6}>
