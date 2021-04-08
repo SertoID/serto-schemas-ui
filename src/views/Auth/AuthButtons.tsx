@@ -14,8 +14,7 @@ export const AuthButtons: React.FunctionComponent = () => {
   } else if (isAuthenticated) {
     return (
       <Popup
-        py={2}
-        pl={4}
+        rimbleProps={{ py: 2, pl: 4 }}
         popupContents={
           <>
             <PopupGroup>
