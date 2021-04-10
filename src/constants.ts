@@ -4,6 +4,7 @@ export enum routes {
   LOGIN = "/login",
   ONBOARDING = "/onboarding",
   DISCOVER = "/discover",
+  EDITOR = "/editor",
   PLAYGROUND = "/playground",
   SCHEMAS = "/schemas/:tabName?",
   SCHEMA = "/schema/:slug?",
