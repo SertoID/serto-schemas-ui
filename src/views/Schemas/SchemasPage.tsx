@@ -31,7 +31,7 @@ export const SchemasPage: React.FunctionComponent = () => {
         </Text.span>
         <Flex alignItems="center" justifyContent="center">
           <Button
-            onClick={() => history.push(isAuthenticated ? routes.EDITOR : routes.LOGIN)}
+            onClick={() => history.push(generatePath(isAuthenticated ? routes.EDITOR : routes.LOGIN))}
             size="small"
             mt={5}
             mx="auto"
@@ -65,7 +65,7 @@ export const SchemasPage: React.FunctionComponent = () => {
               What is a schema?
             </Button.Text>
             <Button
-              onClick={() => history.push(isAuthenticated ? routes.EDITOR : routes.LOGIN)}
+              onClick={() => history.push(generatePath(isAuthenticated ? routes.EDITOR : routes.LOGIN))}
               size="small"
               minWidth="150px"
             >

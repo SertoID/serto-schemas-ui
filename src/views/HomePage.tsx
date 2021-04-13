@@ -119,7 +119,7 @@ export const HomePage: React.FunctionComponent = () => {
             builder UI or code as you go.
           </Text>
           <OutlineButtonWrap>
-            <Button.Outline mt={4} mb={3} as={Link} to={routes.PLAYGROUND} size="small">
+            <Button.Outline mt={4} mb={3} as={Link} to={generatePath(routes.EDITOR)} size="small">
               Try the VC Schema Editor
             </Button.Outline>
           </OutlineButtonWrap>
@@ -174,7 +174,7 @@ export const HomePage: React.FunctionComponent = () => {
                   <span>Preview JSON-LD context and JSON Schema output as you work</span>
                 </DoItLiveListItem>
               </ul>
-              <Button mt={5} as={Link} to={routes.PLAYGROUND}>
+              <Button mt={5} as={Link} to={generatePath(routes.EDITOR)}>
                 Explore the VC Schema Editor
               </Button>
             </Box>
