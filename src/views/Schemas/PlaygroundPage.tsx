@@ -8,8 +8,8 @@ import { GlobalLayout } from "../../components/GlobalLayout";
 export const PlaygroundPage: React.FunctionComponent = () => {
   return (
     <GlobalLayout url={routes.PLAYGROUND} fullWidth={true}>
-      <Box bg={colors.darkGray} color={baseColors.white} p={5}>
-        <H3 m={0} mb={3}>
+      <Box bg={colors.darkGray} color={baseColors.white} px={5} py={4}>
+        <H3 m={0} mb={2}>
           JSON-LD Context Plus Schema Playground
         </H3>
         <Text maxWidth="1150px">
