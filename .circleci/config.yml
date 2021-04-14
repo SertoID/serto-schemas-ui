@@ -260,12 +260,12 @@ workflows:
       #           - master
       #           - sruddy/continuous-deploy
       - eb-deploy:
-        app-dir: ./devops/deploy
-        environment-name: SertoSchemaFrontendStaging
-        label: version-<<pipeline.number>>
-        filters:
-          branches:
-            only:
-              - aldigjo/continuous-deployment
-        requires:
-          - push-image
+          app-dir: ./devops/deploy
+          environment-name: SertoSchemaFrontendStaging
+          label: version-<<pipeline.number>>
+          filters:
+            branches:
+              only:
+                - aldigjo/continuous-deployment
+          requires:
+            - push-ui-image
