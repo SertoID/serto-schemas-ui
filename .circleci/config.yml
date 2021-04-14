@@ -211,12 +211,9 @@ jobs:
            echo "export TAG=$TAG" >> $BASH_ENV
            sed -i='' "s/<TAG>/$TAG-$CIRCLE_SHA1/" ./devops/deploy/docker-compose.yaml
       - run:
-          command: >
-            eb init <<parameters.environment-name>> -r $AWS_DEFAULT_REGION -p 
-            <<parameters.platform-version>>
-            eb deploy <<parameters.environment-name>> <<#parameters.label>>-l
-            <<parameters.label>><</parameters.label>> <<#parameters.description>>-m
-            <<parameters.description>><</parameters.description>>
+          command: |
+            eb init <<parameters.environment-name>> -r $AWS_DEFAULT_REGION -p <<parameters.platform-version>>
+            eb deploy <<parameters.environment-name>> <<#parameters.label>>-l <<parameters.label>><</parameters.label>> <<#parameters.description>>-m <<parameters.description>><</parameters.description>>
           name: EB Deploy
           working_directory: <<parameters.app-dir>>
 
