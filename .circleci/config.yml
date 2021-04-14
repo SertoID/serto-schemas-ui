@@ -5,6 +5,7 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.8.2
   aws-eks: circleci/aws-eks@0.2.7
   aws-cli: circleci/aws-cli@0.1.4
+  aws-eb: circleci/aws-elastic-beanstalk@1.0.1
 
 defaults: &defaults
   docker:
@@ -118,11 +119,6 @@ jobs:
 
   push-image:
     <<: *defaults
-    parameters:
-      deployment-name:
-        description: |
-          Name of the deployment
-        type: string
     steps:
       - attach_workspace:
           at: ./
@@ -139,10 +135,10 @@ jobs:
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          region: AWS_REGION
+          region: AWS_DEFAULT_REGION
           create-repo: true
           checkout: false
-          repo: sertoschemasui # TODO/deploy This repo doesn't exist yet
+          repo: serto-schemas-frontend # TODO/deploy This repo doesn't exist yet
           tag: "$TAG,$TAG-$CIRCLE_SHA1"
 
   deploy-image:
@@ -179,6 +175,51 @@ jobs:
           command: |
             TAG=`echo $CIRCLE_BRANCH | sed 's/\\//_/g'`
             kubectl set image deployment/<< parameters.deployment-name >> << parameters.deployment-name >>=$AWS_ECR_ACCOUNT_URL/vcexplorerdemo:$TAG-$CIRCLE_SHA1
+    
+  eb-deploy:
+    docker:
+      - image: 'cimg/base:stable'
+    parameters:
+      app-dir:
+        default: .
+        type: string
+      description:
+        default: ''
+        type: string
+      environment-name:
+        default: ''
+        type: string
+      image:
+        default: 'cimg/base:stable'
+        type: string
+      label:
+        default: ''
+        type: string
+      platform-version:
+        default: docker
+        type: string
+    steps:
+      - attach_workspace:
+          at: ./
+      - aws-eb/setup
+      - run:
+          name: Prepare directory
+          command: |
+           ls -al .
+           TAG=`echo $CIRCLE_BRANCH | sed 's/\\//_/g'`
+           echo "TAG is $TAG"
+           echo "export TAG=$TAG" >> $BASH_ENV
+           sed -i='' "s/<TAG>/$TAG-$CIRCLE_SHA1/" ./devops/deploy/docker-compose.yaml
+      - run:
+          command: >
+            eb init <<parameters.environment-name>> -r $AWS_DEFAULT_REGION -p 
+            <<parameters.platform-version>>
+            eb deploy <<parameters.environment-name>> <<#parameters.label>>-l
+            <<parameters.label>><</parameters.label>> <<#parameters.description>>-m
+            <<parameters.description>><</parameters.description>>
+          name: EB Deploy
+          working_directory: <<parameters.app-dir>>
+
 
 workflows:
   build-test-deploy:
@@ -196,20 +237,17 @@ workflows:
       - codecov:
           requires:
             - test
-      # TODO/deploy Commenting out until deploy is set up
-      # - push-image:
-      #     name: push-ui-image
-      #     deployment-name: ui
-      #     requires:
-      #       - build
-      #       - test
-      #       - lint
-      #       - codecov
-      #     filters:
-      #       branches:
-      #         only:
-      #           - master
-      #           - sruddy/continuous-deploy
+      - push-image:
+          name: push-ui-image
+          requires:
+            - build
+            - test
+            - lint
+            - codecov
+          filters:
+            branches:
+              only:
+                - aldigjo/continuous-deployment
       # - deploy-image:
       #     name: deploy-ui-image
       #     deployment-name: ui
@@ -221,3 +259,13 @@ workflows:
       #         only:
       #           - master
       #           - sruddy/continuous-deploy
+      - eb-deploy:
+        app-dir: ./devops/deploy
+        environment-name: SertoSchemaFrontendStaging
+        label: version-<<pipeline.number>>
+        filters:
+          branches:
+            only:
+              - aldigjo/continuous-deployment
+        requires:
+          - push-image

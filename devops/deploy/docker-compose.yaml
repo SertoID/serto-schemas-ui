@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  serto-search:
+    container_name: serto-schemas-frontend
+    image: "513362828658.dkr.ecr.us-east-2.amazonaws.com/serto-schemas-frontend:<TAG>"
+    ports:
+      - "80:80"
+    environment:
+      - PORT=80
+    env_file:
+      - .env
