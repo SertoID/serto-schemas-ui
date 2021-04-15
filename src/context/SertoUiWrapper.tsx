@@ -12,10 +12,11 @@ export const SertoUiWrapper: React.FunctionComponent<SertoUiWrapperProps> = (pro
 
   const sertoUiContext = {
     navItems: props.navItems,
+    schemasUiUrl: window.location.origin,
   };
 
   return (
-    <SertoUiProvider schemaApiJwt={jwt} context={sertoUiContext}>
+    <SertoUiProvider schemasApiJwt={jwt} context={sertoUiContext}>
       {props.children}
     </SertoUiProvider>
   );

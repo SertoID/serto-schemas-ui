@@ -3,32 +3,33 @@ import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import { routes } from "../../constants";
 import { Box, Flash, Loader } from "rimble-ui";
-import { SertoUiContext, SertoUiContextInterface, baseColors, Header, HeaderBox, SchemaDetail } from "serto-ui";
+import { SertoUiContext, SertoUiContextInterface, SchemaDetail } from "serto-ui";
 import { GlobalLayout } from "../../components/GlobalLayout";
 
 export const SchemaPage: React.FunctionComponent = () => {
   const { slug } = useParams<{ slug: string }>();
   const schemasService = React.useContext<SertoUiContextInterface>(SertoUiContext).schemasService;
-  const { data, error } = useSWR(`/v1/schemas/public/${slug}`, () => schemasService.getSchema(slug), {
+  const { data: schema, error } = useSWR(`/v1/schemas/public/${slug}`, () => schemasService.getSchema(slug), {
     revalidateOnFocus: false,
   });
   return (
     <GlobalLayout url={routes.SCHEMA}>
-      <HeaderBox>
-        <Header heading={data?.name || <Loader size="32px" />} />
-      </HeaderBox>
-
-      <Box p={4} bg={baseColors.white} borderRadius={1} flexGrow="1">
-        {data ? (
-          <SchemaDetail schema={data} />
-        ) : error ? (
+      {schema ? (
+        <Box pt={5} pb={6}>
+          <SchemaDetail schema={schema} fullPage={true} />
+        </Box>
+      ) : error ? (
+        <Box py={6}>
           <Flash variant="danger">
-            Error loading schema "{slug}": {error.toString()}
+            <p>Error loading schema "{slug}":</p>
+            <pre style={{ whiteSpace: "pre-wrap" }}>{error.message}</pre>
           </Flash>
-        ) : (
-          <Loader size="32px" />
-        )}
-      </Box>
+        </Box>
+      ) : (
+        <Box py={8} textAlign="center">
+          <Loader size="32px" m="auto" />
+        </Box>
+      )}
     </GlobalLayout>
   );
 };

@@ -4,7 +4,10 @@ import { useAuth } from "../../services/useAuth";
 import { routes } from "../../constants";
 import { Button } from "rimble-ui";
 
-export const LogOut: React.FunctionComponent = () => {
+export interface LogOutProps {
+  asLink?: boolean;
+}
+export const LogOut: React.FunctionComponent<LogOutProps> = (props) => {
   const { logout } = useAuth();
   const history = useHistory();
 
@@ -14,9 +17,16 @@ export const LogOut: React.FunctionComponent = () => {
     history.push(routes.LOGIN);
   }
 
+  if (props.asLink) {
+    return (
+      <a href="#" onClick={logOut}>
+        Sign out
+      </a>
+    );
+  }
   return (
     <Button.Outline onClick={logOut} size="small" mt={3} width="100%">
-      Log Out
+      Sign Out
     </Button.Outline>
   );
 };
