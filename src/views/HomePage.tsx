@@ -7,6 +7,7 @@ import { FindInPage, Star } from "@rimble/icons";
 import { routes } from "../constants";
 import { useAuth } from "../services/useAuth";
 import { GlobalLayout, CONTENT_WIDTH } from "../components/GlobalLayout";
+import { featuredImageSrc, vcEditorSrc } from "../images";
 
 // For some reason `color` attribute on `Button` doesn't work (at least not when using `as={Link}`), and `styled(Button)` doesn't let us change it either, so:
 const TextButtonWrap = styled.span`
@@ -28,7 +29,7 @@ const OutlineButtonWrap = styled.span`
 const DoItLiveListItem = styled.li`
   margin-bottom: 16px;
   margin-left: -10px;
-  line-height: 1;
+  line-height: 0.8;
   font-size: 36px;
   span {
     font-size: 20px;
@@ -76,7 +77,7 @@ export const HomePage: React.FunctionComponent = () => {
             )}
           </Box>
           <Box width="40%" textAlign="center">
-            <Image mt={6} src="http://www.fillmurray.com/g/310/330" />
+            <Image mt="92px" src={featuredImageSrc} />
           </Box>
         </Flex>
       </Box>
@@ -179,7 +180,7 @@ export const HomePage: React.FunctionComponent = () => {
               </Button>
             </Box>
             <Box width="66%" pl={5}>
-              <Image src="http://www.fillmurray.com/g/770/500" />
+              <Image src={vcEditorSrc} />
             </Box>
           </Flex>
         </Box>
