@@ -18,12 +18,12 @@ export const AuthButtons: React.FunctionComponent = () => {
         popupContents={
           <>
             <PopupGroup>
-              Signed in as <b>@TODO</b>
+              {/*@TODO/tobek Add avatar and username when supported by API*/}
+              Signed in
             </PopupGroup>
             <PopupGroup>
-              <Link to={generatePath(routes.SCHEMAS)}>Your schemas</Link>
-              {/*@TODO/tobek Update when we have saved schemas*/}
-              <Link to={generatePath(routes.SCHEMAS)}>Your saved schemas</Link>
+              <Link to={generatePath(routes.SCHEMAS, { tabName: "created" })}>Your schemas</Link>
+              <Link to={generatePath(routes.SCHEMAS, { tabName: "saved" })}>Your saved schemas</Link>
             </PopupGroup>
             <PopupGroup>
               <LogOut asLink={true} />

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, generatePath, useHistory, useParams } from "react-router-dom";
-import { Box, Button, Flex, Text } from "rimble-ui";
+import { Loader, Box, Button, Flex, Text } from "rimble-ui";
 import { H1, baseColors, Tabs, SchemaCards, SchemaDataResponse } from "serto-ui";
 import { routes } from "../../constants";
 import { CONTENT_WIDTH, GlobalLayout } from "../../components/GlobalLayout";
@@ -9,7 +9,7 @@ import { useAuth } from "../../services/useAuth";
 export const SchemasPage: React.FunctionComponent = () => {
   const { tabName } = useParams<{ tabName: string }>();
   const history = useHistory();
-  const { isAuthenticated } = useAuth();
+  const { isLoading, isAuthenticated } = useAuth();
   if (tabName && tabName !== "created" && tabName !== "all") {
     history.push(generatePath(routes.SCHEMAS));
   }
@@ -86,7 +86,13 @@ export const SchemasPage: React.FunctionComponent = () => {
               <SchemaCards filter="CREATED" noSchemasElement={noSchemas} onSchemaClick={onSchemaClick} />
             ) : (
               <Box py={5} textAlign="center">
-                Please <Link to={routes.LOGIN}>log in</Link> in order to see your schemas.
+                {isLoading ? (
+                  <Loader m="auto" />
+                ) : (
+                  <>
+                    Please <Link to={routes.LOGIN}>log in</Link> in order to see your schemas.
+                  </>
+                )}
               </Box>
             ),
           },
@@ -95,7 +101,7 @@ export const SchemasPage: React.FunctionComponent = () => {
           history.push(generatePath(routes.SCHEMAS, { tabName }));
         }}
       />
-      {/*@TODO/tobek Add "Saved Schemas" when we have support*/}
+      {/* @TODO/tobek Add "Saved Schemas" when API supports it. */}
     </GlobalLayout>
   );
 };
