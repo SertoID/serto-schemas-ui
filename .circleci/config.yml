@@ -244,7 +244,7 @@ workflows:
           filters:
             branches:
               only:
-                - aldigjo/continuous-deployment
+                - master
       # - deploy-image:
       #     name: deploy-ui-image
       #     deployment-name: ui
@@ -263,6 +263,6 @@ workflows:
           filters:
             branches:
               only:
-                - aldigjo/continuous-deployment
+                - master
           requires:
             - push-ui-image
