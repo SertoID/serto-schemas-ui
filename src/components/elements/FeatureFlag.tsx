@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FeatureFlagContext } from "../../context/TrustAgentProvider";
+import { FeatureFlagContext } from "../../context/SchemasUserProvider";
 import { FeatureFlagService } from "../../services/FeatureFlagService";
 
 export interface FeatureFlagProps {

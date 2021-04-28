@@ -5,7 +5,7 @@ const AUTH_LOCALSTORAGE_KEY = `trust-agent-auth-${config.API_URL}`;
 export interface Auth {
   jwt: string;
 }
-export class TrustAgencyService {
+export class SchemasUserService {
   private loggingIn?: boolean;
   public auth?: Auth;
   public url = config.API_URL;
