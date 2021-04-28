@@ -21,9 +21,13 @@ const StyledCreateSchema = styled(CreateSchema)`
   // 182px = site header + page header + some padding
   max-height: calc(100vh - 192px);
 
-  pre {
-    // 300px = site header + page header + SchemaDetail view selector header + some padding
-    max-height: calc(100vh - 300px);
+  .right-pane {
+    pre,
+    .schema-formatted-preview {
+      // 300px = site header + page header + SchemaDetail view selector header + some padding
+      max-height: calc(100vh - 300px);
+      overflow-y: auto;
+    }
   }
 `;
 
