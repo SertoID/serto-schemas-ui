@@ -4,6 +4,8 @@ const AUTH_LOCALSTORAGE_KEY = `trust-agent-auth-${config.API_URL}`;
 
 export interface Auth {
   jwt: string;
+  /** In seconds. */
+  jwtExpiry?: number;
 }
 export class SchemasUserService {
   private loggingIn?: boolean;
@@ -19,23 +21,23 @@ export class SchemasUserService {
     return this.auth;
   }
 
-  public async signup(jwt: string): Promise<any> {
+  public async signup(auth: Auth): Promise<any> {
     this.loggingIn = true;
-    const user = await this.request("/v1/user/signup", "POST", { userToken: jwt }, true);
+    const user = await this.request("/v1/user/signup", "POST", { userToken: auth.jwt }, true);
     console.log({ user });
-    this.setAuth({ jwt }, true);
+    this.setAuth(auth, true);
     this.loggingIn = false;
   }
 
-  public async login(jwt: string): Promise<any> {
+  public async login(auth: Auth): Promise<any> {
     this.loggingIn = true;
-    this.setAuth({ jwt });
+    this.setAuth(auth);
     const user = await this.request("/v1/user/currentUser");
     console.log({ user });
-    this.setAuth({ jwt }, true);
+    this.setAuth(auth, true);
     this.loggingIn = false;
 
-    this.authenticateExtension(jwt);
+    this.authenticateExtension(auth.jwt);
   }
 
   public async getUser(): Promise<any> {
@@ -56,6 +58,8 @@ export class SchemasUserService {
     body?: any,
     unauthenticated?: boolean,
   ): Promise<any> {
+    this.checkJwtExpiry();
+
     if (!unauthenticated) {
       this.ensureAuthenticated();
     }
@@ -150,6 +154,14 @@ export class SchemasUserService {
   private ensureAuthenticated() {
     if (!this.auth) {
       throw new Error("not authenticated");
+    }
+  }
+
+  private checkJwtExpiry() {
+    if (this.auth?.jwt && this.auth?.jwtExpiry && Date.now() >= this.auth.jwtExpiry * 1000) {
+      // @TODO Handle renewing token, for now just acknowledge that we're logged out rather than try to use an expired JWT
+      console.warn("SchemasUserService JWT expired, logging out");
+      this.logout();
     }
   }
 

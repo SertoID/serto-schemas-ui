@@ -29,7 +29,10 @@ export function useAuth(): {
         return false;
       }
       console.log("logged in", { token });
-      await schemasUserService.login(token.__raw);
+      await schemasUserService.login({
+        jwt: token.__raw,
+        jwtExpiry: token.exp,
+      });
       return true;
     },
     signup: async (options?, config?) => {
@@ -40,7 +43,10 @@ export function useAuth(): {
         return false;
       }
       console.log("signed up", { token });
-      await schemasUserService.signup(token.__raw);
+      await schemasUserService.signup({
+        jwt: token.__raw,
+        jwtExpiry: token.exp,
+      });
       return true;
     },
     logout: (options?) => {
