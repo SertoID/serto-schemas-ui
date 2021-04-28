@@ -9,7 +9,8 @@ export interface Auth {
 }
 export class SchemasUserService {
   private loggingIn?: boolean;
-  public auth?: Auth;
+  private auth?: Auth;
+  private onAuthChange?: (auth?: Auth) => void;
   public url = config.API_URL;
 
   constructor() {
@@ -50,6 +51,11 @@ export class SchemasUserService {
 
   public isAuthenticated(): boolean {
     return !!this.auth && !this.loggingIn;
+  }
+
+  /** @NOTE There is only on `onAuthChange` handler so calling this will multiple times will override it. We only need this in one spot right now so not worth the complexity to add a more generic event listener setup. */
+  public setOnAuthChange(onAuthChange: (auth?: Auth) => void): void {
+    this.onAuthChange = onAuthChange;
   }
 
   private async request(
@@ -141,6 +147,7 @@ export class SchemasUserService {
 
   private setAuth(auth: Auth, persist?: boolean) {
     this.auth = auth;
+    this.onAuthChange?.(auth);
     if (persist) {
       localStorage.setItem(AUTH_LOCALSTORAGE_KEY, JSON.stringify(auth));
     }
@@ -148,6 +155,7 @@ export class SchemasUserService {
 
   private clearAuth() {
     delete this.auth;
+    this.onAuthChange?.();
     localStorage.removeItem(AUTH_LOCALSTORAGE_KEY);
   }
 
