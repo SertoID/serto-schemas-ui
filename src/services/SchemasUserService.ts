@@ -15,6 +15,7 @@ export class SchemasUserService {
 
   constructor() {
     this.loadAuthFromStorage();
+    this.checkJwtExpiry();
     this.onDocumentReady();
   }
 
@@ -183,6 +184,7 @@ export class SchemasUserService {
     try {
       const auth = JSON.parse(authString);
       this.auth = auth;
+      this.onAuthChange?.(auth);
     } catch (err) {
       console.error("failed to parse auth", authString);
     }
