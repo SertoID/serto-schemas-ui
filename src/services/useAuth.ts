@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { useAuth0, Auth0ContextInterface } from "@auth0/auth0-react";
-import { TrustAgencyContext } from "../context/TrustAgentProvider";
-import { TrustAgencyService } from "./TrustAgencyService";
+import { SchemasUserContext } from "../context/SchemasUserProvider";
+import { SchemasUserService } from "./SchemasUserService";
 import { routes } from "../constants";
 
 type ReplaceReturnType<T extends (...a: any) => any, TNewReturn> = (...a: Parameters<T>) => TNewReturn;
@@ -16,10 +16,12 @@ export function useAuth(): {
   jwt?: string;
 } {
   const { loginWithPopup, getIdTokenClaims, isAuthenticated, isLoading, logout } = useAuth0();
-  const TrustAgent = useContext<TrustAgencyService>(TrustAgencyContext);
+  const schemasUserService = useContext<SchemasUserService>(SchemasUserContext);
+  const [jwt, setJwt] = useState<string | undefined>(schemasUserService.getAuth()?.jwt);
+  schemasUserService.setOnAuthChange((auth?) => setJwt(auth?.jwt));
 
   return {
-    isAuthenticated: isAuthenticated && TrustAgent.isAuthenticated(),
+    isAuthenticated: isAuthenticated && schemasUserService.isAuthenticated(),
     isLoading,
     login: async (options?, config?): Promise<boolean> => {
       await loginWithPopup(options, config);
@@ -29,7 +31,10 @@ export function useAuth(): {
         return false;
       }
       console.log("logged in", { token });
-      await TrustAgent.login(token.__raw);
+      await schemasUserService.login({
+        jwt: token.__raw,
+        jwtExpiry: token.exp,
+      });
       return true;
     },
     signup: async (options?, config?) => {
@@ -40,13 +45,16 @@ export function useAuth(): {
         return false;
       }
       console.log("signed up", { token });
-      await TrustAgent.signup(token.__raw);
+      await schemasUserService.signup({
+        jwt: token.__raw,
+        jwtExpiry: token.exp,
+      });
       return true;
     },
     logout: (options?) => {
-      TrustAgent.logout();
+      schemasUserService.logout();
       logout({ returnTo: window.location.origin + routes.LOGIN, ...options });
     },
-    jwt: TrustAgent.auth?.jwt,
+    jwt,
   };
 }

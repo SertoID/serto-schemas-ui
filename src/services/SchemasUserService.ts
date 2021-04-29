@@ -4,14 +4,18 @@ const AUTH_LOCALSTORAGE_KEY = `trust-agent-auth-${config.API_URL}`;
 
 export interface Auth {
   jwt: string;
+  /** In seconds. */
+  jwtExpiry?: number;
 }
-export class TrustAgencyService {
+export class SchemasUserService {
   private loggingIn?: boolean;
-  public auth?: Auth;
+  private auth?: Auth;
+  private onAuthChange?: (auth?: Auth) => void;
   public url = config.API_URL;
 
   constructor() {
     this.loadAuthFromStorage();
+    this.checkJwtExpiry();
     this.onDocumentReady();
   }
 
@@ -19,23 +23,23 @@ export class TrustAgencyService {
     return this.auth;
   }
 
-  public async signup(jwt: string): Promise<any> {
+  public async signup(auth: Auth): Promise<any> {
     this.loggingIn = true;
-    const user = await this.request("/v1/user/signup", "POST", { userToken: jwt }, true);
+    const user = await this.request("/v1/user/signup", "POST", { userToken: auth.jwt }, true);
     console.log({ user });
-    this.setAuth({ jwt }, true);
+    this.setAuth(auth, true);
     this.loggingIn = false;
   }
 
-  public async login(jwt: string): Promise<any> {
+  public async login(auth: Auth): Promise<any> {
     this.loggingIn = true;
-    this.setAuth({ jwt });
+    this.setAuth(auth);
     const user = await this.request("/v1/user/currentUser");
     console.log({ user });
-    this.setAuth({ jwt }, true);
+    this.setAuth(auth, true);
     this.loggingIn = false;
 
-    this.authenticateExtension(jwt);
+    this.authenticateExtension(auth.jwt);
   }
 
   public async getUser(): Promise<any> {
@@ -50,12 +54,19 @@ export class TrustAgencyService {
     return !!this.auth && !this.loggingIn;
   }
 
+  /** @NOTE There is only on `onAuthChange` handler so calling this will multiple times will override it. We only need this in one spot right now so not worth the complexity to add a more generic event listener setup. */
+  public setOnAuthChange(onAuthChange: (auth?: Auth) => void): void {
+    this.onAuthChange = onAuthChange;
+  }
+
   private async request(
     path: string,
     method: "GET" | "DELETE" | "POST" = "GET",
     body?: any,
     unauthenticated?: boolean,
   ): Promise<any> {
+    this.checkJwtExpiry();
+
     if (!unauthenticated) {
       this.ensureAuthenticated();
     }
@@ -137,6 +148,7 @@ export class TrustAgencyService {
 
   private setAuth(auth: Auth, persist?: boolean) {
     this.auth = auth;
+    this.onAuthChange?.(auth);
     if (persist) {
       localStorage.setItem(AUTH_LOCALSTORAGE_KEY, JSON.stringify(auth));
     }
@@ -144,12 +156,21 @@ export class TrustAgencyService {
 
   private clearAuth() {
     delete this.auth;
+    this.onAuthChange?.();
     localStorage.removeItem(AUTH_LOCALSTORAGE_KEY);
   }
 
   private ensureAuthenticated() {
     if (!this.auth) {
       throw new Error("not authenticated");
+    }
+  }
+
+  private checkJwtExpiry() {
+    if (this.auth?.jwt && this.auth?.jwtExpiry && Date.now() >= this.auth.jwtExpiry * 1000) {
+      // @TODO Handle renewing token, for now just acknowledge that we're logged out rather than try to use an expired JWT
+      console.warn("SchemasUserService JWT expired, logging out");
+      this.logout();
     }
   }
 
@@ -163,6 +184,7 @@ export class TrustAgencyService {
     try {
       const auth = JSON.parse(authString);
       this.auth = auth;
+      this.onAuthChange?.(auth);
     } catch (err) {
       console.error("failed to parse auth", authString);
     }

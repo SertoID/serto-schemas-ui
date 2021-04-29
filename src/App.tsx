@@ -6,7 +6,7 @@ import { GlobalStyle } from "serto-ui";
 
 import { config } from "./config";
 import { routes } from "./constants";
-import { TrustAgencyProvider } from "./context/TrustAgentProvider";
+import { SchemasUserProvider } from "./context/SchemasUserProvider";
 import { SertoUiWrapper } from "./context/SertoUiWrapper";
 
 import { HomePage } from "./views/HomePage";
@@ -30,7 +30,7 @@ export const App = (): JSX.Element => {
   return (
     <Auth0Provider domain={config.AUTH0_DOMAIN} clientId={config.AUTH0_CLIENT_ID} redirectUri={window.location.origin}>
       <BrowserRouter>
-        <TrustAgencyProvider featureFlags={featureFlags}>
+        <SchemasUserProvider featureFlags={featureFlags}>
           <React.Suspense fallback={<></>}>
             <SertoUiWrapper navItems={navItems}>
               <GlobalStyle />
@@ -46,7 +46,7 @@ export const App = (): JSX.Element => {
               </Switch>
             </SertoUiWrapper>
           </React.Suspense>
-        </TrustAgencyProvider>
+        </SchemasUserProvider>
       </BrowserRouter>
     </Auth0Provider>
   );
