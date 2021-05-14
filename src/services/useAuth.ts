@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useAuth0, Auth0ContextInterface } from "@auth0/auth0-react";
 import { SchemasUserContext } from "../context/SchemasUserProvider";
 import { SchemasUserService } from "./SchemasUserService";
@@ -18,7 +18,11 @@ export function useAuth(): {
   const { loginWithPopup, getIdTokenClaims, isAuthenticated, isLoading, logout } = useAuth0();
   const schemasUserService = useContext<SchemasUserService>(SchemasUserContext);
   const [jwt, setJwt] = useState<string | undefined>(schemasUserService.getAuth()?.jwt);
-  schemasUserService.setOnAuthChange((auth?) => setJwt(auth?.jwt));
+
+  useEffect(() => {
+    schemasUserService.setOnAuthChange((auth?) => setJwt(auth?.jwt));
+    return () => schemasUserService.removeOnAuthChange();
+  }, [schemasUserService, setJwt]);
 
   return {
     isAuthenticated: isAuthenticated && schemasUserService.isAuthenticated(),
