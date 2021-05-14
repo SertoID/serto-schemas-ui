@@ -58,6 +58,9 @@ export class SchemasUserService {
   public setOnAuthChange(onAuthChange: (auth?: Auth) => void): void {
     this.onAuthChange = onAuthChange;
   }
+  public removeOnAuthChange(): void {
+    delete this.onAuthChange;
+  }
 
   private async request(
     path: string,

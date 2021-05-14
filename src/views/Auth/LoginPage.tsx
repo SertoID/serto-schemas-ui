@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory, generatePath } from "react-router-dom";
 import { routes } from "../../constants";
 import { Box, Button, Card, Flash } from "rimble-ui";
 import { colors, H2 } from "serto-ui";
@@ -33,7 +33,7 @@ export const LoginPage = (): JSX.Element => {
     try {
       const succeeded = await signup();
       if (succeeded) {
-        history.push(routes.ONBOARDING);
+        history.push(generatePath(routes.SCHEMAS)); // @TODO/tobek Change this back to routes.ONBOARDING when that page is set up
       }
     } catch (err) {
       console.error("error signing up:", err);
