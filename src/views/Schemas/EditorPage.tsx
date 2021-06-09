@@ -78,7 +78,6 @@ export const EditorPage: React.FunctionComponent = () => {
         <StyledCreateSchema
           onSchemaSaved={(schema) => {
             history.push(generatePath(routes.SCHEMA, { slug: schema.slug }));
-            console.log("@TODO/tobek");
           }}
           initialSchemaState={initialSchemaState}
           isUpdate={!!initialSchemaState}
