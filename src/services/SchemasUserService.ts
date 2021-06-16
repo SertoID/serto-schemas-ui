@@ -1,6 +1,6 @@
 import { config } from "../config";
 
-const AUTH_LOCALSTORAGE_KEY = `trust-agent-auth-${config.API_URL}`;
+const AUTH_LOCALSTORAGE_KEY = `serto-schemas-auth-${config.API_URL}`;
 
 export interface Auth {
   jwt: string;
