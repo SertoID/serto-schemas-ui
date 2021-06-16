@@ -14,6 +14,9 @@ export const AuthButtons: React.FunctionComponent = () => {
   } else if (isAuthenticated) {
     return (
       <Popup
+        popupTopPos="auto"
+        popupRightPos={-12}
+        arrowOffset={12}
         rimbleProps={{ py: 2, pl: 4 }}
         popupContents={
           <>
@@ -22,6 +25,7 @@ export const AuthButtons: React.FunctionComponent = () => {
               Signed in
             </PopupGroup>
             <PopupGroup>
+              {/*@TODO/tobek add class "selected" if current route*/}
               <Link to={generatePath(routes.SCHEMAS, { tabName: "created" })}>Your schemas</Link>
               <Link to={generatePath(routes.SCHEMAS, { tabName: "saved" })}>Your saved schemas</Link>
             </PopupGroup>
