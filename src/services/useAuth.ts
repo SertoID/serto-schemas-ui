@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useAuth0, Auth0ContextInterface } from "@auth0/auth0-react";
 import { SchemasUserContext } from "../context/SchemasUserProvider";
-import { SchemasUserService } from "./SchemasUserService";
+import { SchemasUserService, Auth } from "./SchemasUserService";
 import { routes } from "../constants";
 
 type ReplaceReturnType<T extends (...a: any) => any, TNewReturn> = (...a: Parameters<T>) => TNewReturn;
@@ -20,9 +20,10 @@ export function useAuth(): {
   const [jwt, setJwt] = useState<string | undefined>(schemasUserService.getAuth()?.jwt);
 
   useEffect(() => {
-    schemasUserService.setOnAuthChange((auth?) => setJwt(auth?.jwt));
-    return () => schemasUserService.removeOnAuthChange();
-  }, [schemasUserService, setJwt]);
+    const onAuthChange = (auth?: Auth) => setJwt(auth?.jwt);
+    schemasUserService.addOnAuthChange(onAuthChange);
+    return () => schemasUserService.removeOnAuthChange(onAuthChange);
+  }, [schemasUserService]);
 
   return {
     isAuthenticated: isAuthenticated && schemasUserService.isAuthenticated(),
