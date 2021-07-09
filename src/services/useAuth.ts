@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useAuth0, Auth0ContextInterface } from "@auth0/auth0-react";
 import { SchemasUserContext } from "../context/SchemasUserProvider";
-import { SchemasUserService, Auth } from "./SchemasUserService";
+import { SchemasUserService, Auth, JwtUserData } from "./SchemasUserService";
 import { routes } from "../constants";
 
 type ReplaceReturnType<T extends (...a: any) => any, TNewReturn> = (...a: Parameters<T>) => TNewReturn;
@@ -14,13 +14,18 @@ export function useAuth(): {
   signup: ReplaceReturnType<Auth0ContextInterface["loginWithPopup"], Promise<boolean>>;
   logout: Auth0ContextInterface["logout"];
   jwt?: string;
+  userData?: JwtUserData;
 } {
   const { loginWithPopup, getIdTokenClaims, isAuthenticated, isLoading, logout } = useAuth0();
   const schemasUserService = useContext<SchemasUserService>(SchemasUserContext);
   const [jwt, setJwt] = useState<string | undefined>(schemasUserService.getAuth()?.jwt);
+  const [userData, setUserData] = useState<JwtUserData | undefined>(schemasUserService.getUserData());
 
   useEffect(() => {
-    const onAuthChange = (auth?: Auth) => setJwt(auth?.jwt);
+    const onAuthChange = (auth?: Auth) => {
+      setJwt(auth?.jwt);
+      setUserData(schemasUserService.getUserData());
+    };
     schemasUserService.addOnAuthChange(onAuthChange);
     return () => schemasUserService.removeOnAuthChange(onAuthChange);
   }, [schemasUserService]);
@@ -61,5 +66,6 @@ export function useAuth(): {
       logout({ returnTo: window.location.origin + routes.LOGIN, ...options });
     },
     jwt,
+    userData,
   };
 }

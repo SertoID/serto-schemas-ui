@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link, generatePath } from "react-router-dom";
-import { Button, Loader } from "rimble-ui";
+import { Button, Loader, Avatar, Text } from "rimble-ui";
 import { AccountCircle, KeyboardArrowDown } from "@rimble/icons";
 import { baseColors, Popup, PopupGroup } from "serto-ui";
 import { useAuth } from "../../services/useAuth";
@@ -8,7 +8,7 @@ import { LogOut } from "./LogOut";
 import { routes } from "../../constants";
 
 export const AuthButtons: React.FunctionComponent = () => {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, userData } = useAuth();
   if (isLoading) {
     return <Loader />;
   } else if (isAuthenticated) {
@@ -21,8 +21,16 @@ export const AuthButtons: React.FunctionComponent = () => {
         popupContents={
           <>
             <PopupGroup>
-              {/*@TODO/tobek Add avatar and username when supported by API*/}
               Signed in
+              {(userData?.name || userData?.nickname) && (
+                <>
+                  {" "}
+                  as{" "}
+                  <Text display="inline-block" fontWeight={3} fontSize={1}>
+                    {userData.name || userData.nickname}
+                  </Text>
+                </>
+              )}
             </PopupGroup>
             <PopupGroup>
               {/*@TODO/tobek add class "selected" if current route*/}
@@ -35,7 +43,11 @@ export const AuthButtons: React.FunctionComponent = () => {
           </>
         }
       >
-        <AccountCircle size="32px" />
+        {userData?.picture ? (
+          <Avatar src={userData.picture} size="32px" display="inline-block" />
+        ) : (
+          <AccountCircle size="32px" />
+        )}
         <KeyboardArrowDown size="20px" color={baseColors.blurple} style={{ position: "relative", top: -4 }} />
       </Popup>
     );

@@ -1,15 +1,27 @@
+import decodeJwt from "jwt-decode";
 import { config } from "../config";
 
 const AUTH_LOCALSTORAGE_KEY = `serto-schemas-auth-${config.API_URL}`;
+
+export interface JwtUserData {
+  name?: string;
+  email?: string;
+  nickname?: string;
+  picture?: string;
+  /** JWT subject identifier */
+  sub?: string;
+}
 
 export interface Auth {
   jwt: string;
   /** In seconds. */
   jwtExpiry?: number;
 }
+
 export class SchemasUserService {
   private loggingIn?: boolean;
   private auth?: Auth;
+  private userData?: JwtUserData;
   private onAuthChangeFuncs: ((auth?: Auth) => void)[] = [];
   public url = config.API_URL;
 
@@ -21,6 +33,9 @@ export class SchemasUserService {
 
   public getAuth(): Auth | undefined {
     return this.auth;
+  }
+  public getUserData(): JwtUserData | undefined {
+    return this.userData;
   }
 
   public async signup(auth: Auth): Promise<any> {
@@ -159,6 +174,7 @@ export class SchemasUserService {
 
   private setAuth(auth: Auth, persist?: boolean) {
     this.auth = auth;
+    this.userData = auth?.jwt ? decodeJwt(auth.jwt) : undefined;
     this.onAuthChange(auth);
     if (persist) {
       localStorage.setItem(AUTH_LOCALSTORAGE_KEY, JSON.stringify(auth));
@@ -194,8 +210,7 @@ export class SchemasUserService {
 
     try {
       const auth = JSON.parse(authString);
-      this.auth = auth;
-      this.onAuthChange(auth);
+      this.setAuth(auth);
     } catch (err) {
       console.error("failed to parse auth", authString);
     }
