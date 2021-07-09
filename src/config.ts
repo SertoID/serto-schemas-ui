@@ -10,7 +10,7 @@ export interface ConfigType {
 const defaultConfig: ConfigType = {
   ENVIRONMENT: process.env.NODE_ENV || "development",
   API_URL: "https://staging.api.schemas.serto.id",
-  // API_URL: "http://localhost:8000",
+  // API_URL: "http://localhost:8083",
   UI_URL: window.location.origin,
   AUTH0_CLIENT_ID: "WRVmn2NOJSGpBFTIF7cJFIkZBMZ6j9Cc",
   AUTH0_DOMAIN: "auth.serto.id",

@@ -1,16 +1,28 @@
+import decodeJwt from "jwt-decode";
 import { config } from "../config";
 
 const AUTH_LOCALSTORAGE_KEY = `serto-schemas-auth-${config.API_URL}`;
+
+export interface JwtUserData {
+  name?: string;
+  email?: string;
+  nickname?: string;
+  picture?: string;
+  /** JWT subject identifier */
+  sub?: string;
+}
 
 export interface Auth {
   jwt: string;
   /** In seconds. */
   jwtExpiry?: number;
 }
+
 export class SchemasUserService {
   private loggingIn?: boolean;
   private auth?: Auth;
-  private onAuthChange?: (auth?: Auth) => void;
+  private userData?: JwtUserData;
+  private onAuthChangeFuncs: ((auth?: Auth) => void)[] = [];
   public url = config.API_URL;
 
   constructor() {
@@ -21,6 +33,9 @@ export class SchemasUserService {
 
   public getAuth(): Auth | undefined {
     return this.auth;
+  }
+  public getUserData(): JwtUserData | undefined {
+    return this.userData;
   }
 
   public async signup(auth: Auth): Promise<any> {
@@ -54,12 +69,20 @@ export class SchemasUserService {
     return !!this.auth && !this.loggingIn;
   }
 
-  /** @NOTE There is only on `onAuthChange` handler so calling this will multiple times will override it. We only need this in one spot right now so not worth the complexity to add a more generic event listener setup. */
-  public setOnAuthChange(onAuthChange: (auth?: Auth) => void): void {
-    this.onAuthChange = onAuthChange;
+  public addOnAuthChange(f: (auth?: Auth) => void): void {
+    console.log("SchemasUserService setOnAuthChange called");
+    this.onAuthChangeFuncs.push(f);
   }
-  public removeOnAuthChange(): void {
-    delete this.onAuthChange;
+  public removeOnAuthChange(f: (auth?: Auth) => void): void {
+    const index = this.onAuthChangeFuncs.indexOf(f);
+    if (index !== -1) {
+      this.onAuthChangeFuncs.splice(index, 1);
+    } else {
+      console.warn("Given function not found in onAuthChangeFuncs");
+    }
+  }
+  private onAuthChange(auth?: Auth) {
+    this.onAuthChangeFuncs.forEach((f) => f(auth));
   }
 
   private async request(
@@ -151,7 +174,8 @@ export class SchemasUserService {
 
   private setAuth(auth: Auth, persist?: boolean) {
     this.auth = auth;
-    this.onAuthChange?.(auth);
+    this.userData = auth?.jwt ? decodeJwt(auth.jwt) : undefined;
+    this.onAuthChange(auth);
     if (persist) {
       localStorage.setItem(AUTH_LOCALSTORAGE_KEY, JSON.stringify(auth));
     }
@@ -159,7 +183,7 @@ export class SchemasUserService {
 
   private clearAuth() {
     delete this.auth;
-    this.onAuthChange?.();
+    this.onAuthChange();
     localStorage.removeItem(AUTH_LOCALSTORAGE_KEY);
   }
 
@@ -186,8 +210,7 @@ export class SchemasUserService {
 
     try {
       const auth = JSON.parse(authString);
-      this.auth = auth;
-      this.onAuthChange?.(auth);
+      this.setAuth(auth);
     } catch (err) {
       console.error("failed to parse auth", authString);
     }

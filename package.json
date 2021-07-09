@@ -20,6 +20,7 @@
   "dependencies": {
     "@auth0/auth0-react": "^1.2.0",
     "@rimble/icons": "^1.2.0",
+    "jwt-decode": "^3.1.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
