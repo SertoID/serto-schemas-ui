@@ -2,6 +2,7 @@ import React from "react";
 import { SertoUiProvider, SertoUiContextInterface } from "serto-ui";
 
 import { useAuth } from "../services/useAuth";
+import { config } from "../config";
 
 export interface SertoUiWrapperProps {
   navItems: SertoUiContextInterface["navItems"];
@@ -16,7 +17,7 @@ export const SertoUiWrapper: React.FunctionComponent<SertoUiWrapperProps> = (pro
   };
 
   return (
-    <SertoUiProvider schemasApiJwt={jwt} context={sertoUiContext}>
+    <SertoUiProvider schemasApiJwt={jwt} schemasApiUrl={config.API_URL} context={sertoUiContext}>
       {props.children}
     </SertoUiProvider>
   );
