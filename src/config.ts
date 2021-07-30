@@ -9,6 +9,7 @@ export interface ConfigType {
 
 const defaultConfig: ConfigType = {
   ENVIRONMENT: process.env.NODE_ENV || "development",
+  // API_URL: "https://beta.api.schemas.serto.id",
   API_URL: "https://staging.api.schemas.serto.id",
   // API_URL: "http://localhost:8083",
   UI_URL: window.location.origin,

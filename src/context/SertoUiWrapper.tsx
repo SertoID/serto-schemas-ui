@@ -13,7 +13,7 @@ export const SertoUiWrapper: React.FunctionComponent<SertoUiWrapperProps> = (pro
 
   const sertoUiContext = {
     navItems: props.navItems,
-    schemasUiUrl: window.location.origin,
+    schemasUiUrl: config.UI_URL,
   };
 
   return (
