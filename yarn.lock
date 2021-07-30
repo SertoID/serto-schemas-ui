@@ -13116,10 +13116,10 @@ serialize-javascript@^5.0.1:
   dependencies:
     randombytes "^2.1.0"
 
-serto-ui@^0.3.23:
-  version "0.3.23"
-  resolved "https://registry.yarnpkg.com/serto-ui/-/serto-ui-0.3.23.tgz#640a141821d93757df6a9a401c108704cc50a734"
-  integrity sha512-EGCEriO9zgFTfuUTIqgxHe0dIsJRjVHx/HNyIEtTcR29iT4i26USFjLSUZjm98U3zCMMSkjGUdRt+ZvEeKEn/Q==
+serto-ui@^0.3.27:
+  version "0.3.27"
+  resolved "https://registry.yarnpkg.com/serto-ui/-/serto-ui-0.3.27.tgz#8f08814c4f3ec80fc7c6e021bf30cc27b2b2b159"
+  integrity sha512-E9VkGEnkUEMx5Nt12lt2Y6ioULNxnUtlxhrnhpVJV/jdVOPYZKAXD5ZxXz1Ixt81Q8NZN7YTTDBYMcP3qtYFVw==
   dependencies:
     "@rimble/icons" ConsenSysMesh/rimble-icons
     "@sindresorhus/slugify" "^1.1.0"
@@ -13131,7 +13131,7 @@ serto-ui@^0.3.23:
     swr "^0.2.2"
     typescript "^4.1.3"
     use-debounce "^3.4.3"
-    vc-schema-tools "^0.2.3"
+    vc-schema-tools "^0.2.4"
 
 serve-favicon@^2.5.0:
   version "2.5.0"
@@ -14652,10 +14652,10 @@ vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
 
-vc-schema-tools@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/vc-schema-tools/-/vc-schema-tools-0.2.3.tgz#b75ef226fcd8eeeb21d8f04f0b60938064b3d5af"
-  integrity sha512-6NgLCsWxJTE2Veo1WEYvACbglDCKyjcl8N95gK5Z8P3qu2/TgA/hIJUw7ZRIhngXFz9z3J+LOsqhWZ9K2zcT6A==
+vc-schema-tools@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/vc-schema-tools/-/vc-schema-tools-0.2.4.tgz#60de8d61df6bc460ad617c6335bed93c13d8fbb4"
+  integrity sha512-kbjyc/P5TPFfWHc/J3elzOQA9p8VkS7gIE0D70M4zgPjAnmJ3WIdpQEMBKAxO9ysa/KkEgSM7szwqzIVh/eZzA==
   dependencies:
     ajv "^6.12.3"
     cross-fetch "^3.1.4"

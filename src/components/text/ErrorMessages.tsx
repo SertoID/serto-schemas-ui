@@ -16,7 +16,11 @@ export const ErrorSignup: React.FunctionComponent = () => (
 );
 
 // code: 455
-export const ErrorUserNameUnique: React.FunctionComponent = () => <>A user already exists with that username.</>;
+export const ErrorUserNameUnique: React.FunctionComponent = () => (
+  <>A user already exists with those credentials - please try logging in.</>
+);
 
 // code: 312
-export const ErrorUserNotFound: React.FunctionComponent = () => <>User does not exist.</>;
+export const ErrorUserNotFound: React.FunctionComponent = () => (
+  <>No user exists with those credentials - please try creating an account.</>
+);

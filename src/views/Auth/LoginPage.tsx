@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Redirect, useHistory, generatePath } from "react-router-dom";
 import { routes } from "../../constants";
 import { Box, Button, Card, Flash } from "rimble-ui";
@@ -7,12 +7,28 @@ import { ErrorUserNameUnique, ErrorUserNotFound, ErrorLogin, ErrorSignup } from 
 import { useAuth } from "../../services/useAuth";
 
 export const LoginPage = (): JSX.Element => {
+  const history = useHistory();
   const { login, signup, logout, isAuthenticated } = useAuth();
 
-  const [error, setError] = useState<any | undefined>();
-  const history = useHistory();
+  const urlParams = new URLSearchParams(window.location.search);
+  const errorMessage = urlParams.get("err") || "";
+
+  let errorComponent: JSX.Element | undefined;
+  // @TODO Temporarily checking for error text until API is fixed to include error codes (https://www.notion.so/Return-error-codes-from-API-b6157469e8fd48358b48a9dba646181c)
+  if (errorMessage.includes("312") || errorMessage.includes("User not found")) {
+    errorComponent = <ErrorUserNotFound />;
+  } else if (errorMessage.includes("455") || errorMessage.includes("must be unique")) {
+    errorComponent = <ErrorUserNameUnique />;
+  } else if (errorMessage.includes("sign up")) {
+    errorComponent = <ErrorSignup />;
+  } else if (errorMessage) {
+    errorComponent = <ErrorLogin />;
+  }
 
   async function doLogin() {
+    if (urlParams.get("err")) {
+      history.replace(routes.LOGIN);
+    }
     try {
       const succeeded = await login();
       if (succeeded) {
@@ -20,16 +36,17 @@ export const LoginPage = (): JSX.Element => {
       }
     } catch (err) {
       console.error("error logging in:", err);
-      if (err.toString().includes("312")) {
-        setError(ErrorUserNotFound);
-      } else {
-        setError(ErrorLogin);
-      }
-      logout();
+      const error = "Failed to log in: " + err.toString();
+      logout({
+        returnTo: window.location.origin + routes.LOGIN + "?err=" + encodeURIComponent(error),
+      });
     }
   }
 
   async function doSignup() {
+    if (urlParams.get("err")) {
+      history.replace(routes.LOGIN);
+    }
     try {
       const succeeded = await signup();
       if (succeeded) {
@@ -37,12 +54,10 @@ export const LoginPage = (): JSX.Element => {
       }
     } catch (err) {
       console.error("error signing up:", err);
-      if (err.toString().includes("455")) {
-        setError(ErrorUserNameUnique);
-      } else {
-        setError(ErrorSignup);
-      }
-      logout();
+      const error = "Failed to sign up: " + err.toString();
+      logout({
+        returnTo: window.location.origin + routes.LOGIN + "?err=" + encodeURIComponent(error),
+      });
     }
   }
 
@@ -73,10 +88,10 @@ export const LoginPage = (): JSX.Element => {
           </Button.Outline>
         </Box>
 
-        {error && (
+        {errorComponent && (
           <Box p={1} mb={1}>
             <Flash my={3} variant="danger">
-              {error}
+              {errorComponent}
             </Flash>
           </Box>
         )}
