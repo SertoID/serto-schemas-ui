@@ -9,7 +9,7 @@ export interface SertoUiWrapperProps {
 }
 
 export const SertoUiWrapper: React.FunctionComponent<SertoUiWrapperProps> = (props) => {
-  const { jwt } = useAuth();
+  const { jwt, userData } = useAuth();
 
   const sertoUiContext = {
     navItems: props.navItems,
@@ -17,7 +17,12 @@ export const SertoUiWrapper: React.FunctionComponent<SertoUiWrapperProps> = (pro
   };
 
   return (
-    <SertoUiProvider schemasApiJwt={jwt} schemasApiUrl={config.API_URL} context={sertoUiContext}>
+    <SertoUiProvider
+      schemasApiJwt={jwt}
+      schemasApiUrl={config.API_URL}
+      schemasApiUserData={userData}
+      context={sertoUiContext}
+    >
       {props.children}
     </SertoUiProvider>
   );

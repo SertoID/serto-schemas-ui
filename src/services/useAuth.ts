@@ -1,7 +1,8 @@
 import { useEffect, useState, useContext } from "react";
 import { useAuth0, Auth0ContextInterface } from "@auth0/auth0-react";
+import { JwtUserData } from "serto-ui";
 import { SchemasUserContext } from "../context/SchemasUserProvider";
-import { SchemasUserService, Auth, JwtUserData } from "./SchemasUserService";
+import { SchemasUserService, Auth } from "./SchemasUserService";
 import { routes } from "../constants";
 
 type ReplaceReturnType<T extends (...a: any) => any, TNewReturn> = (...a: Parameters<T>) => TNewReturn;

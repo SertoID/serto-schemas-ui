@@ -51,6 +51,8 @@ export const EditorPage: React.FunctionComponent = () => {
     }
   }, [schema]);
 
+  const userOwnsSchema = schema && schemasService.userData?.sub === schema.creator?.identifier;
+
   return (
     <GlobalLayout url={routes.EDITOR} fullWidth={true}>
       <Flex
@@ -81,6 +83,7 @@ export const EditorPage: React.FunctionComponent = () => {
           }}
           initialSchemaState={initialSchemaState}
           isUpdate={!!initialSchemaState}
+          userOwnsSchema={userOwnsSchema}
         />
       ) : error ? (
         <Box px={6} py={6} minHeight={9}>
