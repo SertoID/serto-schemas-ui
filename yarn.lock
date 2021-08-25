@@ -13116,10 +13116,10 @@ serialize-javascript@^5.0.1:
   dependencies:
     randombytes "^2.1.0"
 
-serto-ui@^0.3.27:
-  version "0.3.27"
-  resolved "https://registry.yarnpkg.com/serto-ui/-/serto-ui-0.3.27.tgz#8f08814c4f3ec80fc7c6e021bf30cc27b2b2b159"
-  integrity sha512-E9VkGEnkUEMx5Nt12lt2Y6ioULNxnUtlxhrnhpVJV/jdVOPYZKAXD5ZxXz1Ixt81Q8NZN7YTTDBYMcP3qtYFVw==
+serto-ui@^0.3.30:
+  version "0.3.30"
+  resolved "https://registry.yarnpkg.com/serto-ui/-/serto-ui-0.3.30.tgz#07f39fe343d21764c66a0e1320eb2f9c2ae5b619"
+  integrity sha512-ZUiXJaWk/4cNaHFlho12vY4+XCJoJQwoiSGoddxkHol/IvGK5zNY9/hYAon7fHnXjXrYoVK8v8AKCAQFTgYOXw==
   dependencies:
     "@rimble/icons" ConsenSysMesh/rimble-icons
     "@sindresorhus/slugify" "^1.1.0"
