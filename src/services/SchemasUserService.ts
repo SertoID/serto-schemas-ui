@@ -1,16 +1,8 @@
 import decodeJwt from "jwt-decode";
+import { JwtUserData } from "serto-ui";
 import { config } from "../config";
 
 const AUTH_LOCALSTORAGE_KEY = `serto-schemas-auth-${config.API_URL}`;
-
-export interface JwtUserData {
-  name?: string;
-  email?: string;
-  nickname?: string;
-  picture?: string;
-  /** JWT subject identifier */
-  sub?: string;
-}
 
 export interface Auth {
   jwt: string;
@@ -70,7 +62,6 @@ export class SchemasUserService {
   }
 
   public addOnAuthChange(f: (auth?: Auth) => void): void {
-    console.log("SchemasUserService setOnAuthChange called");
     this.onAuthChangeFuncs.push(f);
   }
   public removeOnAuthChange(f: (auth?: Auth) => void): void {

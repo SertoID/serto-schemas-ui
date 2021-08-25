@@ -1,7 +1,8 @@
 import React from "react";
-import { useHistory, useParams, generatePath } from "react-router-dom";
+import { Link, useHistory, useParams, generatePath } from "react-router-dom";
 import useSWR from "swr";
 import styled from "styled-components";
+import { Info } from "@rimble/icons";
 import { Loader, Flash, Button, Box, Text, Flex } from "rimble-ui";
 import {
   SertoUiContext,
@@ -37,7 +38,7 @@ export const EditorPage: React.FunctionComponent = () => {
   const history = useHistory();
 
   const schemasService = React.useContext<SertoUiContextInterface>(SertoUiContext).schemasService;
-  const { data: schema, error } = useSWR(
+  const { data: schema, error, isValidating } = useSWR(
     `/v1/schemas/public/${slug}`,
     () => (slug ? schemasService.getSchema(slug) : undefined),
     {
@@ -51,8 +52,29 @@ export const EditorPage: React.FunctionComponent = () => {
     }
   }, [schema]);
 
+  const userOwnsSchema =
+    schema && !!schemasService.userData?.sub && schemasService.userData.sub === schema.creator?.identifier;
+
   return (
     <GlobalLayout url={routes.EDITOR} fullWidth={true}>
+      {((editMode && !userOwnsSchema) || !schemasService.isAuthenticated) && !isValidating && (
+        <Flash variant="danger" border={0}>
+          <Flex justifyContent="center">
+            <Info color={colors.danger.dark} />
+            <Text ml={2}>
+              {!schemasService.isAuthenticated ? (
+                <>
+                  You are not currently logged in. You may explore the schema preview and editor, but must{" "}
+                  <Link to={routes.LOGIN}>log in</Link> order to {editMode ? "make any changes" : "create a schema"}.
+                </>
+              ) : (
+                "You are not the creator of this schema. Any changes you make will be saved as a new fork of this schema."
+              )}
+            </Text>
+          </Flex>
+        </Flash>
+      )}
+
       <Flex
         bg={colors.darkGray}
         color={baseColors.white}
@@ -81,6 +103,7 @@ export const EditorPage: React.FunctionComponent = () => {
           }}
           initialSchemaState={initialSchemaState}
           isUpdate={!!initialSchemaState}
+          userOwnsSchema={userOwnsSchema}
         />
       ) : error ? (
         <Box px={6} py={6} minHeight={9}>
