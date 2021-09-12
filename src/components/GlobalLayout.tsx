@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { Box, Flex } from "rimble-ui";
 import styled from "styled-components";
-import { colors, baseColors, Nav, SertoSchemasLogo } from "serto-ui";
+import { colors, baseColors, Nav, SertoSchemasLogo, NavItemStyled } from "serto-ui";
 import { AuthButtons } from "../views/Auth/AuthButtons";
 import { Footer } from "./Footer";
 import { routes } from "../constants";
@@ -28,6 +28,20 @@ const NavWrapper = styled(Box)`
   }
   a:hover span {
     color: ${baseColors.black};
+  }
+
+  ${NavItemStyled} {
+    a,
+    a:hover {
+      background-color: transparent;
+    }
+    span {
+      font-weight: normal;
+    }
+    &.active span {
+      font-weight: bold;
+      color: ${baseColors.black};
+    }
   }
 `;
 
