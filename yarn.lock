@@ -11999,6 +11999,15 @@ qrcode.react@^0.9.3:
     prop-types "^15.6.0"
     qr.js "0.0.0"
 
+qrcode.react@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/qrcode.react/-/qrcode.react-1.0.1.tgz#2834bb50e5e275ffe5af6906eff15391fe9e38a5"
+  integrity sha512-8d3Tackk8IRLXTo67Y+c1rpaiXjoz/Dd2HpcMdW//62/x8J1Nbho14Kh8x974t9prsLHN6XqVgcnRiBGFptQmg==
+  dependencies:
+    loose-envify "^1.4.0"
+    prop-types "^15.6.0"
+    qr.js "0.0.0"
+
 qs@6.7.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
@@ -13116,15 +13125,16 @@ serialize-javascript@^5.0.1:
   dependencies:
     randombytes "^2.1.0"
 
-serto-ui@^0.3.30:
-  version "0.3.30"
-  resolved "https://registry.yarnpkg.com/serto-ui/-/serto-ui-0.3.30.tgz#07f39fe343d21764c66a0e1320eb2f9c2ae5b619"
-  integrity sha512-ZUiXJaWk/4cNaHFlho12vY4+XCJoJQwoiSGoddxkHol/IvGK5zNY9/hYAon7fHnXjXrYoVK8v8AKCAQFTgYOXw==
+serto-ui@^0.3.35:
+  version "0.3.35"
+  resolved "https://registry.yarnpkg.com/serto-ui/-/serto-ui-0.3.35.tgz#923d2a896f09a69a783066b018dba84e8181d166"
+  integrity sha512-/7a5vDXG/tm96NwPTOI4joZjVXNCkQq+6pHR3eDCV5IiX2NwsT4mYVvQZyyC4HefWaqlgNJpDP7hULTY7SyQ4w==
   dependencies:
     "@rimble/icons" ConsenSysMesh/rimble-icons
     "@sindresorhus/slugify" "^1.1.0"
     deepdash "^5.3.9"
     prismjs "^1.23.0"
+    qrcode.react "^1.0.1"
     react-scripts "4.0.1"
     react-simple-code-editor "^0.11.0"
     rimble-ui "^0.14.0"
