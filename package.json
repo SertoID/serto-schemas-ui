@@ -15,6 +15,7 @@
     "prettier": "prettier --config .prettierrc.yaml --write --list-different './**/*.{ts,tsx,json,md}'",
     "prettier:lint": "prettier --config .prettierrc.yaml --list-different './**/*.{ts,tsx,json,md}'",
     "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "dev-upgrade-serto-ui": "yarn unlink serto-ui && yarn upgrade --latest serto-ui && yarn link serto-ui"
   },
   "dependencies": {
@@ -52,6 +53,7 @@
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-unused-imports": "^1.1.4",
     "prettier": "^2.2.1"
   },
   "eslintConfig": {
