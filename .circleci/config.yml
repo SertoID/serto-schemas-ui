@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@4.1.0
   kubernetes: circleci/kubernetes@0.11.0
-  aws-ecr: circleci/aws-ecr@6.8.2
+  aws-ecr: circleci/aws-ecr@7.2.0
   aws-eks: circleci/aws-eks@1.1.0
   aws-cli: circleci/aws-cli@2.0.3
   aws-eb: circleci/aws-elastic-beanstalk@2.0.1
@@ -131,7 +131,7 @@ jobs:
             echo "export TAG=$TAG" >> $BASH_ENV
       # These envvars are set in CircleCI
       - aws-ecr/build-and-push-image:
-          setup-remote-docker: true
+          executor: default
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
@@ -155,7 +155,6 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - checkout
       - run:
           name: Set up tag var
           command: |
