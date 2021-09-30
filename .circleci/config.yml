@@ -142,7 +142,7 @@ jobs:
           tag: "$TAG,$TAG-$CIRCLE_SHA1"
 
   deploy-image:
-    <<: *defaults
+    executor: aws-cli/default
     parameters:
       deployment-name:
         description: |
