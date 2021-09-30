@@ -245,7 +245,6 @@ workflows:
             branches:
               only:
                 - master
-                - aldigjo/fix-ci
       # - deploy-image:
       #     name: deploy-ui-image
       #     deployment-name: ui
@@ -265,6 +264,5 @@ workflows:
             branches:
               only:
                 - master
-                - aldigjo/fix-ci
           requires:
             - push-ui-image
