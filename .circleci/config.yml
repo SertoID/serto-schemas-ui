@@ -131,7 +131,8 @@ jobs:
             echo "export TAG=$TAG" >> $BASH_ENV
       # These envvars are set in CircleCI
       - aws-ecr/build-and-push-image:
-          executor: default
+          setup-remote-docker:
+            version: 20.10.7
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
