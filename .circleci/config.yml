@@ -155,6 +155,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
+      - checkout
       - run:
           name: Set up tag var
           command: |
