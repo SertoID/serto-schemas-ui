@@ -3,9 +3,9 @@ orbs:
   node: circleci/node@4.1.0
   kubernetes: circleci/kubernetes@0.11.0
   aws-ecr: circleci/aws-ecr@6.8.2
-  aws-eks: circleci/aws-eks@0.2.7
-  aws-cli: circleci/aws-cli@0.1.4
-  aws-eb: circleci/aws-elastic-beanstalk@1.0.2
+  aws-eks: circleci/aws-eks@1.1.0
+  aws-cli: circleci/aws-cli@2.0.3
+  aws-eb: circleci/aws-elastic-beanstalk@2.0.1
 
 defaults: &defaults
   docker:
@@ -245,6 +245,7 @@ workflows:
             branches:
               only:
                 - master
+                - aldigjo/fix-ci
       # - deploy-image:
       #     name: deploy-ui-image
       #     deployment-name: ui
@@ -264,5 +265,6 @@ workflows:
             branches:
               only:
                 - master
+                - aldigjo/fix-ci
           requires:
             - push-ui-image
