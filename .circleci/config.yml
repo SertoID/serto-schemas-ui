@@ -9,7 +9,7 @@ orbs:
 
 defaults: &defaults
   docker:
-    - image: circleci/node:15.1
+    - image: cimg/node:16.10.0
 
 jobs:
   build:
@@ -162,7 +162,7 @@ jobs:
             echo "TAG is $TAG"
             echo "export TAG=$TAG" >> $BASH_ENV
       - aws-cli/install
-      - aws-cli/configure:
+      - aws-cli/setup:
           aws-access-key-id: $AWS_ACCESS_KEY_ID
           aws-region: $AWS_REGION
       - aws-eks/update-kubeconfig-with-authenticator:
