@@ -161,7 +161,6 @@ jobs:
             TAG=`echo $CIRCLE_BRANCH | sed 's/\\//_/g'`
             echo "TAG is $TAG"
             echo "export TAG=$TAG" >> $BASH_ENV
-      - aws-cli/install
       - aws-cli/setup:
           aws-access-key-id: $AWS_ACCESS_KEY_ID
           aws-region: $AWS_REGION
