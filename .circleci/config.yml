@@ -2,10 +2,10 @@ version: 2.1
 orbs:
   node: circleci/node@4.1.0
   kubernetes: circleci/kubernetes@0.11.0
-  aws-ecr: circleci/aws-ecr@6.8.2
-  aws-eks: circleci/aws-eks@0.2.7
-  aws-cli: circleci/aws-cli@0.1.4
-  aws-eb: circleci/aws-elastic-beanstalk@1.0.2
+  aws-ecr: circleci/aws-ecr@7.2.0
+  aws-eks: circleci/aws-eks@1.1.0
+  aws-cli: circleci/aws-cli@2.0.3
+  aws-eb: circleci/aws-elastic-beanstalk@2.0.1
 
 defaults: &defaults
   docker:
@@ -132,6 +132,7 @@ jobs:
       # These envvars are set in CircleCI
       - aws-ecr/build-and-push-image:
           setup-remote-docker: true
+          remote-docker-version: 20.10.7
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
@@ -142,7 +143,7 @@ jobs:
           tag: "$TAG,$TAG-$CIRCLE_SHA1"
 
   deploy-image:
-    <<: *defaults
+    executor: aws-cli/default
     parameters:
       deployment-name:
         description: |
@@ -161,8 +162,7 @@ jobs:
             TAG=`echo $CIRCLE_BRANCH | sed 's/\\//_/g'`
             echo "TAG is $TAG"
             echo "export TAG=$TAG" >> $BASH_ENV
-      - aws-cli/install
-      - aws-cli/configure:
+      - aws-cli/setup:
           aws-access-key-id: $AWS_ACCESS_KEY_ID
           aws-region: $AWS_REGION
       - aws-eks/update-kubeconfig-with-authenticator:
