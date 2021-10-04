@@ -4,7 +4,7 @@ orbs:
   kubernetes: circleci/kubernetes@0.11.0
   aws-ecr: circleci/aws-ecr@6.8.2
   aws-eks: circleci/aws-eks@0.2.7
-  aws-cli: circleci/aws-cli@0.1.4
+  aws-cli: circleci/aws-cli@2.0.3
   aws-eb: circleci/aws-elastic-beanstalk@1.0.2
 
 defaults: &defaults
