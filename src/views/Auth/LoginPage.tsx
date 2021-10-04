@@ -81,7 +81,7 @@ export const LoginPage = (): JSX.Element => {
         </H2>
         <Box width="100%">
           <Button onClick={doLogin} mb={3} width="100%">
-            Login
+            Log In
           </Button>
           <Button.Outline onClick={doSignup} mb={3} width="100%">
             Create Account

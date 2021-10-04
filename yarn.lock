@@ -6728,6 +6728,18 @@ eslint-plugin-testing-library@^3.9.2:
   dependencies:
     "@typescript-eslint/experimental-utils" "^3.10.1"
 
+eslint-plugin-unused-imports@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-unused-imports/-/eslint-plugin-unused-imports-1.1.4.tgz#f43a5ba9ebbb5b6325923523ee7c29e9b33d2b6e"
+  integrity sha512-6M9iqqZbnsLdcpYm8ZAyjHHxw1Gmv/pK8yK9Za/cfrKKkOyxaXmiw5/EtBXPcp/JJ6Ge9ur+OROSAcYho45smA==
+  dependencies:
+    eslint-rule-composer "^0.3.0"
+
+eslint-rule-composer@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-rule-composer/-/eslint-rule-composer-0.3.0.tgz#79320c927b0c5c0d3d3d2b76c8b4a488f25bbaf9"
+  integrity sha512-bt+Sh8CtDmn2OajxvNO+BX7Wn4CIWMpTRm3MaiKPCQcnnlm0CS2mhui6QaoeQugs+3Kj2ESKEEGJUdVafwhiCg==
+
 eslint-scope@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-4.0.3.tgz#ca03833310f6889a3264781aa82e63eb9cfe7848"
@@ -13125,10 +13137,10 @@ serialize-javascript@^5.0.1:
   dependencies:
     randombytes "^2.1.0"
 
-serto-ui@^0.3.35:
-  version "0.3.35"
-  resolved "https://registry.yarnpkg.com/serto-ui/-/serto-ui-0.3.35.tgz#923d2a896f09a69a783066b018dba84e8181d166"
-  integrity sha512-/7a5vDXG/tm96NwPTOI4joZjVXNCkQq+6pHR3eDCV5IiX2NwsT4mYVvQZyyC4HefWaqlgNJpDP7hULTY7SyQ4w==
+serto-ui@^0.3.41:
+  version "0.3.41"
+  resolved "https://registry.yarnpkg.com/serto-ui/-/serto-ui-0.3.41.tgz#2c767a41c29161ca96befe4a1706dbd07ac89c3b"
+  integrity sha512-IGJS70c3KY8tT+lRDG923wMk66Jv5enkcpz6vmWahu9bnWmgVhztiOIKtqSs8VERa4OmrgGhy0tsxe9HO2o6Mg==
   dependencies:
     "@rimble/icons" ConsenSysMesh/rimble-icons
     "@sindresorhus/slugify" "^1.1.0"

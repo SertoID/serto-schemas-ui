@@ -2,7 +2,7 @@ import decodeJwt from "jwt-decode";
 import { JwtUserData } from "serto-ui";
 import { config } from "../config";
 
-const AUTH_LOCALSTORAGE_KEY = `serto-schemas-auth-${config.API_URL}`;
+const AUTH_LOCALSTORAGE_KEY = `serto-schemas-auth-${config.SCHEMAS_API_URL}`;
 
 export interface Auth {
   jwt: string;
@@ -15,7 +15,7 @@ export class SchemasUserService {
   private auth?: Auth;
   private userData?: JwtUserData;
   private onAuthChangeFuncs: ((auth?: Auth) => void)[] = [];
-  public url = config.API_URL;
+  public url = config.SCHEMAS_API_URL;
 
   constructor() {
     this.loadAuthFromStorage();

@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Box, Flex } from "rimble-ui";
 import { baseColors, SertoLogo } from "serto-ui";
+import { config } from "../config";
 
 const LinkBox = styled(Box)`
   margin-right: 48px;
@@ -63,7 +64,7 @@ export const Footer: React.FunctionComponent = () => {
             </a>
           </p>
           <p>
-            <a href="http://beta.search.serto.id/" target="_blank">
+            <a href={config.SEARCH_UI_URL} target="_blank">
               Serto Search
             </a>
           </p>
