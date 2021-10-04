@@ -1,11 +1,11 @@
 version: 2.1
 orbs:
-  node: circleci/node@4.1.0
-  kubernetes: circleci/kubernetes@0.11.0
-  aws-ecr: circleci/aws-ecr@6.8.2
-  aws-eks: circleci/aws-eks@0.2.7
+  node: circleci/node@4.7.0
+  kubernetes: circleci/kubernetes@0.12.0
+  aws-ecr: circleci/aws-ecr@7.2.0
+  aws-eks: circleci/aws-eks@1.1.0
   aws-cli: circleci/aws-cli@2.0.3
-  aws-eb: circleci/aws-elastic-beanstalk@1.0.2
+  aws-eb: circleci/aws-elastic-beanstalk@2.0.1
 
 defaults: &defaults
   docker:
