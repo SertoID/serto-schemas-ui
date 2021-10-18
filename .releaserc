@@ -1,0 +1,50 @@
+{
+  "branches": ["production",{"name": "main", "prerelease": true}],
+    "plugins": [
+        ["@semantic-release/commit-analyzer", {
+            "preset": "conventionalcommits",
+            "releaseRules": [
+                {"breaking": true, "release": "major"},
+                {"revert": true,"release": "patch"},
+                {"type": "refactor", "release": "patch"},
+                {"scope": "no-release", "release": false}
+
+          ]
+        }],
+      
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": ["CHANGELOG.md"]
+        }
+      ],
+      [
+        "semantic-release-slack-bot",
+        {
+          "notifyOnSuccess": false,
+          "notifyOnFail": false,
+          "slackWebhook": "https://hooks.slack.com/services/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",
+          "branchesConfig": [
+            {
+              "pattern": "production",
+              "notifyOnSuccess": true,
+              "notifyOnFail": true
+            },
+            {
+              "pattern": "main",
+              "notifyOnSuccess": true,
+              "notifyOnFail": true
+            }
+          ]
+        }
+      ]
+    ]
+  }
+  
