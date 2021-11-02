@@ -1,0 +1,53 @@
+{
+  "branches": ["production"],
+    "plugins": [
+        ["@semantic-release/commit-analyzer", {
+            "preset": "conventionalcommits",
+            "releaseRules": [
+                {"breaking": true, "release": "major"},
+                {"revert": true,"release": "patch"},
+                {"type": "refactor", "release": "patch"},
+                {"scope": "no-release", "release": false}
+
+          ]
+        }],
+      
+        ["@semantic-release/release-notes-generator",
+          {
+            "linkReferences":"false",
+            "linkCompare":"false"
+          }
+        ],
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "schemauichangelog.md",
+          "changelogTitle": "# Serto Schemas UI Notes"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": ["schemauichangelog.md"]
+        }
+      ],
+      "@semantic-release/github",
+
+      [
+        "semantic-release-slack-bot",
+        {
+          "notifyOnSuccess": false,
+          "notifyOnFail": false,
+          "slackWebhook": "https://hooks.slack.com/services/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",
+          "branchesConfig": [
+            {
+              "pattern": "production",
+              "notifyOnSuccess": true,
+              "notifyOnFail": true
+            }
+          ]
+        }
+      ]
+    ]
+  }
+  
