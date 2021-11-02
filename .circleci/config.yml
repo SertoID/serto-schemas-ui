@@ -51,6 +51,7 @@ jobs:
             - tsconfig.json
             - Dockerfile
             - .releaserc
+            - schemauichangelog.md
 
   test:
     <<: *defaults
@@ -251,6 +252,15 @@ workflows:
       - codecov:
           requires:
             - test
+      - releasenotes:
+          context:
+            - semantic-release
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - production
       - push-image:
           name: push-ui-image
           requires:
@@ -261,7 +271,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
       # - deploy-image:
       #     name: deploy-ui-image
       #     deployment-name: ui
@@ -280,6 +290,6 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
           requires:
             - push-ui-image

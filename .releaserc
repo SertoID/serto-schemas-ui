@@ -1,5 +1,5 @@
 {
-  "branches": ["production",{"name": "main", "prerelease": true}],
+  "branches": ["production"],
     "plugins": [
         ["@semantic-release/commit-analyzer", {
             "preset": "conventionalcommits",
@@ -12,19 +12,27 @@
           ]
         }],
       
-      "@semantic-release/release-notes-generator",
+        ["@semantic-release/release-notes-generator",
+          {
+            "linkReferences":"false",
+            "linkCompare":"false"
+          }
+        ],
       [
         "@semantic-release/changelog",
         {
-          "changelogFile": "CHANGELOG.md"
+          "changelogFile": "schemauichangelog.md",
+          "changelogTitle": "# Serto Schemas UI Notes"
         }
       ],
       [
         "@semantic-release/git",
         {
-          "assets": ["CHANGELOG.md"]
+          "assets": ["schemauichangelog.md"]
         }
       ],
+      "@semantic-release/github",
+
       [
         "semantic-release-slack-bot",
         {
@@ -34,11 +42,6 @@
           "branchesConfig": [
             {
               "pattern": "production",
-              "notifyOnSuccess": true,
-              "notifyOnFail": true
-            },
-            {
-              "pattern": "main",
               "notifyOnSuccess": true,
               "notifyOnFail": true
             }
