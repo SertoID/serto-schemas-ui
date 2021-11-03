@@ -38,7 +38,7 @@
         {
           "notifyOnSuccess": false,
           "notifyOnFail": false,
-          "slackWebhook": "https://hooks.slack.com/services/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",
+          "slackWebhookEnVar":"SLACK_WEBHOOK",
           "branchesConfig": [
             {
               "pattern": "production",
