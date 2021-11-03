@@ -14,7 +14,7 @@ jobs:
         run: git pull origin production
 
       - name: Pushes test file
-        uses: dmnemec/copy_file_to_another_repo_actio@v1.0.4
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.RELEASE_NOTES }}
         with:
