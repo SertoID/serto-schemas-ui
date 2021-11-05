@@ -1,0 +1,25 @@
+name: Copy Changelog-manual
+
+on:
+  workflow_dispatch:
+
+jobs:
+  copy-file-manually:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Pull production
+        run: git pull origin production
+
+      - name: Pushes test file
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.RELEASE_NOTES }}
+        with:
+          source_file: "schemauichangelog.md"
+          destination_repo: "SertoID/Release-Notes"
+          destination_folder: "draft-notes"
+          destination_branch: "main"
+          user_email: "ese.mentie@gmail.com"
+          user_name: "Eseoghene"
