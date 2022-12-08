@@ -28,7 +28,7 @@
     "url": "https://github.com/SertoID/serto-schemas-ui.git"
   
   },
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged",
