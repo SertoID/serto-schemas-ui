@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Box, Flex } from "rimble-ui";
-import { baseColors, SertoLogo } from "serto-ui";
+import { baseColors, SertoLogo, links } from "serto-ui";
 import { config } from "../config";
 
 const LinkBox = styled(Box)`
@@ -50,7 +50,7 @@ export const Footer: React.FunctionComponent = () => {
             </a>
           </p>
           <p>
-            <a href="https://www.serto.id/contact" target="_blank">
+            <a href={links.SCHEMAS_FEEDBACK} target="_blank">
               Feedback
             </a>
           </p>

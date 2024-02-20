@@ -73,7 +73,12 @@ export const GlobalLayout: React.FunctionComponent<GlobalLayoutProps> = (props) 
         </Box>
       )}
       <Box backgroundColor={baseColors.white}>
-        <Box maxWidth={props.fullWidth ? undefined : CONTENT_WIDTH} m="auto" py={props.fullWidth ? undefined : 4}>
+        <Box
+          maxWidth={props.fullWidth ? undefined : CONTENT_WIDTH}
+          minHeight="calc(100vh - 250px)"
+          m="auto"
+          py={props.fullWidth ? undefined : 4}
+        >
           {props.children}
         </Box>
         <Box borderTop={`1px solid ${colors.lightGray}`}>
